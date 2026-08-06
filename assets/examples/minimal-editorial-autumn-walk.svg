@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Autumn Walk editorial illustration</title>
+  <desc id="desc">A minimal ivory editorial poster with abstract autumn trees, small walking figures, and quiet serif caption typography.</desc>
+  <rect width="1200" height="760" fill="#f4efe8"/>
+  <g transform="translate(0 8)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 436c75-5 158-7 240-4 133 4 263 1 423-8" fill="none" stroke="#465445" stroke-width="8"/>
+    <path d="M304 501c75-64 145-107 220-140" fill="none" stroke="#c6b9a4" stroke-width="4"/>
+    <path d="M650 381c46 51 91 96 134 150" fill="none" stroke="#c6b9a4" stroke-width="5"/>
+    <path d="M814 445c43 14 83 39 129 78" fill="none" stroke="#c6b9a4" stroke-width="4"/>
+
+    <g fill="none" stroke="#6c503b" stroke-width="15">
+      <path d="M458 427c7-92 9-157-30-216"/>
+      <path d="M461 274c-39-24-64-54-87-91"/>
+      <path d="M470 285c51-31 83-70 104-122"/>
+      <path d="M454 329c-28-28-47-60-62-97"/>
+    </g>
+    <g fill="none" stroke="#6c503b" stroke-width="10">
+      <path d="M324 435c5-58 8-103 34-145"/>
+      <path d="M331 337c-20-17-34-38-42-65"/>
+      <path d="M346 337c21-23 39-48 48-77"/>
+      <path d="M752 429c-3-65 3-122 30-175"/>
+      <path d="M766 317c-23-24-39-51-48-82"/>
+      <path d="M783 317c37-24 66-57 86-98"/>
+    </g>
+
+    <g fill="#d9a72c" opacity=".82">
+      <ellipse cx="367" cy="179" rx="10" ry="6" transform="rotate(23 367 179)"/>
+      <ellipse cx="410" cy="194" rx="9" ry="6"/>
+      <ellipse cx="441" cy="171" rx="7" ry="9"/>
+      <ellipse cx="499" cy="173" rx="8" ry="10"/>
+      <ellipse cx="542" cy="194" rx="11" ry="8"/>
+      <ellipse cx="604" cy="174" rx="8" ry="11"/>
+      <ellipse cx="641" cy="196" rx="10" ry="8"/>
+      <ellipse cx="696" cy="184" rx="8" ry="10"/>
+      <ellipse cx="735" cy="205" rx="9" ry="7"/>
+      <ellipse cx="797" cy="199" rx="11" ry="8"/>
+      <ellipse cx="344" cy="222" rx="11" ry="6"/>
+      <ellipse cx="389" cy="234" rx="8" ry="8"/>
+      <ellipse cx="432" cy="220" rx="10" ry="7"/>
+      <ellipse cx="478" cy="234" rx="8" ry="9"/>
+      <ellipse cx="524" cy="225" rx="12" ry="8"/>
+      <ellipse cx="574" cy="237" rx="8" ry="10"/>
+      <ellipse cx="626" cy="225" rx="10" ry="7"/>
+      <ellipse cx="681" cy="236" rx="8" ry="9"/>
+      <ellipse cx="729" cy="230" rx="12" ry="8"/>
+      <ellipse cx="780" cy="244" rx="8" ry="10"/>
+      <ellipse cx="829" cy="226" rx="10" ry="7"/>
+      <ellipse cx="384" cy="278" rx="8" ry="10"/>
+      <ellipse cx="437" cy="286" rx="10" ry="7"/>
+      <ellipse cx="489" cy="273" rx="8" ry="8"/>
+      <ellipse cx="539" cy="292" rx="12" ry="7"/>
+      <ellipse cx="599" cy="282" rx="9" ry="9"/>
+      <ellipse cx="652" cy="293" rx="12" ry="8"/>
+      <ellipse cx="704" cy="278" rx="8" ry="10"/>
+      <ellipse cx="760" cy="291" rx="10" ry="7"/>
+      <ellipse cx="810" cy="274" rx="9" ry="8"/>
+    </g>
+
+    <g fill="#222827">
+      <rect x="430" y="427" width="15" height="75" rx="8"/>
+      <rect x="390" y="425" width="8" height="45" rx="4"/>
+      <rect x="555" y="410" width="8" height="35" rx="4"/>
+      <rect x="578" y="410" width="8" height="38" rx="4"/>
+      <rect x="604" y="415" width="9" height="45" rx="4"/>
+      <rect x="690" y="414" width="7" height="44" rx="4"/>
+      <rect x="723" y="413" width="12" height="54" rx="6"/>
+      <rect x="851" y="423" width="10" height="50" rx="5"/>
+    </g>
+    <rect x="672" y="420" width="9" height="46" rx="5" fill="#8a4b3e"/>
+  </g>
+  <text x="64" y="658" fill="#2d2926" font-family="Georgia, 'Times New Roman', serif" font-size="38">Autumn Walk</text>
+  <text x="66" y="688" fill="#4b4038" font-family="Georgia, 'Times New Roman', serif" font-size="18" font-style="italic">study of a quiet crossing</text>
+  <g transform="translate(905 646)">
+    <rect width="31" height="31" fill="#d9a72c"/>
+    <rect x="52" width="31" height="31" fill="#5c402d"/>
+    <rect x="104" width="31" height="31" fill="#465445"/>
+  </g>
+</svg>

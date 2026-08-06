@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">Bridge Holds Light editorial illustration</title>
+  <desc id="desc">A minimal lakeside bridge with warm arches, cool water marks, and museum-like negative space.</desc>
+  <rect width="1200" height="820" fill="#f4efe8"/>
+  <g transform="translate(76 210)" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="#e1d9ca" opacity=".82">
+      <rect x="0" y="96" width="28" height="88" rx="6"/>
+      <rect x="43" y="88" width="34" height="94" rx="6"/>
+      <rect x="92" y="108" width="36" height="72" rx="6"/>
+      <rect x="151" y="101" width="42" height="76" rx="6"/>
+      <rect x="218" y="82" width="30" height="93" rx="6"/>
+      <rect x="276" y="65" width="38" height="111" rx="6"/>
+    </g>
+    <path d="M67 190c190-13 396-27 811-13" fill="none" stroke="#7e7f78" stroke-width="14"/>
+    <path d="M190 198c241-72 514-82 809-38" fill="none" stroke="#c4c8c6" stroke-width="20"/>
+    <path d="M189 218c282-60 561-70 815-30" fill="none" stroke="#f4efe8" stroke-width="16"/>
+
+    <g fill="#e2bf73">
+      <path d="M244 234c0-38 18-63 38-63s36 25 36 63z"/>
+      <path d="M340 230c0-42 21-69 44-69s42 27 42 69z"/>
+      <path d="M465 224c0-48 24-79 50-79s48 31 48 79z"/>
+      <path d="M607 218c0-51 25-84 54-84s51 33 51 84z"/>
+      <path d="M762 216c0-55 28-91 59-91s56 36 56 91z"/>
+      <path d="M922 223c0-45 24-76 50-76s48 31 48 76z"/>
+    </g>
+    <path d="M224 232c255-42 544-48 807-23" fill="none" stroke="#f4efe8" stroke-width="11"/>
+
+    <g fill="#62625a">
+      <path d="M82 137c27-15 44-34 54-61 28 20 50 38 78 50-33 18-81 21-132 11z"/>
+      <rect x="50" y="153" width="178" height="29" rx="13"/>
+      <rect x="34" y="187" width="224" height="28" rx="12"/>
+    </g>
+
+    <g fill="#62625a">
+      <rect x="476" y="87" width="8" height="19" rx="4"/>
+      <rect x="524" y="80" width="7" height="18" rx="4"/>
+      <rect x="584" y="77" width="7" height="18" rx="4"/>
+      <rect x="638" y="77" width="7" height="18" rx="4"/>
+      <rect x="700" y="76" width="8" height="19" rx="4"/>
+      <rect x="770" y="78" width="8" height="19" rx="4"/>
+      <rect x="834" y="82" width="8" height="20" rx="4"/>
+      <rect x="888" y="86" width="7" height="18" rx="4"/>
+      <rect x="948" y="92" width="8" height="18" rx="4"/>
+    </g>
+
+    <g fill="none" stroke="#6f91a0">
+      <path d="M33 250c116 18 232 12 340-9" stroke-width="8"/>
+      <path d="M9 287c91 9 191 11 323-2" stroke-width="6"/>
+      <path d="M358 273c118 9 238 5 359-13" stroke-width="7"/>
+      <path d="M172 322c144 13 281 7 411-17" stroke-width="7"/>
+      <path d="M620 302c112 10 231 7 357-13" stroke-width="5"/>
+      <path d="M410 356c80 8 162 6 247-6" stroke-width="6"/>
+      <path d="M666 353c64 6 134 2 208-9" stroke-width="5"/>
+    </g>
+    <g fill="none" stroke="#d8b567" opacity=".8">
+      <path d="M240 263c51 9 102 8 154-2" stroke-width="6"/>
+      <path d="M488 247c65 10 130 8 194-3" stroke-width="6"/>
+      <path d="M761 248c71 8 145 6 221-5" stroke-width="6"/>
+    </g>
+  </g>
+  <text x="66" y="730" fill="#3a3734" font-family="Georgia, 'Times New Roman', serif" font-size="48">Bridge Holds Light</text>
+</svg>

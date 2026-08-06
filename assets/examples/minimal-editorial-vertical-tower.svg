@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Vertical Morning editorial illustration</title>
+  <desc id="desc">A tall abstract tower on an ivory ground, using narrow perspective lines, cool gray blocks, and restrained typography.</desc>
+  <rect width="760" height="1000" fill="#f4efe8"/>
+  <g transform="translate(0 36)">
+    <g stroke="#a9a095" stroke-width="4" stroke-linecap="round">
+      <line x1="188" y1="600" x2="295" y2="400"/>
+      <line x1="572" y1="596" x2="466" y2="400"/>
+      <line x1="139" y1="690" x2="264" y2="540"/>
+      <line x1="620" y1="690" x2="496" y2="540"/>
+    </g>
+    <path d="M285 690h190l-35-76h-120z" fill="#20344a"/>
+    <g stroke="#f4efe8" stroke-width="7">
+      <line x1="302" y1="635" x2="459" y2="635"/>
+      <line x1="316" y1="666" x2="447" y2="666"/>
+      <line x1="330" y1="690" x2="330" y2="614"/>
+      <line x1="378" y1="690" x2="378" y2="614"/>
+      <line x1="425" y1="690" x2="425" y2="614"/>
+    </g>
+    <g fill="#dbe2e3">
+      <rect x="345" y="160" width="42" height="456"/>
+      <rect x="384" y="210" width="25" height="406"/>
+      <rect x="320" y="396" width="43" height="220"/>
+      <rect x="387" y="475" width="45" height="141"/>
+      <rect x="337" y="310" width="52" height="86"/>
+      <rect x="360" y="88" width="16" height="72"/>
+    </g>
+    <g fill="#b8c4c8">
+      <rect x="385" y="235" width="12" height="105"/>
+      <rect x="350" y="160" width="36" height="40"/>
+      <rect x="401" y="500" width="17" height="116"/>
+    </g>
+    <line x1="368" y1="88" x2="368" y2="22" stroke="#5f7f8a" stroke-width="3"/>
+    <rect x="278" y="486" width="24" height="56" fill="#0f7354"/>
+    <rect x="278" y="542" width="24" height="18" fill="#23333b"/>
+  </g>
+  <text x="380" y="820" text-anchor="middle" fill="#6c3f75" font-family="Georgia, 'Times New Roman', serif" font-size="34" font-weight="700">Vertical Morning</text>
+  <text x="380" y="867" text-anchor="middle" fill="#6c3f75" font-family="Georgia, 'Times New Roman', serif" font-size="31" font-style="italic">quiet architectural study</text>
+</svg>

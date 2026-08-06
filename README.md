@@ -1,165 +1,165 @@
 # Editorial Vision Studio
 
-**Language:** English | [繁體中文](README.zh-TW.md)
+**語言：** 繁體中文 | [English](README.en.md)
 
-AI creative direction engine for editorial image generation, visual planning, and model-ready prompt writing.
+給 AI 圖像生成、視覺規劃與模型提示詞撰寫使用的編輯視覺導演引擎。
 
-Editorial Vision Studio helps you turn a theme, photo, brand idea, or rough reference into a clear visual direction: intent, visual language, layout, style DNA, recovery strategy, and a prompt that can be pasted into GPT Image, Flux, Ideogram, or another image model.
+Editorial Vision Studio 是一套給 AI 圖像與編輯設計使用的「視覺導演」工作流程。它不只是撰寫提示詞，而是先判斷用途、拆解畫面語言、選擇版面與風格，再輸出可執行的生成請求，讓圖片更接近雜誌、展覽海報、品牌主視覺或極簡插畫的質感。
 
-## Example Style
+## 風格範例
 
-The examples below show a quiet editorial illustration direction: ivory paper ground, high negative space, restrained geometry, simplified marks, muted palette, and small serif captions.
+以下範例示範一種安靜的極簡編輯插畫方向：米白紙底、大量留白、克制幾何、簡化筆觸、低飽和色盤，以及像書封或展覽圖錄一樣的精緻標題。
 
 <p>
-  <img src="assets/examples/minimal-editorial-autumn-walk.svg" alt="Autumn Walk minimal editorial illustration" width="48%">
-  <img src="assets/examples/minimal-editorial-city-dusk.svg" alt="City Dusk minimal editorial illustration" width="48%">
+  <img src="assets/examples/minimal-editorial-autumn-walk.svg" alt="秋日散步極簡編輯插畫" width="48%">
+  <img src="assets/examples/minimal-editorial-city-dusk.svg" alt="暮色城市極簡編輯插畫" width="48%">
 </p>
 <p>
-  <img src="assets/examples/minimal-editorial-vertical-tower.svg" alt="Vertical Morning minimal editorial illustration" width="48%">
-  <img src="assets/examples/minimal-editorial-bridge-light.svg" alt="Bridge Holds Light minimal editorial illustration" width="48%">
+  <img src="assets/examples/minimal-editorial-vertical-tower.svg" alt="垂直晨光極簡編輯插畫" width="48%">
+  <img src="assets/examples/minimal-editorial-bridge-light.svg" alt="橋拱留住光極簡編輯插畫" width="48%">
 </p>
 
-## What It Does
+## 它能做什麼
 
-- Resolves the user goal into an output family such as gallery print, poster, campaign key visual, product editorial, website hero, zine, or moodboard.
-- Analyzes the visual language before choosing a style, so the result is driven by intent instead of random style words.
-- Plans layout, typography, palette, abstraction level, texture permission, and recovery fixes.
-- Converts the plan into model-ready prompts through adapters for GPT Image, Flux, Ideogram, or generic tools.
-- Reviews the prompt for conflicts, such as MUJI with heavy type, gallery print with dense typography, or non-zine layouts using riso texture.
+- 先判斷用途，例如展覽輸出、海報、活動主視覺、產品編輯圖、網站首圖、小誌或情緒看板。
+- 先決定視覺語言，再選風格，避免只靠「好看的風格詞」碰運氣。
+- 規劃版面、字體、色盤、抽象程度、材質權限與補救策略。
+- 透過轉接器轉成 GPT Image、Flux、Ideogram 或其他模型可用的提示詞。
+- 產圖前檢查衝突，例如 MUJI 卻使用過重標題、展覽圖塞太多文字、非小誌版面卻使用孔版印刷或影印質感。
 
-## Quick Prompt
+## 快速提示詞
 
-Use this prompt when you want the minimal editorial illustration style shown above.
-
-```text
-Create a minimal editorial gallery illustration, not a photo-to-illustration conversion.
-Reconstruct the scene with only three to five simplified symbolic forms on an ivory paper ground.
-Use opaque, flat gouache-like marks with gently irregular hand-painted edges; preserve no photographic surface detail.
-Composition: keep the motif small and centered in the upper-middle of the canvas, with at least 55% calm empty space.
-Palette: warm ivory, charcoal brown, one muted earthy accent, one cool neutral, and at most one small color anchor.
-Typography: optional; one small refined serif caption near the lower margin with the exact title "[TITLE]".
-Avoid: photorealism, transparent overlays, realistic perspective, wires, dense windows, detailed latticework, glossy gradients, neon, magazine-cover layout, watermark, fake logo, extra text.
-```
-
-### Style Lock for Reference Photos
-
-When a supplied photo keeps producing a faded or overly detailed result, describe it as a **content reference**, not an image that must be preserved. State the abstraction rules explicitly:
+想產出上面這種極簡 editorial 插畫，可以從這段開始：
 
 ```text
-Use the supplied photo only as a content reference. Do not preserve its photographic detail, lighting, perspective, or texture.
-Choose only the most recognizable scene cues and redraw them as independent, flat editorial marks.
-Do not make a magazine cover. Do not add a frame, barcode, cover lines, or headline unless requested.
+建立一張極簡編輯展覽插畫，不要做成照片轉插畫。
+在象牙白紙底上，只用三到五個經過簡化的象徵性形體重新構成場景。
+使用不透明、扁平、近似水粉顏料的色塊，邊緣可帶有輕微不規則的手繪感；不要保留任何攝影表面細節。
+構圖：主視覺縮小並置於畫面上方中央，至少保留百分之五十五安靜的空白。
+色盤：暖象牙白、炭褐色、一種低飽和大地色、一種冷中性色，最多再加入一個小型色彩焦點。
+文字：可省略；若保留，僅在下方邊界放上一行精緻小型襯線字標題「[標題]」。
+避免：寫實攝影、半透明疊影、真實透視、電線、密集窗格、細緻格狀結構、亮面漸層、霓虹色、雜誌封面版式、浮水印、虛構標誌、額外文字。
 ```
 
-## Recommended Workflow
+### 照片參考的風格鎖定
 
-1. Define the intent.
-
-   Example: `gallery print`, `editorial poster`, `brand key visual`, `website hero`, or `social asset`.
-
-2. Choose the visual language.
-
-   Example: `Museum`, `Architectural`, `Product Stillness`, `Quiet Human`, `Urban Documentary`.
-
-3. Select the layout and style DNA.
-
-   Example: `Gallery Print + MUJI`, `Swiss Poster + Architectural`, `Magazine Cover + Kinfolk`.
-
-4. Compile a model prompt.
-
-   Use the files in `adapters/` to translate the same visual plan for GPT Image, Flux, Ideogram, or a generic image tool.
-
-5. Review before generation.
-
-   Check that typography, texture, palette, and layout do not contradict each other.
-
-## Prompt Recipes
-
-### Minimal Editorial City
+如果提供照片後，結果仍出現淡化照片感或保留太多細節，請將照片指定為「內容參考」，而非必須保留的原圖，並明確加入以下規則：
 
 ```text
-Vertical 1:1 editorial illustration on warm ivory paper.
-A simplified city skyline at dusk, built from flat rectangular blocks and one iconic central arch-like structure.
-Tiny human silhouettes form a quiet rhythm at the bottom edge.
-Muted navy, dusty violet, coral, and ochre palette.
-Small centered serif title: "City Dusk".
-Avoid photorealism, complex perspective, dense windows, glossy effects, watermark.
+這張照片僅作為內容參考。不要保留它的攝影細節、光線、透視或材質。
+只挑選場景中最具辨識度的線索，重新繪製為彼此獨立、扁平的編輯插畫筆觸。
+不要做成雜誌封面。除非特別要求，否則不要加入外框、條碼、封面小標或大標題。
 ```
 
-### Quiet Architecture Poster
+## 建議流程
+
+1. 先定義用途。
+
+   例如：展覽圖、編輯海報、品牌主視覺、網站首圖或社群圖片。
+
+2. 選擇視覺語言。
+
+   例如：博物館感、建築感、產品靜物感、安靜人物感、都市紀實感。
+
+3. 選擇版面與風格特徵。
+
+   例如：展覽圖加 MUJI、瑞士風海報加建築感、雜誌封面加 Kinfolk。
+
+4. 轉成模型提示詞。
+
+   使用 `adapters/` 裡的規則，將同一份視覺計畫轉成 GPT Image、Flux、Ideogram 或通用工具可用的提示詞。
+
+5. 產圖前檢查。
+
+   確認字體、材質、色盤、版面沒有互相衝突。
+
+## 提示詞範例
+
+### 極簡城市編輯插畫
 
 ```text
-Portrait 3:4 minimal architectural editorial poster.
-A tall abstract tower made of stacked pale gray volumes, centered on an ivory background.
-Thin perspective guide lines lead toward the base.
-One small green-black color anchor near the lower left of the tower.
-Refined serif title near the bottom: "Vertical Morning".
-Avoid realistic glass, dramatic sky, crowds, shadows, texture noise, watermark.
+一張一比一的直式極簡城市編輯插畫，紙底為溫暖象牙白。
+以扁平矩形色塊和一座具辨識度的中央拱形建築，構成暮色中的簡化城市天際線。
+畫面底部以極小人物剪影形成安靜節奏。
+使用低飽和海軍藍、霧紫色、珊瑚色與赭黃色。
+中央下方放上一行小型襯線字標題：「暮色城市」。
+避免寫實攝影、複雜透視、密集窗格、亮面效果與浮水印。
 ```
 
-### Museum Bridge Study
+### 安靜建築海報
 
 ```text
-Landscape 4:3 gallery-print illustration.
-A long bridge crossing quiet water, reduced to soft gray lines, warm ochre arches, and a small pavilion silhouette.
-Large untouched ivory space above the bridge.
-Loose horizontal water marks below, controlled and sparse.
-Small elegant serif caption near the lower margin: "Bridge Holds Light".
-Avoid realism, heavy outline, saturated blue, decorative pattern, watermark.
+一張三比四直式極簡建築編輯海報。
+在象牙白背景中央，以層疊的淡灰色量體構成一座高聳抽象塔樓。
+用幾條極細引導線指向塔樓基座。
+在塔樓左下附近加入一個小型墨綠色焦點。
+下方放上一行精緻襯線字標題：「垂直晨光」。
+避免真實玻璃材質、戲劇性天空、人群、濃重陰影、雜訊質感與浮水印。
 ```
 
-### Tokyo Tower, Reconstructed
+### 博物館感橋樑習作
 
 ```text
-Portrait 3:4 minimal editorial gallery illustration, not a photo-to-illustration conversion.
-Use a Tokyo Tower street photo only as content reference. Reconstruct the scene using four symbolic elements: one muted brick-red tower silhouette, three charcoal-brown bare tree trunks, a few soft gray building blocks, and small sage-green lantern accents.
-Use opaque flat gouache marks on an ivory paper ground. Keep the scene small in the upper-middle, leaving at least 55% empty space. Add one small serif caption near the lower margin: "Tower at Dusk".
-Avoid wires, realistic tower latticework, glass reflections, dense windows, detailed shadows, photographic texture, transparent overlays, borders, magazine-cover typography, watermark.
+一張四比三橫式展覽圖插畫。
+一座跨越安靜水面的長橋，化約為柔灰線條、暖赭色橋拱和一個小型亭子剪影。
+橋面上方保留大面積未繪製的象牙白空間。
+下方以鬆散、受控制且稀疏的水平筆觸表示水面。
+在下方邊界放上一行優雅襯線字：「橋拱留住光」。
+避免寫實感、粗重外框、高飽和藍色、裝飾圖樣與浮水印。
 ```
 
-## Repository Map
+### 東京鐵塔重新構圖
+
+```text
+一張三比四直式極簡編輯展覽插畫，不要做成照片轉插畫。
+東京鐵塔街景照片僅作為內容參考。只使用四個象徵元素重新構圖：一座低飽和磚紅色鐵塔輪廓、三棵炭褐色冬季樹幹、少量柔灰色建築量體，以及小型鼠尾草綠街燈焦點。
+使用不透明、扁平、近似水粉顏料的色塊，背景為象牙白紙底。主視覺置於畫面上方中央，至少保留百分之五十五空白。下方邊界放上一行小型襯線字：「暮色鐵塔」。
+避免電線、真實的鐵塔格狀結構、玻璃反射、密集窗格、細緻陰影、攝影材質、半透明疊影、外框、雜誌封面字體、浮水印。
+```
+
+## 專案結構
 
 ```text
 .
-├── SKILL.md                 # Full Codex skill entrypoint
-├── prompts/                 # Intent, analyzer, planner, compiler, reviewer, evaluator
-├── styles/                  # Style DNA: Swiss, MUJI, Kinfolk, Monocle, COS, and more
-├── layouts/                 # Output families such as poster, zine, gallery, hero, campaign
-├── adapters/                # Model-specific prompt adapters
-├── recovery/                # Targeted fixes for weak contrast, subject, palette, geometry
-├── assets/                  # Palette, typography, texture rules, and examples
-├── reference/               # Architecture and decision tree
-├── references/              # Reusable photo-abstract prompts
+├── SKILL.md                 # Codex 技能入口
+├── prompts/                 # 意圖、分析器、規劃器、編譯器、檢查器、評估器
+├── styles/                  # 風格特徵：Swiss、MUJI、Kinfolk、Monocle、COS 等
+├── layouts/                 # 海報、小誌、展覽圖、首圖、活動等輸出格式
+├── adapters/                # 不同模型使用的提示詞轉接器
+├── recovery/                # 對比、主體、色盤、幾何等補救策略
+├── assets/                  # 色盤、字體、材質規則與範例
+├── reference/               # 架構與決策樹
+├── references/              # 可重複使用的照片抽象化提示詞
 └── spec/                    # EditorialSpec schema
 ```
 
-## Install as a Codex Skill
+## 安裝成 Codex 技能
 
-Copy or symlink this repository into your Codex skills directory:
+將這個 repo 複製或 symlink 到你的 Codex skills 目錄：
 
 ```bash
 mkdir -p ~/.codex/skills
 cp -R editorial-vision-studio ~/.codex/skills/editorial-vision-studio
 ```
 
-Then ask Codex for work such as:
+接著可以這樣請 Codex 使用：
 
 ```text
-Use editorial-vision-studio to turn this photo into a quiet gallery print prompt.
+使用 editorial-vision-studio，將這張照片重新構圖為極簡展覽插畫提示詞；不要保留寫實攝影細節。
 ```
 
-## Design Notes
+## 設計備註
 
-- The system is intentionally model-agnostic. Keep visual logic in the EditorialSpec, then translate it through adapters.
-- Texture is controlled by layout. Riso, halftone, xerox, and scan-noise language belongs to zine-like outputs, not clean gallery or product layouts.
-- Recovery should be targeted. Fix contrast, focus, geometry, palette, or background only when the image report shows a weakness.
-- For exact in-image text, keep it short and place it explicitly.
+- 這套系統刻意保持模型無關。先保留視覺邏輯，再用轉接器轉成不同模型語法。
+- 材質由版面決定。孔版印刷、網點、影印與掃描雜訊適合小誌，不適合乾淨的展覽圖或產品版面。
+- 補救策略要精準。只有在分析指出問題時，才修正對比、焦點、幾何、色盤或背景。
+- 圖中文字必須短，並明確指定位置。
 
 ## License
 
 MIT
 
-## Author
+## 作者
 
 Max Wang  
 GitHub: <https://github.com/Yu-0312>

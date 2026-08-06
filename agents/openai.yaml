@@ -1,0 +1,4 @@
+interface:
+  display_name: "Editorial Vision Studio"
+  short_description: "Model-agnostic visual direction and prompt design"
+  default_prompt: "Use $editorial-vision-studio to develop a visual direction and model-ready image prompt."

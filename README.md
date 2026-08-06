@@ -32,13 +32,23 @@ The examples below show a quiet editorial illustration direction: ivory paper gr
 Use this prompt when you want the minimal editorial illustration style shown above.
 
 ```text
-Create a quiet minimal editorial illustration on an ivory paper ground.
-Use large negative space, simplified geometric forms, brush-like but controlled marks, and a muted four-color palette.
-The subject is: [describe city, bridge, tower, park path, product, or scene].
-Composition: museum-like spacing, central visual motif, no dense background, no realism, no 3D render.
-Typography: small refined serif caption near the lower margin, with the exact title "[TITLE]".
-Color palette: warm ivory, muted charcoal, one earthy accent, one cool neutral.
-Avoid: photorealism, glossy gradients, neon, busy details, watermark, fake logo, extra text.
+Create a minimal editorial gallery illustration, not a photo-to-illustration conversion.
+Reconstruct the scene with only three to five simplified symbolic forms on an ivory paper ground.
+Use opaque, flat gouache-like marks with gently irregular hand-painted edges; preserve no photographic surface detail.
+Composition: keep the motif small and centered in the upper-middle of the canvas, with at least 55% calm empty space.
+Palette: warm ivory, charcoal brown, one muted earthy accent, one cool neutral, and at most one small color anchor.
+Typography: optional; one small refined serif caption near the lower margin with the exact title "[TITLE]".
+Avoid: photorealism, transparent overlays, realistic perspective, wires, dense windows, detailed latticework, glossy gradients, neon, magazine-cover layout, watermark, fake logo, extra text.
+```
+
+### Style Lock for Reference Photos
+
+When a supplied photo keeps producing a faded or overly detailed result, describe it as a **content reference**, not an image that must be preserved. State the abstraction rules explicitly:
+
+```text
+Use the supplied photo only as a content reference. Do not preserve its photographic detail, lighting, perspective, or texture.
+Choose only the most recognizable scene cues and redraw them as independent, flat editorial marks.
+Do not make a magazine cover. Do not add a frame, barcode, cover lines, or headline unless requested.
 ```
 
 ## Recommended Workflow
@@ -96,6 +106,15 @@ Large untouched ivory space above the bridge.
 Loose horizontal water marks below, controlled and sparse.
 Small elegant serif caption near the lower margin: "Bridge Holds Light".
 Avoid realism, heavy outline, saturated blue, decorative pattern, watermark.
+```
+
+### Tokyo Tower, Reconstructed
+
+```text
+Portrait 3:4 minimal editorial gallery illustration, not a photo-to-illustration conversion.
+Use a Tokyo Tower street photo only as content reference. Reconstruct the scene using four symbolic elements: one muted brick-red tower silhouette, three charcoal-brown bare tree trunks, a few soft gray building blocks, and small sage-green lantern accents.
+Use opaque flat gouache marks on an ivory paper ground. Keep the scene small in the upper-middle, leaving at least 55% empty space. Add one small serif caption near the lower margin: "Tower at Dusk".
+Avoid wires, realistic tower latticework, glass reflections, dense windows, detailed shadows, photographic texture, transparent overlays, borders, magazine-cover typography, watermark.
 ```
 
 ## Repository Map

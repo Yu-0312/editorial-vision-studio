@@ -1,16 +1,14 @@
 # Editorial Vision Studio
 
+**Language:** English | [繁體中文](README.zh-TW.md)
+
 AI creative direction engine for editorial image generation, visual planning, and model-ready prompt writing.
 
 Editorial Vision Studio helps you turn a theme, photo, brand idea, or rough reference into a clear visual direction: intent, visual language, layout, style DNA, recovery strategy, and a prompt that can be pasted into GPT Image, Flux, Ideogram, or another image model.
 
-中文說明：Editorial Vision Studio 是一套給 AI 圖像與編輯設計使用的「視覺導演」工作流。它不只是寫 prompt，而是先判斷用途、拆解畫面語言、選擇版面與風格，再輸出可執行的生成請求，讓圖片更接近雜誌、展覽海報、品牌主視覺或極簡插畫的質感。
-
 ## Example Style
 
 The examples below show a quiet editorial illustration direction: ivory paper ground, high negative space, restrained geometry, simplified marks, muted palette, and small serif captions.
-
-以下範例示範一種安靜的 editorial illustration 方向：米白紙底、大量留白、克制幾何、簡化筆觸、低飽和色盤，以及像書封或展覽圖錄一樣的精緻標題。
 
 <p>
   <img src="assets/examples/minimal-editorial-autumn-walk.svg" alt="Autumn Walk minimal editorial illustration" width="48%">
@@ -29,19 +27,9 @@ The examples below show a quiet editorial illustration direction: ivory paper gr
 - Converts the plan into model-ready prompts through adapters for GPT Image, Flux, Ideogram, or generic tools.
 - Reviews the prompt for conflicts, such as MUJI with heavy type, gallery print with dense typography, or non-zine layouts using riso texture.
 
-中文：
-
-- 先判斷用途，例如展覽輸出、海報、活動主視覺、產品 editorial、網站 hero、zine 或 moodboard。
-- 先決定視覺語言，再選風格，避免只靠「好看的風格詞」碰運氣。
-- 規劃版面、字體、色盤、抽象程度、材質權限與補救策略。
-- 透過 adapter 轉成 GPT Image、Flux、Ideogram 或其他模型可用的 prompt。
-- 產圖前檢查衝突，例如 MUJI 卻使用過重標題、gallery print 塞太多文字、非 zine 版面卻使用 riso/xerox 質感。
-
 ## Quick Prompt
 
 Use this prompt when you want the minimal editorial illustration style shown above.
-
-想產出上面這種極簡 editorial 插畫，可以從這段開始：
 
 ```text
 Create a quiet minimal editorial illustration on an ivory paper ground.
@@ -74,14 +62,6 @@ Avoid: photorealism, glossy gradients, neon, busy details, watermark, fake logo,
 5. Review before generation.
 
    Check that typography, texture, palette, and layout do not contradict each other.
-
-中文流程：
-
-1. 先定義用途：例如 `gallery print`、`editorial poster`、`brand key visual`、`website hero` 或 `social asset`。
-2. 選擇視覺語言：例如 `Museum`、`Architectural`、`Product Stillness`、`Quiet Human`、`Urban Documentary`。
-3. 選擇版面與風格 DNA：例如 `Gallery Print + MUJI`、`Swiss Poster + Architectural`、`Magazine Cover + Kinfolk`。
-4. 轉成模型 prompt：使用 `adapters/` 裡的規則，將同一份視覺計畫轉成 GPT Image、Flux、Ideogram 或通用工具可用的 prompt。
-5. 產圖前 review：確認字體、材質、色盤、版面沒有互相衝突。
 
 ## Prompt Recipes
 
@@ -149,25 +129,12 @@ Then ask Codex for work such as:
 Use editorial-vision-studio to turn this photo into a quiet gallery print prompt.
 ```
 
-中文：
-
-```text
-使用 editorial-vision-studio，把這張照片轉成極簡展覽海報 prompt。
-```
-
 ## Design Notes
 
 - The system is intentionally model-agnostic. Keep visual logic in the EditorialSpec, then translate it through adapters.
 - Texture is controlled by layout. Riso, halftone, xerox, and scan-noise language belongs to zine-like outputs, not clean gallery or product layouts.
 - Recovery should be targeted. Fix contrast, focus, geometry, palette, or background only when the image report shows a weakness.
 - For exact in-image text, keep it short and place it explicitly.
-
-中文：
-
-- 這套系統刻意保持模型無關。先保留視覺邏輯，再用 adapter 轉成不同模型語法。
-- 材質由版面決定。Riso、halftone、xerox、scan-noise 適合 zine，不適合乾淨的 gallery 或 product layout。
-- 補救策略要精準。只有在分析指出問題時，才修正對比、焦點、幾何、色盤或背景。
-- 圖中文字必須短，並明確指定位置。
 
 ## License
 

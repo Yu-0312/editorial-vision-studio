@@ -8,15 +8,23 @@ Editorial Vision Studio helps you turn a theme, photo, brand idea, or rough refe
 
 ## Example Style
 
-The examples below show a quiet editorial illustration direction: ivory paper ground, high negative space, restrained geometry, simplified marks, muted palette, and small serif captions.
+These eight finished pieces show how a photograph can be used as content reference and reconstructed as a minimal postcard: ivory paper ground, generous negative space, restrained geometry, simplified marks, and a muted palette. This is not a photo filter; the workflow selects the subject, removes detail, and rebuilds the composition.
 
 <p>
-  <img src="assets/examples/minimal-editorial-autumn-walk.svg" alt="Autumn Walk minimal editorial illustration" width="48%">
-  <img src="assets/examples/minimal-editorial-city-dusk.svg" alt="City Dusk minimal editorial illustration" width="48%">
+  <img src="assets/examples/pavilion-postcard.webp" alt="Pavilion Over Still Water minimal postcard" width="48%">
+  <img src="assets/examples/quiet-seat-postcard.webp" alt="A Quiet Seat minimal postcard" width="48%">
 </p>
 <p>
-  <img src="assets/examples/minimal-editorial-vertical-tower.svg" alt="Vertical Morning minimal editorial illustration" width="48%">
-  <img src="assets/examples/minimal-editorial-bridge-light.svg" alt="Bridge Holds Light minimal editorial illustration" width="48%">
+  <img src="assets/examples/mountain-dawn-postcard.webp" alt="Before Dawn minimal postcard" width="48%">
+  <img src="assets/examples/harbor-postcard.webp" alt="Harbor in Haze minimal postcard" width="48%">
+</p>
+<p>
+  <img src="assets/examples/autumn-walk-postcard.webp" alt="Gold Between Branches minimal postcard" width="48%">
+  <img src="assets/examples/osaka-castle-postcard.webp" alt="Osaka Castle in Quiet Light minimal postcard" width="48%">
+</p>
+<p>
+  <img src="assets/examples/mountain-valley-postcard.webp" alt="Valley Under Cloud minimal postcard" width="48%">
+  <img src="assets/examples/tokyo-tower-postcard.webp" alt="Tower at Dusk minimal postcard" width="48%">
 </p>
 
 ## What It Does

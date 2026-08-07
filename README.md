@@ -8,15 +8,23 @@ Editorial Vision Studio 是一套給 AI 圖像與編輯設計使用的「視覺�
 
 ## 風格範例
 
-以下範例示範一種安靜的極簡編輯插畫方向：米白紙底、大量留白、克制幾何、簡化筆觸、低飽和色盤，以及像書封或展覽圖錄一樣的精緻標題。
+以下八張成品示範如何把照片作為內容參考，重新轉譯成極簡明信片：米白紙底、大量留白、克制幾何、簡化筆觸與低飽和色盤。這不是照片濾鏡，而是重新選擇主體、刪減細節並重建構圖。
 
 <p>
-  <img src="assets/examples/minimal-editorial-autumn-walk.svg" alt="秋日散步極簡編輯插畫" width="48%">
-  <img src="assets/examples/minimal-editorial-city-dusk.svg" alt="暮色城市極簡編輯插畫" width="48%">
+  <img src="assets/examples/pavilion-postcard.webp" alt="靜水亭台極簡明信片" width="48%">
+  <img src="assets/examples/quiet-seat-postcard.webp" alt="安靜長椅極簡明信片" width="48%">
 </p>
 <p>
-  <img src="assets/examples/minimal-editorial-vertical-tower.svg" alt="垂直晨光極簡編輯插畫" width="48%">
-  <img src="assets/examples/minimal-editorial-bridge-light.svg" alt="橋拱留住光極簡編輯插畫" width="48%">
+  <img src="assets/examples/mountain-dawn-postcard.webp" alt="黎明山稜極簡明信片" width="48%">
+  <img src="assets/examples/harbor-postcard.webp" alt="霧中港灣極簡明信片" width="48%">
+</p>
+<p>
+  <img src="assets/examples/autumn-walk-postcard.webp" alt="枝間秋光極簡明信片" width="48%">
+  <img src="assets/examples/osaka-castle-postcard.webp" alt="大阪城極簡明信片" width="48%">
+</p>
+<p>
+  <img src="assets/examples/mountain-valley-postcard.webp" alt="雲下山谷極簡明信片" width="48%">
+  <img src="assets/examples/tokyo-tower-postcard.webp" alt="暮色東京鐵塔極簡明信片" width="48%">
 </p>
 
 ## 它能做什麼
@@ -29,7 +37,7 @@ Editorial Vision Studio 是一套給 AI 圖像與編輯設計使用的「視覺�
 
 ## 快速提示詞
 
-想產出上面這種極簡 editorial 插畫，可以從這段開始：
+想產出上面這種極簡編輯插畫，可以從這段開始：
 
 ```text
 建立一張極簡編輯展覽插畫，不要做成照片轉插畫。

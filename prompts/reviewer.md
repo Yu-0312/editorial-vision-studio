@@ -1,6 +1,6 @@
 # Prompt Reviewer
 
-Run **after** Model Adapter, **before** image generation. Validates `GenerationRequest`, not raw EditorialSpec.
+Run **after** Model Adapter, **before** image generation. Validates the `GenerationRequest` **against the spec it was compiled from** — it reads the spec to detect drift, but never edits it. Corrections are applied to the request; anything that needs a spec change is a rejection routed back to the Compiler.
 
 ## Model-Specific Checks
 
@@ -27,13 +27,17 @@ Run **after** Model Adapter, **before** image generation. Validates `GenerationR
 | Zine + "pale accent" wording | Reject | Require saturated ink anchor per variation-engine |
 | Non-`zine` layout + riso / grain / halftone / xerox / scan-noise wording | Reject | Strip PRINT clause; compensate with contrast, spacing, mark scale ([assets/texture.md](../assets/texture.md)) |
 | panter_mode + texture clause on non-`zine` layout | Reject | Panter is colour-only outside `zine` |
-| FLAT target (`photo-abstract-diptych` panel, `interface-asset`, `website-hero` copy area, `product-editorial` bg) + any texture word | Reject | Remove all texture language; ground stays flat and uniform |
+| FLAT target (`photo-abstract-diptych` panel, `interface-asset`, `website-hero` copy area, `product-editorial` bg, any `presentation-deck` containing a `data` page) + any texture word | Reject | Remove all texture language; ground stays flat and uniform |
 | SURFACE token on a style rated Texture ★★ or lower, or with no material dimension | Warning | Drop to flat matte — style DNA does not support material character |
 | COS / MUJI + multiple chroma anchors | Reject | One accent maximum |
 | Monocle + brutalist raw concrete | Warning | Choose cosmopolitan OR raw industrial |
 | Website hero + no copy-safe space | Reject | Insert copy-safe negative space clause |
 | Interface asset + fake UI text | Reject | Remove fake controls/text; use symbolic visual |
 | Product editorial + distorted product identity | Reject | Add silhouette/proportion preservation clause |
+| `memory_id` set + prompt contradicts a locked field | Reject | Recompile against the lock; never relax it to fit one image ([visual-memory.md](visual-memory.md)) |
+| Locked `texture_tier` + a layout requiring a different tier (e.g. FLAT lock + `zine`) | Reject | A second tier breaks the set. Change the layout, not the lock |
+| `series_id` set + palette or typeface differs from the hero | Reject | Derivatives inherit the system verbatim ([series.md](series.md)) |
+| Presentation deck + riso / scan / halftone wording | Reject | Decks are FLAT or SURFACE only ([../layouts/presentation-deck.md](../layouts/presentation-deck.md)) |
 
 ## Style DNA Compatibility
 
@@ -54,6 +58,8 @@ Each style file defines dimension stars (Typography, Geometry, Negative Space, T
 - [ ] Web/interface outputs preserve copy-safe or UI-safe space
 - [ ] Product/brand outputs avoid fake logos, fake labels, and distorted identity
 - [ ] Supplied in-image copy is short enough to render and has an explicit placement
+- [ ] Every locked field from an active Visual Memory survives into the prompt
+- [ ] Series derivatives carry the hero's palette, typeface, and texture tier unchanged
 - [ ] Hard avoids paragraph present
 
 ## Output

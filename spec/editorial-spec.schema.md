@@ -8,16 +8,37 @@ Use `EditorialSpec` for backward compatibility. For general tasks, treat the sam
 ## Schema
 
 ```yaml
-spec_version: "1.0"
+spec_version: "1.1"
 
 # --- From Intent Engine ---
 intent:
   goal: string
   family: Visual Concept | Art Book | Event Campaign | Gallery | Zine | Magazine | Branding | Product / Object | Digital Product | Social | Interface Asset
-  allowed_outputs: [string]
-  blocked_outputs: [string]
+  purpose: poster | editorial | social | portfolio | campaign | presentation | brand
+  audience: general | student | professional | luxury | youth | internal
+  emotion: string          # calm, nostalgic, futuristic, dramatic, confident, quiet
+  platform: instagram | website | print | presentation | app
+  subject: string          # what is depicted
+  aspect_ratio: string     # requested or derived from platform
+  inferred: [string]       # intent dimensions the engine filled in rather than read
+  allowed_outputs: [string]   # layout ids, same vocabulary as direction.layout
+  blocked_outputs: [string]   # layout ids, same vocabulary as direction.layout
+  user_style_override: string | null   # "swiss", "kinfolk", … — makes Art Direction auto-commit
   language: en | zh  # user-facing summary language, not prompt language
   source_type: photo | theme | brand | product | interface | mixed
+
+# --- From Art Direction Engine (prompts/art-direction.md) ---
+art_direction:
+  id: string               # A | B | C
+  name: string             # "Swiss Editorial"
+  thesis: string           # one sentence: what this direction argues the image is about
+  fit_score: 0.0-1.0
+  selection_mode: auto | user
+  runner_up: string | null # candidate id — switchable without re-analysis
+
+# --- Series / memory linkage (null for a standalone run) ---
+series_id: string | null   # set by prompts/series.md when the request is a set
+memory_id: string | null   # set by prompts/visual-memory.md; locked fields become hard constraints
 
 # --- From Visual Analyzer (null if theme-only / prompt-only) ---
 image_report:
@@ -34,7 +55,7 @@ image_report:
 # --- From Visual Language + Planner ---
 direction:
   visual_language: string
-  layout: poster | magazine-cover | gallery-print | zine | editorial-spread | campaign-poster | photo-abstract-diptych | brand-key-visual | product-editorial | website-hero | social-asset | moodboard | interface-asset
+  layout: poster | magazine-cover | gallery-print | zine | editorial-spread | campaign-poster | photo-abstract-diptych | brand-key-visual | product-editorial | website-hero | social-asset | moodboard | interface-asset | presentation-deck
   style: string  # swiss, kinfolk, muji, ...
   editorial_mode: premium | standard | compensation | reconstruction
   abstraction_level: relationship-first | identity-cue | full-abstract
@@ -43,7 +64,7 @@ direction:
     abstract_ratio: 0.0-1.0
     type_ratio: 0.0-1.0
     whitespace_ratio: 0.0-1.0
-  aspect_ratio: "3:4" | "2:3" | "3:5" | "1:1" | "16:9"
+  aspect_ratio: "3:4" | "2:3" | "3:5" | "1:1" | "4:5" | "9:16" | "16:9" | "4:3" | "A4"
   title: string | null        # 2-5 word English title
   subtitle: string | null
   production_context: print | social | web | interface | prompt_only
@@ -52,6 +73,7 @@ direction:
 design_tokens:
   palette: [string]           # named hues, not hex-only
   typography: string          # e.g. "thin serif, caption scale"
+  texture_tier: FLAT | SURFACE | PRINT   # resolved tier — the lockable field. See assets/texture.md
   texture: [string]           # PRINT tokens (riso_halftone, xerox, scan_noise) only when direction.layout == zine
                               # CLEAN layouts: SURFACE tokens only (cotton_paper, natural_material, matte_board) or []
                               # FLAT targets: always []. See assets/texture.md
@@ -86,6 +108,15 @@ target:
 
 ## Validation Rules
 
+- `art_direction.thesis` is required and must be traceable to a photo fact, brand cue, or stated goal — a direction with no argument is decoration
+- `direction.layout` must appear in `intent.allowed_outputs` and must not appear in `intent.blocked_outputs`
+- If `memory_id` is set, every field locked by that memory must match it exactly ([visual-memory.schema.md](visual-memory.schema.md)). A mismatch is a rejection, not a warning
+- If `memory_id` is set, `art_direction.selection_mode` must be `auto` — memory runs do not re-pick a direction
+- If `series_id` is set, `design_tokens` and `direction.style` must be identical across every spec sharing that id
+- If `direction.layout = presentation-deck`, `design_tokens.texture_tier` must be `FLAT` or `SURFACE` — never `PRINT`
+- `design_tokens.texture_tier` must agree with `design_tokens.texture`: `FLAT` → `[]`, `SURFACE` → SURFACE tokens only, `PRINT` → `direction.layout = zine`
+- `intent.platform` and `direction.aspect_ratio` must be compatible (`instagram` → 1:1 / 4:5 / 9:16; `presentation` → 16:9 / 4:3; `print` → 2:3 / 3:4 / A4; `website` → 16:9; `app` → 1:1). In a series, `intent.platform` names the hero's platform and each output is checked against its own `direction.production_context` instead
+- `intent.allowed_outputs`, `intent.blocked_outputs`, and `direction.layout` all use the same kebab-case layout vocabulary
 - `recoveries` must match `image_report.flags` — no orphan recoveries
 - If `photo_policy.fidelity = required`, `avoids` must include `photo redraw`
 - If `layout = photo-abstract-diptych`, `photo_policy.fidelity` must be `required`
@@ -97,12 +128,29 @@ target:
 ## Example (minimal)
 
 ```yaml
-spec_version: "1.0"
+spec_version: "1.1"
 intent:
   goal: "editorial poster from gray street photo"
   family: Gallery
-  allowed_outputs: [editorial_poster, photo_abstract_diptych]
+  purpose: editorial
+  audience: general
+  emotion: quiet
+  platform: print
+  subject: "rain-wet street corner"
+  aspect_ratio: "3:4"
+  inferred: [audience, aspect_ratio]
+  allowed_outputs: [poster, photo-abstract-diptych]
+  blocked_outputs: [campaign-poster, interface-asset]
   language: zh
+art_direction:
+  id: A
+  name: "Swiss Architectural"
+  thesis: "The street is a grid interrupted by weather."
+  fit_score: 0.87
+  selection_mode: auto
+  runner_up: B
+series_id: null
+memory_id: null
 image_report:
   subject: street
   clarity: 58
@@ -130,6 +178,7 @@ direction:
 design_tokens:
   palette: [warm ivory, compensated amber, cool slate, cobalt anchor]
   typography: "thin Helvetica caption"
+  texture_tier: FLAT
   texture: []
   atmosphere: quiet urban
 recoveries: [panter_mode, color_anchor]   # no riso_texture — photo-abstract-diptych is CLEAN

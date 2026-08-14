@@ -34,6 +34,10 @@ These eight finished pieces show how a photograph can be used as content referen
 - Plans layout, typography, palette, abstraction level, texture permission, and recovery fixes.
 - Converts the plan into model-ready prompts through adapters for GPT Image, Flux, Ideogram, or generic tools.
 - Reviews the prompt for conflicts, such as MUJI with heavy type, gallery print with dense typography, or non-zine layouts using riso texture.
+- Proposes two or three competing art directions, each with a thesis and a trade-off, then commits to one and keeps the runner-up switchable.
+- Scores the result across ten dimensions after generation and fixes only the single layer responsible, up to three passes.
+- Remembers a visual system so the second and tenth image read as the same publication: style, palette, typography, and texture tier stay locked while layout and composition adapt per image.
+- Expands one visual system into a full set: campaign at every size, carousels, multi-page decks.
 
 ## Quick Prompt
 
@@ -69,17 +73,29 @@ Do not make a magazine cover. Do not add a frame, barcode, cover lines, or headl
 
    Example: `Museum`, `Architectural`, `Product Stillness`, `Quiet Human`, `Urban Documentary`.
 
-3. Select the layout and style DNA.
+3. Commit to an art direction.
+
+   Compare two or three directions by thesis and trade-off instead of accepting the first plausible reading. The committed direction constrains everything below it.
+
+4. Set the layout and composition inside that direction.
 
    Example: `Gallery Print + MUJI`, `Swiss Poster + Architectural`, `Magazine Cover + Kinfolk`.
 
-4. Compile a model prompt.
+5. Compile a model prompt.
 
    Use the files in `adapters/` to translate the same visual plan for GPT Image, Flux, Ideogram, or a generic image tool.
 
-5. Review before generation.
+6. Review before generation.
 
    Check that typography, texture, palette, and layout do not contradict each other.
+
+7. Score and iterate after generation.
+
+   Find the lowest-scoring dimension, fix the one layer responsible, recompile, regenerate.
+
+8. Lock the system for a set.
+
+   Once the first image passes, lock style, palette, typography, and texture tier so every later image inherits them.
 
 ## Prompt Recipes
 
@@ -130,7 +146,7 @@ Avoid wires, realistic tower latticework, glass reflections, dense windows, deta
 ```text
 .
 ├── SKILL.md                 # Full Codex skill entrypoint
-├── prompts/                 # Intent, analyzer, planner, compiler, reviewer, evaluator
+├── prompts/                 # Intent, analyzer, art direction, planner, compiler, reviewer, evaluator, iteration, visual memory, series
 ├── styles/                  # Style DNA: Swiss, MUJI, Kinfolk, Monocle, COS, and more
 ├── layouts/                 # Output families such as poster, zine, gallery, hero, campaign
 ├── adapters/                # Model-specific prompt adapters
@@ -138,7 +154,7 @@ Avoid wires, realistic tower latticework, glass reflections, dense windows, deta
 ├── assets/                  # Palette, typography, texture rules, and examples
 ├── reference/               # Architecture and decision tree
 ├── references/              # Reusable photo-abstract prompts
-└── spec/                    # EditorialSpec schema
+└── spec/                    # EditorialSpec, VisualManifest, and VisualMemory schemas
 ```
 
 ## Install as a Codex Skill

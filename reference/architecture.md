@@ -9,25 +9,41 @@ Only the adapter layer changes when switching image models. The decision pipelin
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  DECISION ENGINE (model-agnostic)                       │
-│  Intent → Analyzer → Visual Language → Planner          │
-│         → Recovery → EditorialSpec                      │
+│  Intent → Analyzer → Visual Language → Art Direction    │
+│         → Planner → Recovery                            │
 └──────────────────────────┬──────────────────────────────┘
-                           │ EditorialSpec (YAML)
                            ▼
 ┌─────────────────────────────────────────────────────────┐
-│  MODEL ADAPTER (swappable)                              │
-│  VisionSpec / EditorialSpec → prompt + gen params       │
-└──────────────────────────┬──────────────────────────────┘
-                           │
-                           ▼
-              GPT Image / Flux / Ideogram / …
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│  SHARED POST-LAYER                                      │
-│  Reviewer → Generate → Evaluator                        │
+│  COMPILER  → EditorialSpec (YAML)                       │◄──┐
+└──────────────────────────┬──────────────────────────────┘   │
+                           ▼                                  │
+┌─────────────────────────────────────────────────────────┐   │
+│  MODEL ADAPTER (swappable)                              │   │
+│  EditorialSpec → prompt + gen params                    │   │
+└──────────────────────────┬──────────────────────────────┘   │
+                           ▼                                  │
+              GPT Image / Flux / Ideogram / …                 │
+                           ▼                                  │
+┌─────────────────────────────────────────────────────────┐   │
+│  SHARED POST-LAYER                                      │   │
+│  Reviewer → Generate → Evaluator → Iteration ───────────┼───┘
+└──────────────────────────┬──────────────────────────────┘  one spec
+                           ▼ pass                            mutation,
+┌─────────────────────────────────────────────────────────┐  max 3
+│  PERSISTENCE                                            │  passes
+│  VisualManifest (this run) · VisualMemory (the system)  │
 └─────────────────────────────────────────────────────────┘
 ```
+
+## Three Contracts
+
+| Contract | Written by | Answers |
+|----------|-----------|---------|
+| [EditorialSpec](../spec/editorial-spec.schema.md) | Decision Engine, before generating | What should this image be? |
+| [VisualManifest](../spec/visual-manifest.schema.md) | Compiler, opened at compile time, finalized when the run settles | What did this run actually do? |
+| [VisualMemory](../spec/visual-memory.schema.md) | Visual Memory, after a passing run | What must the next image inherit? |
+
+Spec is intent. Manifest is history. Memory is identity. Keeping them separate is what makes replay, model switching, and multi-image consistency cheap — each one answers a different question, and no layer has to guess.
 
 ## What Never Changes
 
@@ -35,11 +51,15 @@ These modules are **pure editorial logic** — no model syntax:
 
 | Layer | Output |
 |-------|--------|
-| Intent Engine | output family, allowed layouts |
+| Intent Engine | output family, allowed layouts, intent dimensions |
 | Visual Analyzer | Image Report, Editorial Score |
 | Visual Language Engine | language → style derivation |
+| Art Direction Engine | candidate directions, fit scores, committed direction |
 | Editorial Planner | layout, ratios, abstraction level |
 | Recovery Engine | recovery module IDs |
+| Quality Evaluator | quality vector, responsible layer |
+| Iteration Engine | spec mutations, stop reason |
+| Visual Memory | locked DNA across runs |
 | Style / Layout / Recovery files | DNA parameters |
 
 ## What Changes Per Model
@@ -66,6 +86,14 @@ Adapters **must not** re-analyze the image or override Planner decisions — onl
 2. Define: prompt shape, negative syntax, reference-image policy, default params
 3. Register in [adapters/registry.md](../adapters/registry.md)
 4. No changes to Analyzer, Planner, Recovery, or Style files
+
+## Where Loops Are Allowed
+
+Exactly one edge closes a cycle: Evaluator → Iteration → **Compiler**. Iteration never re-enters higher than the Compiler. It mutates a spec field, then the run flows forward normally — Compiler → Adapter → Reviewer → Generate → Evaluator.
+
+Escalation (Compiler → Recovery → Planner → Art Direction → Intent) chooses *which spec field* the next mutation touches. It does not add extra edges: whichever layer's decision changed, the run still re-enters at the Compiler. The loop is bounded at three passes.
+
+Every other edge in the diagram is one-way. A layer that reaches backward — an Adapter that re-plans, a Compiler that re-analyzes, a Reviewer that edits the spec — is a bug, not an optimisation.
 
 ## Adding a New Style or Layout
 

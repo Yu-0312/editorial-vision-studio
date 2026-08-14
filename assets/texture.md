@@ -10,9 +10,9 @@ Three tiers, most permissive to least:
 |------|----------------|---------------|
 | **PRINT** | Print defects as visible pattern: risograph grain, xerox halftone, halftone degradation, scan noise, film grain, ink bleed, misregistration, aged paper mottling | `zine` **only** |
 | **SURFACE** | Material character of the substrate itself: cotton paper, natural fibre, matte board, lived-in warmth. Described as what the ground *is*, never as an overlay pattern or visible dot/grain structure | CLEAN layouts whose style DNA rates Texture (or an equivalent material dimension) ★★★ or higher: Apartamento ★★★★★, COS ★★★★★ *Material calm*, Kinfolk ★★★★, MUJI ★★★, Brutalist ★★★ |
-| **FLAT** | Zero texture language of any kind | `photo-abstract-diptych` abstract panel ground, `interface-asset`, `website-hero` copy-safe area, `product-editorial` background |
+| **FLAT** | Zero texture language of any kind | `photo-abstract-diptych` abstract panel ground, `interface-asset`, `website-hero` copy-safe area, `product-editorial` background, every page of a `presentation-deck` that contains a `data` page |
 
-Everything not listed under PRINT is **CLEAN**: `photo-abstract-diptych`, `poster`, `magazine-cover`, `gallery-print`, `editorial-spread`, `campaign-poster`, `brand-key-visual`, `product-editorial`, `website-hero`, `social-asset`, `interface-asset`, `moodboard`.
+Everything not listed under PRINT is **CLEAN**: `photo-abstract-diptych`, `poster`, `magazine-cover`, `gallery-print`, `editorial-spread`, `campaign-poster`, `brand-key-visual`, `product-editorial`, `website-hero`, `social-asset`, `interface-asset`, `moodboard`, `presentation-deck`.
 
 **CLEAN is the default.** On a CLEAN layout a PRINT clause is dropped, not downgraded — the requesting module falls back to contrast, spacing, mark scale, and hierarchy.
 
@@ -23,6 +23,13 @@ Contract consequences:
 - CLEAN → no adapter may emit "riso", "halftone", "grain", "noise", "xerox", "scan", or "mottling"
 - FLAT → `design_tokens.texture` is `[]` and no texture words appear at all
 - Styles with no Texture / material dimension (Swiss ★★, Monocle, Purple, POPEYE, Wallpaper\*) get no SURFACE tokens — flat matte grounds
+- `design_tokens.texture_tier` names the resolved tier and must agree with `design_tokens.texture`: `PRINT` implies PRINT tokens, `SURFACE` implies SURFACE tokens only, `FLAT` implies `[]`
+
+## One Tier Per Set
+
+A tier is a property of the **system**, not of a page. Every output sharing a `series_id`, and every page of a `presentation-deck`, resolves to one tier. Mixed tiers never read as a set — see [../prompts/series.md](../prompts/series.md) and [../spec/visual-memory.schema.md](../spec/visual-memory.schema.md).
+
+For a deck, FLAT is the default and is mandatory whenever the deck contains a `data` page. A deck with no `data` page may run SURFACE on every page when the style DNA rates Texture ★★★+.
 
 ## Editorial (photo-abstract) — FLAT panel
 

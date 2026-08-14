@@ -33,6 +33,7 @@ This skill evolves [photo-abstract-editorial](https://github.com/ZzzLc0405/photo
 - User specifies model: `gpt-image`, `flux`, `ideogram` — or asks to reuse direction with a different model
 - User wants a **set**, not an image: campaign at all sizes, a carousel, a multi-page deck
 - User wants a **second image that matches the first** — series consistency, brand system, "同一套視覺"
+- User names a preset, or wants a specific fixed look reproduced exactly
 
 ## Architecture: Decision Engine + Model Adapters
 
@@ -125,7 +126,7 @@ Read [prompts/analyzer.md](prompts/analyzer.md).
 
 Derive **Visual Language first**, then style/palette/layout — not the reverse.
 
-Examples: Museum → Swiss + ivory + fine serif; Quiet Human → Kinfolk + cream/sage; Indie Memory → Zine + riso anchor.
+Examples: Museum → Swiss or MUJI + fine serif; Quiet Human → Kinfolk + cream/sage; Indie Memory → Zine + riso anchor; Poster Graphic → Travel Poster + flat inks.
 
 Read [prompts/visual-language.md](prompts/visual-language.md). User `style:` override skips auto-derivation but Reviewer still validates DNA fit.
 
@@ -135,10 +136,11 @@ Do not generate the first plausible reading of the brief. Draft **2–3 competin
 
 | Situation | Behaviour |
 |-----------|-----------|
+| A `preset:` is named | Auto-commit, no candidates, no question — the preset already decided ([presets/registry.md](presets/registry.md)) |
 | Explicit `style:`, narrow intent family, or active Visual Memory | Auto-commit; name the runner-up in one line. The layer still runs — every spec needs an `art_direction` block |
 | Top two candidates within 0.15 `fit_score`, theme-only brief, or Editorial Score <50 | Offer 2–3 and let the user pick |
 
-Candidates must differ on at least two of: visual language, layout family, abstraction level, palette temperature, typography weight. Palette swaps are not directions.
+**Every candidate must set a different `ground`.** Eight of the eleven style DNAs resolve to a light paper field, so candidates chosen on style alone come back as three shades of ivory. Beyond that, candidates must differ on at least two of: render mode, visual language, layout family, abstraction level, typography weight. Palette swaps are not directions.
 
 The committed direction is a **hard constraint** on the Planner. Switching to the runner-up later re-runs Planner onward only — never the Analyzer.
 
@@ -234,6 +236,35 @@ Taste disagreement ("I don't like the blue") is a direction change, not a QC fai
 
 Read [prompts/iteration.md](prompts/iteration.md).
 
+## Ground & Render Mode
+
+Two axes, **required, with no default**:
+
+| Axis | Values | Question it answers |
+|------|--------|---------------------|
+| `design_tokens.ground` | `paper-light` · `neutral-gray` · `dark` · `saturated` · `full-bleed-photo` · `duotone` | What is the canvas field itself? |
+| `direction.render_mode` | `photographic` · `photo-plus-graphic` · `graphic` · `painterly` · `mixed` | What medium is the image made of? |
+
+Enum values are contract tokens, never prompt words — every adapter resolves them to prose through [assets/ground.md](assets/ground.md).
+
+An unset value is a **rejection, not a fallback**. This matters more than it looks: before these fields existed, an undecided ground fell through to warm ivory paper on every run, because that was the most-repeated value in the repo. A field with no default cannot be skipped.
+
+`render_mode` is not `abstraction_level`. Medium and distance-from-source are independent — a `photographic` image can still be `full-abstract`.
+
+## Presets
+
+A preset is a shipped [VisualMemory](spec/visual-memory.schema.md) with `source: preset` — a locked partial spec authored in the repo instead of established from a run. It reuses the entire memory mechanism; nothing new enforces it.
+
+| Preset | Ground | Render mode |
+|--------|--------|-------------|
+| [ivory-postcard](presets/ivory-postcard.md) | `paper-light` | `painterly` |
+| [vintage-travel-poster](presets/vintage-travel-poster.md) | `saturated` | `graphic` |
+| [papercraft-diorama-postcard](presets/papercraft-diorama-postcard.md) | `full-bleed-photo` | `photographic` |
+
+`preset: ivory-postcard` reproduces the repo's original look exactly, with no direction question. Three different grounds is deliberate — it is what gives the candidate-diversity rule something to draw on. Registry and authoring guide: [presets/registry.md](presets/registry.md).
+
+Unlike a series memory, a preset **may lock `composition`, `aspect_ratio`, and `layout`**: a preset is avowedly a template, which is what it is for.
+
 ## Visual Memory & Series
 
 The engine keeps a visual system across images, not just within one.
@@ -321,6 +352,13 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 
 ## Style & Layout Reference
 
+| Asset module | File |
+|--------------|------|
+| Ground & Render Mode | [assets/ground.md](assets/ground.md) |
+| Texture permission | [assets/texture.md](assets/texture.md) |
+| Palette | [assets/palette.md](assets/palette.md) |
+| Typography | [assets/typography.md](assets/typography.md) |
+
 | Style | File |
 |-------|------|
 | Swiss | [styles/swiss.md](styles/swiss.md) |
@@ -333,6 +371,7 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 | POPEYE | [styles/popeye.md](styles/popeye.md) |
 | Monocle | [styles/monocle.md](styles/monocle.md) |
 | COS | [styles/cos.md](styles/cos.md) |
+| Period Travel Poster | [styles/travel-poster.md](styles/travel-poster.md) |
 
 | Layout | File |
 |--------|------|
@@ -355,6 +394,7 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 | Extend | Action | Touch Decision Engine? |
 |--------|--------|--------------------------|
 | New style (Aesop, NYT Mag) | Add `styles/foo.md` | No |
+| New preset | Add `presets/foo.md` + register | **No** |
 | New layout | Add `layouts/foo.md` | No |
 | New recovery | Add `recovery/foo.md` | No |
 | New image model | Add `adapters/foo.md` + register | **No** |
@@ -384,6 +424,7 @@ Add new magazines/brands by creating `styles/your-style.md` with Style DNA table
 | Iteration Engine | [prompts/iteration.md](prompts/iteration.md) |
 | Visual Memory | [prompts/visual-memory.md](prompts/visual-memory.md) |
 | Series Planner | [prompts/series.md](prompts/series.md) |
+| Preset Registry | [presets/registry.md](presets/registry.md) |
 
 | Contract | File |
 |----------|------|

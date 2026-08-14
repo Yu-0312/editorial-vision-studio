@@ -41,7 +41,7 @@ Only the adapter layer changes when switching image models. The decision pipelin
 |----------|-----------|---------|
 | [EditorialSpec](../spec/editorial-spec.schema.md) | Decision Engine, before generating | What should this image be? |
 | [VisualManifest](../spec/visual-manifest.schema.md) | Compiler, opened at compile time, finalized when the run settles | What did this run actually do? |
-| [VisualMemory](../spec/visual-memory.schema.md) | Visual Memory, after a passing run | What must the next image inherit? |
+| [VisualMemory](../spec/visual-memory.schema.md) | Visual Memory after a passing run, or authored as a [preset](../presets/registry.md) | What must the next image inherit? |
 
 Spec is intent. Manifest is history. Memory is identity. Keeping them separate is what makes replay, model switching, and multi-image consistency cheap — each one answers a different question, and no layer has to guess.
 
@@ -94,6 +94,13 @@ Exactly one edge closes a cycle: Evaluator → Iteration → **Compiler**. Itera
 Escalation (Compiler → Recovery → Planner → Art Direction → Intent) chooses *which spec field* the next mutation touches. It does not add extra edges: whichever layer's decision changed, the run still re-enters at the Compiler. The loop is bounded at three passes.
 
 Every other edge in the diagram is one-way. A layer that reaches backward — an Adapter that re-plans, a Compiler that re-analyzes, a Reviewer that edits the spec — is a bug, not an optimisation.
+
+## Adding a Preset
+
+1. Copy [../presets/_template.md](../presets/_template.md) → `presets/your-preset.md`
+2. Fill every locked field, `ground` and `render_mode` included
+3. Register it in [../presets/registry.md](../presets/registry.md)
+4. No changes to Analyzer, Planner, Recovery, adapters, or the spec — a preset is a VisualMemory with `source: preset`, so the existing lock machinery already enforces it
 
 ## Adding a New Style or Layout
 

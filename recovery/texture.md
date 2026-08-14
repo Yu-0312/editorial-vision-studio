@@ -27,14 +27,14 @@ Do **not** add grain, noise, halftone, or paper stain. At most name the substrat
 PRINT:
 
 ```
-Fine matte paper grain on ivory ground,
+Fine matte paper grain on {ground},   # resolve via ../assets/ground.md
 Riso halftone texture on abstract panel region.
 ```
 
 CLEAN:
 
 ```
-Flat uniform ivory ground with no grain or paper texture;
+Flat uniform {ground} with no grain or paper texture;
 material depth from tonal separation, interval, and mark scale.
 ```
 

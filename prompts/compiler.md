@@ -10,7 +10,7 @@ Pull modules from:
 
 - Layout: [layouts/](../layouts/)
 - Style DNA: [styles/](../styles/)
-- Assets: [assets/typography.md](../assets/typography.md), [assets/palette.md](../assets/palette.md), [assets/texture.md](../assets/texture.md)
+- Assets: [assets/ground.md](../assets/ground.md), [assets/typography.md](../assets/typography.md), [assets/palette.md](../assets/palette.md), [assets/texture.md](../assets/texture.md)
 - Recovery clauses: [recovery/](../recovery/)
 - Conditional: [references/photo-abstract-prompt.*](../references/) when diptych; [assets/variation-engine.md](../assets/variation-engine.md) when zine
 
@@ -46,7 +46,7 @@ User override: `model: flux` in request → sets `target.model` before Phase 2.
 
 Compile only information that can change final pixels. Convert the brief into this order:
 
-1. canvas and surface
+1. canvas and surface — state `design_tokens.ground` explicitly and first, resolved to prose via [assets/ground.md](../assets/ground.md); never emit the enum token. An unstated ground is the single most common way an image drifts back to paper white
 2. attention geometry and negative-space budget
 3. one primary image anchor and its treatment
 4. typography or copy-safe behavior
@@ -99,5 +99,6 @@ Keep the manifest internal unless the user asks for it or the run is part of a s
 | layout = interface-asset | [layouts/interface-asset.md](../layouts/interface-asset.md) |
 | layout = presentation-deck | [layouts/presentation-deck.md](../layouts/presentation-deck.md) |
 | `series_id` set | [series.md](series.md) |
+| `preset` set | [presets/registry.md](../presets/registry.md) |
 | `memory_id` set, or brand assets supplied | [visual-memory.md](visual-memory.md) |
 | architecture overview | [reference/architecture.md](../reference/architecture.md) |

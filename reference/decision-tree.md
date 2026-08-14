@@ -3,6 +3,11 @@
 ```
 START: User request + optional image / brand / product / theme
 │
+├─ Named a preset ("preset: ivory-postcard", "用時代海報那組")?
+│   └─ YES → presets/registry.md → load as VisualMemory (source: preset)
+│            → Art Direction auto-commits, ZERO questions
+│            → Analyzer still runs if a photo was given
+│
 ├─ Asking for a SET (N pages, all sizes, carousel)?
 │   └─ YES → prompts/series.md → run Intent…Art Direction ONCE
 │            → hero first, QC, then fan out derivatives
@@ -40,8 +45,10 @@ START: User request + optional image / brand / product / theme
     │   (override if user said style: X)
     │
     ├─ Step 3: Art Direction → 2–3 candidates → commit one, keep runner-up
-    │   auto-commit if: style override · narrow family · memory active
+    │   auto-commit if: preset named · style override · narrow family · memory
     │   offer choices if: close scores · theme-only · score <50
+    │   EVERY candidate must set a different ground — no all-ivory sets
+    │   ground + render_mode are required here; there is no default
     │
     ├─ Step 4: Planner → layout + composition ratios (inside the direction)
     │

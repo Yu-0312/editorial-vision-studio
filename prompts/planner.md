@@ -6,7 +6,9 @@ Run [visual-language.md](visual-language.md) then [art-direction.md](art-directi
 
 The Planner works **inside** the committed direction. It sets ratios, typography scale, abstraction level, and recovery plan — it does not re-pick style, palette, or visual language. If the direction itself is wrong, that is an Art Direction escalation ([iteration.md](iteration.md)), not a Planner override.
 
-When `memory_id` is set, fields locked by that memory are read-only. The Planner sets `free` fields only — see [visual-memory.md](visual-memory.md).
+When `memory_id` or `preset` is set, fields locked by that memory are read-only. The Planner sets `free` fields only — see [visual-memory.md](visual-memory.md) and [../presets/registry.md](../presets/registry.md).
+
+`design_tokens.ground` and `direction.render_mode` must both be set before the Planner hands off. They have no defaults; an unset value is a rejection, not ivory paper.
 
 ## Subject → Layout Matrix
 

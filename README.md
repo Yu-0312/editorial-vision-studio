@@ -8,7 +8,9 @@ Editorial Vision Studio 是一套給 AI 圖像與編輯設計使用的「視覺�
 
 ## 風格範例
 
-以下八張成品示範如何把照片作為內容參考，重新轉譯成極簡明信片：米白紙底、大量留白、克制幾何、簡化筆觸與低飽和色盤。這不是照片濾鏡，而是重新選擇主體、刪減細節並重建構圖。
+以下八張成品全部出自 **[`ivory-postcard`](presets/ivory-postcard.md) preset**，示範如何把照片作為內容參考，重新轉譯成極簡明信片：米白紙底、大量留白、克制幾何、簡化筆觸與低飽和色盤。這不是照片濾鏡，而是重新選擇主體、刪減細節並重建構圖。
+
+這是**其中一種 preset，不是引擎預設值**。底色與呈現方式由 `ground` 與 `render_mode` 兩個必填欄位決定，沒有預設值可以掉進去。另外兩組隨附 preset：[`vintage-travel-poster`](presets/vintage-travel-poster.md)（飽和色場、平面色塊）與 [`papercraft-diorama-postcard`](presets/papercraft-diorama-postcard.md)（照片即底、紙雕立體模型）。完整清單見 [presets/registry.md](presets/registry.md)。
 
 <p>
   <img src="assets/examples/pavilion-postcard.webp" alt="靜水亭台極簡明信片" width="48%">
@@ -41,7 +43,13 @@ Editorial Vision Studio 是一套給 AI 圖像與編輯設計使用的「視覺�
 
 ## 快速提示詞
 
-想產出上面這種極簡編輯插畫，可以從這段開始：
+想產出上面這種極簡編輯插畫，最短的方式是指定 preset：
+
+```text
+preset: ivory-postcard
+```
+
+不透過引擎、直接貼給模型的話，可以從這段開始（這就是 `ivory-postcard` 展開後的內容）：
 
 ```text
 建立一張極簡編輯展覽插畫，不要做成照片轉插畫。
@@ -146,6 +154,7 @@ Editorial Vision Studio 是一套給 AI 圖像與編輯設計使用的「視覺�
 ```text
 .
 ├── SKILL.md                 # Codex 技能入口
+├── presets/                 # 隨附的固定模板：米色明信片、時代海報、紙雕立體明信片
 ├── prompts/                 # 意圖、分析器、藝術方向、規劃器、編譯器、檢查器、評估器、迭代、視覺記憶、成套規劃
 ├── styles/                  # 風格特徵：Swiss、MUJI、Kinfolk、Monocle、COS 等
 ├── layouts/                 # 海報、小誌、展覽圖、首圖、活動等輸出格式

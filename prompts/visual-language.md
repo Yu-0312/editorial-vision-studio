@@ -20,7 +20,7 @@ Never pick Style first unless user explicitly overrides (`style: kinfolk`).
 
 | Visual Language | Signals in Image Report | Style | Layout bias | Palette | Typography | Texture | Lighting |
 |-----------------|-------------------------|-------|-------------|---------|------------|---------|----------|
-| Museum | quiet, high negative space, fine detail | Swiss | Gallery / Cover | Ivory, warm gray | Fine serif | Cotton paper | Soft side |
+| Museum | quiet, high negative space, fine detail | Swiss / MUJI | Gallery / Cover | Ivory, warm gray | Fine serif | Flat matte, or cotton paper when style DNA allows | Soft side |
 | Quiet Human | portrait, emotion, soft light | Kinfolk | Magazine Cover | Cream, sage, beige | Light serif | Cotton paper (SURFACE) | Diffuse |
 | Architectural | geometry, lines, structure | Swiss / Brutalist | Poster | Neutral + accent | Grotesk | Matte concrete | Directional |
 | Domestic Intimacy | interiors, objects, warmth | Apartamento | Spread | Terracotta, wood | Small serif | Lived-in | Window light |
@@ -33,7 +33,10 @@ Never pick Style first unless user explicitly overrides (`style: kinfolk`).
 | Brand System Calm | brand/product launch, premium restraint | COS / Swiss / Wallpaper* | Brand Key Visual | Off-white, black, one product hue | Small sans | Material surface | Soft controlled |
 | Digital Trust | SaaS, app, technical product, calm clarity | Swiss / MUJI / COS | Website Hero / Interface Asset | White, cool gray, single signal color | UI-safe sans | Flat matte (FLAT) | Even luminous |
 | Social Impact | social campaign, launch post, mobile crop | Swiss / Brutalist / POPEYE | Social Asset | High contrast + one anchor | Bold but sparse | Flat ink | Graphic |
+| Poster Graphic | destination, event, place-as-idea, no photographic surface | Travel Poster / Brutalist | Poster / Campaign Poster | 4–6 flat saturated inks | Condensed sans wordmark | Matte stock | Flat graphic |
 | Concept Atmosphere | theme-only prompt, moodboard, style frame | User override / Generic | Moodboard / Zine | Derived from theme | Minimal labels | Material mix | Mood-led |
+
+The Texture column names the *character* a language reaches for. The permitted tier is still resolved by [../assets/texture.md](../assets/texture.md) against `direction.layout` and the style DNA stars — a language never raises a tier.
 
 ## Selection Rules
 

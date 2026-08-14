@@ -9,7 +9,7 @@ Three tiers, most permissive to least:
 | Tier | What it covers | Allowed where |
 |------|----------------|---------------|
 | **PRINT** | Print defects as visible pattern: risograph grain, xerox halftone, halftone degradation, scan noise, film grain, ink bleed, misregistration, aged paper mottling | `zine` **only** |
-| **SURFACE** | Material character of the substrate itself: cotton paper, natural fibre, matte board, lived-in warmth. Described as what the ground *is*, never as an overlay pattern or visible dot/grain structure | CLEAN layouts whose style DNA rates Texture (or an equivalent material dimension) ★★★ or higher: Apartamento ★★★★★, COS ★★★★★ *Material calm*, Kinfolk ★★★★, MUJI ★★★, Brutalist ★★★ |
+| **SURFACE** | Material character of the substrate itself: cotton paper, natural fibre, matte board, lived-in warmth. Described as what the ground *is*, never as an overlay pattern or visible dot/grain structure | CLEAN layouts whose style DNA rates Texture (or an equivalent material dimension) ★★★ or higher: Apartamento ★★★★★, COS ★★★★★ *Material calm*, Kinfolk ★★★★, MUJI ★★★, Brutalist ★★★, Period Travel Poster ★★★ |
 | **FLAT** | Zero texture language of any kind | `photo-abstract-diptych` abstract panel ground, `interface-asset`, `website-hero` copy-safe area, `product-editorial` background, every page of a `presentation-deck` that contains a `data` page |
 
 Everything not listed under PRINT is **CLEAN**: `photo-abstract-diptych`, `poster`, `magazine-cover`, `gallery-print`, `editorial-spread`, `campaign-poster`, `brand-key-visual`, `product-editorial`, `website-hero`, `social-asset`, `interface-asset`, `moodboard`, `presentation-deck`.
@@ -23,6 +23,7 @@ Contract consequences:
 - CLEAN → no adapter may emit "riso", "halftone", "grain", "noise", "xerox", "scan", or "mottling"
 - FLAT → `design_tokens.texture` is `[]` and no texture words appear at all
 - Styles with no Texture / material dimension (Swiss ★★, Monocle, Purple, POPEYE, Wallpaper\*) get no SURFACE tokens — flat matte grounds
+- `ground: full-bleed-photo` is always FLAT. Paper depicted *inside* a photograph is content, not canvas texture — the tier governs the canvas, never the subject matter
 - `design_tokens.texture_tier` names the resolved tier and must agree with `design_tokens.texture`: `PRINT` implies PRINT tokens, `SURFACE` implies SURFACE tokens only, `FLAT` implies `[]`
 
 ## One Tier Per Set

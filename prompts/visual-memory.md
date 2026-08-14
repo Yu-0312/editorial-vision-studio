@@ -21,6 +21,8 @@ Contract: [../spec/visual-memory.schema.md](../spec/visual-memory.schema.md)
 
 | Field | Default | Why |
 |-------|---------|-----|
+| `ground` | **locked** | The canvas field. Two images cannot share a system across a paper ground and a dark one |
+| `render_mode` | **locked** | Medium is identity. A painterly image and a photograph are not one publication |
 | `palette` | **locked** | The single strongest cross-image consistency signal |
 | `typography` | **locked** | A changed typeface reads as a different publication |
 | `style` | **locked** | Style is the system's identity |
@@ -36,6 +38,8 @@ Contract: [../spec/visual-memory.schema.md](../spec/visual-memory.schema.md)
 
 Locking composition is a common mistake: it produces four images with the subject in the same corner, which reads as a template, not a system.
 
+**Presets are the exception.** A [preset](../presets/registry.md) (`source: preset`) may lock `composition`, `aspect_ratio`, and `layout`, because a preset is avowedly a template — reproducing one exact look is the whole job. Memories established from a run may not.
+
 ## Establishing Memory
 
 Emit memory after the first run **passes QC** — `overall ≥ 0.85` **and** no dimension below 0.60, the same gate [iteration.md](iteration.md) ships on. Do not lock a direction that failed.
@@ -45,12 +49,15 @@ visual_memory:
   memory_id: tokyo-series
   established_from: tokyo-tower-editorial-r1
   locked:
+    ground: paper-light
+    render_mode: photo-plus-graphic
     style: swiss
     visual_language: Architectural
     palette: [warm ivory, charcoal, muted red]
     typography: "grotesk title, sans metadata"
     texture_tier: FLAT          # Swiss is Texture ★★ — no SURFACE tokens, see ../assets/texture.md
     atmosphere: quiet contemporary
+  blocked_layouts: [zine]        # required whenever layout is free — PRINT would break a FLAT system
   free: [layout, composition, abstraction_level, aspect_ratio, title, recoveries]
   runs: [tokyo-tower-editorial-r1]
 ```
@@ -88,10 +95,14 @@ visual_memory:
   established_from: brand_input
   source: user_provided
   locked:
+    ground: paper-light
+    render_mode: photo-plus-graphic
     palette: [ivory, ink black, signal red]
     typography: "brand grotesk, tight tracking"
     style: cos
     texture_tier: FLAT
+  blocked_layouts: [zine]
+  free: [layout, composition, abstraction_level, aspect_ratio, title, recoveries]
   hard_constraints:
     - "Never invent a logo mark"
     - "Never alter supplied brand hues"

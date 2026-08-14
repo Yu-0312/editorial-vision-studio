@@ -35,6 +35,8 @@ Format alone underdetermines the image. Resolve **six** dimensions before anythi
 | `platform` | instagram, website, print, presentation, app | copy-safe rules, texture tier |
 | `aspect_ratio` | 3:4, 2:3, 3:5, 1:1, 4:5, 9:16, 16:9, 4:3, A4 | Planner ratios, crop survival |
 
+Intent does **not** set `ground` or `render_mode` — those belong to Art Direction or a preset. But `platform` and `emotion` constrain them: a story frame rarely wants a paper ground, and `dramatic` rarely wants `paper-light`.
+
 Infer, do not interrogate. Ask the user only when a dimension is both unresolvable and load-bearing — an unstated `platform` when the brief could be print or story is worth one question; an unstated `audience` on a personal zine is not.
 
 Record which values were inferred, so the Art Direction fit score knows what it is grading against.
@@ -68,6 +70,7 @@ intent:
   inferred: [audience, aspect_ratio]   # dimensions the engine filled in
 
 # scope ids sit at spec root, not inside intent — see ../spec/editorial-spec.schema.md
+preset: null                           # string → presets/registry.md
 series_id: null                        # string → prompts/series.md
 memory_id: null                        # string → prompts/visual-memory.md
 ```
@@ -78,6 +81,7 @@ memory_id: null                        # string → prompts/visual-memory.md
 |--------|-----|
 | "一套", "全尺寸", "N 頁", "carousel", "all platform sizes" | `series_id` → [series.md](series.md) |
 | "同一套視覺", "延續上一張", "same look as before", brand assets supplied | `memory_id` → [visual-memory.md](visual-memory.md) |
+| `preset: <id>`, or a named look from [../presets/registry.md](../presets/registry.md) | `preset` → auto-commit, Art Direction asks nothing |
 | Neither | single run |
 
 Detect this at Intent, not later. A series discovered at the Compiler has already wasted a full pipeline pass.

@@ -34,7 +34,11 @@ Run **after** Model Adapter, **before** image generation. Validates the `Generat
 | Website hero + no copy-safe space | Reject | Insert copy-safe negative space clause |
 | Interface asset + fake UI text | Reject | Remove fake controls/text; use symbolic visual |
 | Product editorial + distorted product identity | Reject | Add silhouette/proportion preservation clause |
-| `memory_id` set + prompt contradicts a locked field | Reject | Recompile against the lock; never relax it to fit one image ([visual-memory.md](visual-memory.md)) |
+| `ground` or `render_mode` unset | Reject | Both are required with no default. Send it back to Art Direction rather than letting it fall through to a paper ground |
+| Prompt describes a ground that contradicts `design_tokens.ground` | Reject | The ground is the one thing a stray "ivory" or "white background" clause silently overwrites |
+| `render_mode: photographic` + flat paint / illustration wording | Reject | Pick one medium |
+| `render_mode: painterly` or `graphic` + "photorealistic", "8K", depth-of-field wording | Reject | Same, inverted |
+| `memory_id` or `preset` set + prompt contradicts a locked field | Reject | Recompile against the lock; never relax it to fit one image ([visual-memory.md](visual-memory.md)) |
 | Locked `texture_tier` + a layout requiring a different tier (e.g. FLAT lock + `zine`) | Reject | A second tier breaks the set. Change the layout, not the lock |
 | `series_id` set + palette or typeface differs from the hero | Reject | Derivatives inherit the system verbatim ([series.md](series.md)) |
 | Presentation deck + riso / scan / halftone wording | Reject | Decks are FLAT or SURFACE only ([../layouts/presentation-deck.md](../layouts/presentation-deck.md)) |
@@ -58,7 +62,8 @@ Each style file defines dimension stars (Typography, Geometry, Negative Space, T
 - [ ] Web/interface outputs preserve copy-safe or UI-safe space
 - [ ] Product/brand outputs avoid fake logos, fake labels, and distorted identity
 - [ ] Supplied in-image copy is short enough to render and has an explicit placement
-- [ ] Every locked field from an active Visual Memory survives into the prompt
+- [ ] `ground` and `render_mode` are set, and the prompt says the same thing they do
+- [ ] Every locked field from an active Visual Memory or preset survives into the prompt
 - [ ] Series derivatives carry the hero's palette, typeface, and texture tier unchanged
 - [ ] Hard avoids paragraph present
 

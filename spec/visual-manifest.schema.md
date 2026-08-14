@@ -23,7 +23,9 @@ project:
   name: tokyo-tower-editorial     # slug, stable across regenerations
   run_id: tokyo-tower-editorial-r2
   series_id: null                 # set when part of a series
+  preset: null                    # preset id when one was named
   memory_id: null                 # set when a Visual Memory applied; this run establishes one instead
+  memory_version: null            # the preset/memory `version` this run compiled against
 
 intent:
   goal: "editorial poster of Tokyo Tower"
@@ -49,6 +51,8 @@ art_direction:                    # same block name as the spec — never `direc
   candidates_offered: [A, B, C]
 
 visual_system:
+  ground: paper-light             # required — see ../assets/ground.md
+  render_mode: photo-plus-graphic # required
   style: swiss
   visual_language: Architectural
   palette: [warm ivory, charcoal, muted red]
@@ -105,6 +109,8 @@ provenance:
 - `project.name` is stable; `run_id` increments. Two runs of the same project share a name and differ by `run_id`.
 - `art_direction` uses the same block name and field names as the spec. The manifest has no `direction` block — style and palette live under `visual_system`.
 - `quality` carries all ten evaluator dimensions, `null` for inapplicable ones. A partial vector is not a manifest.
+- `visual_system.ground` and `visual_system.render_mode` are mandatory. The evaluator's `texture` dimension scores the rendered image against them, so a manifest without them makes that score unverifiable.
+- `project.memory_version` records which version of a preset or memory the run compiled against, so an edited preset does not silently invalidate old runs.
 - `art_direction.runner_up` must be a real candidate id, not a guess. Null when Art Direction auto-committed with no alternatives.
 - `quality.overall` is the weighted mean from [../prompts/evaluator.md](../prompts/evaluator.md), not an average of the listed dimensions.
 - `model.prompt_hash` makes "did this actually change?" answerable across iterations. A mutation that leaves the hash unchanged is a no-op — see the `no_op_mutation` stop rule.

@@ -41,7 +41,7 @@ A single grade cannot be acted on. Score **every dimension separately** — the 
 | `focal_point` | 0.10 | One unambiguous entry point; anchor visible at thumbnail scale |
 | `palette` | 0.10 | Palette count respected; contrast separation adequate; no drift hues |
 | `typography` | 0.10 | Present when specified, absent when not; within style DNA caps; legible |
-| `texture` | 0.10 | Tier matches [../assets/texture.md](../assets/texture.md) exactly |
+| `texture` | 0.10 | Tier matches [../assets/texture.md](../assets/texture.md) exactly; `ground` and `render_mode` are what the spec asked for, not what the model defaulted to |
 | `style_coherence` | 0.10 | One dominant visual language; no mixed grammar |
 | `photo_fidelity` | 0.10 | Source region unmodified when `fidelity: required` |
 | `intent_fit` | 0.05 | Output sits in `intent.allowed_outputs`; serves the stated purpose |
@@ -94,6 +94,7 @@ Each row names the dimension that should have caught it and the layer that owns 
 | Style conflict visible | `style_coherence` | Art Direction — one grammar, or switch to `runner_up` |
 | Missing Panter anchor | `focal_point` | Recovery — add `color_anchor` ([recovery/focus.md](../recovery/focus.md)) |
 | Texture on a CLEAN layout | `texture` | Compiler — correct `texture_tier` per [assets/texture.md](../assets/texture.md) |
+| Ground came out paper-white when the spec said otherwise | `texture` | Compiler — restate `ground` as the first clause |
 | Layout overcrowded | `typography` | Planner — reduce type scale within style DNA caps |
 | Missing web copy-safe area | `platform_fit` | Planner — re-apply [layouts/website-hero.md](../layouts/website-hero.md) |
 | Fake UI or unreadable labels | `platform_fit` | Planner — re-apply [layouts/interface-asset.md](../layouts/interface-asset.md) |

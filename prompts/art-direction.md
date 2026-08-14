@@ -12,6 +12,7 @@ A single auto-derived direction hides the decision. When the user says "not quit
 
 | Condition | Behaviour |
 |-----------|-----------|
+| User named a `preset:` | **Auto-commit, no candidates, no question.** The preset already decided everything this layer would ([../presets/registry.md](../presets/registry.md)). |
 | User set explicit `style:` | **Auto-commit.** Build one direction from the override. Name the runner-up in one line. |
 | Intent family is narrow (Interface Asset, Product / Object) | **Auto-commit.** Name the runner-up in one line. |
 | Series continuation (`memory_id` set) | **Auto-commit** to the locked DNA. The layer still runs and still emits `art_direction` — it just offers no candidates. See [visual-memory.md](visual-memory.md) |
@@ -23,7 +24,11 @@ Never offer more than three. Three directions that genuinely differ beat five th
 
 ## Direction Requirements
 
-Each candidate must differ on **at least two** of: visual language, layout family, abstraction level, palette temperature, typography weight. Two directions that share everything but the accent hue are one direction.
+**Every candidate must set a different `ground`.** This is the one hard diversity rule, and it exists for a concrete reason: eight of the eleven style DNAs resolve to a light paper field, and only Purple and Period Travel Poster leave neutral territory at all, so candidates chosen on style alone come back as three shades of ivory. Differing grounds force genuinely different images.
+
+Beyond that, each candidate must differ on **at least two** of: render mode, visual language, layout family, abstraction level, typography weight. Two directions that share everything but the accent hue are one direction.
+
+The shipped presets are three different grounds by design — `paper-light`, `saturated`, `full-bleed-photo` — and make useful candidate seeds when a brief is wide open.
 
 Each candidate carries a **thesis** — one sentence naming what it argues the image is *about*. A candidate with no thesis is decoration.
 
@@ -36,6 +41,8 @@ directions:
   - id: A
     name: "Swiss Editorial"
     thesis: "The tower is geometry before it is a landmark."
+    ground: paper-light
+    render_mode: graphic
     visual_language: Architectural
     style: swiss
     layout: poster
@@ -46,15 +53,31 @@ directions:
     fit_score: 0.88
 
   - id: B
-    name: "Japanese Documentary"
-    thesis: "The tower is a memory of a specific afternoon."
-    visual_language: Indie Memory
-    style: popeye
-    layout: zine
-    abstraction_level: relationship-first
-    palette: [paper white, faded slate, cobalt anchor]
-    typography: "typewriter microtext"
-    trade_off: "Loses commercial polish; gains intimacy."
+    name: "Night Fashion"
+    thesis: "The tower is a light source, not a structure."
+    ground: dark
+    render_mode: photographic
+    visual_language: Fashion Edge
+    style: purple
+    layout: magazine-cover
+    abstraction_level: identity-cue
+    palette: [near-black, sodium amber, cold steel]
+    typography: "bold serif headline"
+    trade_off: "Loses daylight legibility; gains drama."
+    fit_score: 0.79
+
+  - id: C
+    name: "Period Poster"
+    thesis: "The tower is a destination someone once advertised."
+    ground: saturated
+    render_mode: graphic
+    visual_language: Poster Graphic
+    style: travel-poster
+    layout: poster
+    abstraction_level: full-abstract
+    palette: [deep teal, burnt orange, cream]
+    typography: "condensed sans wordmark"
+    trade_off: "Loses contemporary edge; gains optimism."
     fit_score: 0.74
 
 selected: A
@@ -74,6 +97,8 @@ Score each candidate 0.0–1.0. Not a quality rating — a **fit to brief** rati
 | 0.15 | Platform fit | Does it survive `intent.platform` — thumbnail scale, copy-safe area, print bleed? |
 | 0.10 | Style DNA headroom | Can the style carry the typography and texture the direction wants? |
 
+Ground and render mode are **not** scored. They are diversity constraints on the candidate set, not merits of any one candidate.
+
 Auto-commit to the highest score. If the top two are within 0.15 `fit_score` and the table above says "offer," ask. This 0.15 gap is the only quantitative trigger — there is no separate Visual Language score.
 
 ## Asking the User
@@ -81,12 +106,14 @@ Auto-commit to the highest score. If the top two are within 0.15 `fit_score` and
 Present directions as a compact table — name, thesis, trade-off. Do not paste the full YAML at the user. Do not generate images for all three unless the user asks; that is a generation-budget decision, not a direction decision.
 
 ```
-A — Swiss Editorial: geometry before landmark. Structural, cool, typographic.
-B — Japanese Documentary: a memory of one afternoon. Quiet, grainy, intimate.
-C — Contemporary Museum: the tower as abstract mass. Sparse, tonal, near-textless.
+A — Swiss Editorial：先是幾何，才是地標。象牙白紙底，結構、冷、字體主導。
+B — Night Fashion：塔是光源，不是結構。深底照片，戲劇性強。
+C — Period Poster：塔是某個年代被拿來宣傳的目的地。飽和色場，平面色塊。
 
-選一個方向，或說「你決定」。
+選一個方向，或說「你決定」。也可以直接指定 preset。
 ```
+
+Note the three grounds — ivory, dark, saturated. That is the rule working.
 
 If the user says "你決定" / "you pick," commit to the highest `fit_score` and state the thesis in one line before continuing.
 

@@ -8,7 +8,9 @@ Editorial Vision Studio helps you turn a theme, photo, brand idea, or rough refe
 
 ## Example Style
 
-These eight finished pieces show how a photograph can be used as content reference and reconstructed as a minimal postcard: ivory paper ground, generous negative space, restrained geometry, simplified marks, and a muted palette. This is not a photo filter; the workflow selects the subject, removes detail, and rebuilds the composition.
+These eight finished pieces are all output of the **[`ivory-postcard`](presets/ivory-postcard.md) preset**: a photograph used as content reference and reconstructed as a minimal postcard — ivory paper ground, generous negative space, restrained geometry, simplified marks, muted palette. This is not a photo filter; the workflow selects the subject, removes detail, and rebuilds the composition.
+
+This is **one preset, not the engine's default**. Ground and medium are set by the required `ground` and `render_mode` fields, which have no fallback value. Two other presets ship with the repo: [`vintage-travel-poster`](presets/vintage-travel-poster.md) (saturated ink field, flat graphic shapes) and [`papercraft-diorama-postcard`](presets/papercraft-diorama-postcard.md) (photograph as ground, papercraft diorama). Full list: [presets/registry.md](presets/registry.md).
 
 <p>
   <img src="assets/examples/pavilion-postcard.webp" alt="Pavilion Over Still Water minimal postcard" width="48%">
@@ -41,7 +43,13 @@ These eight finished pieces show how a photograph can be used as content referen
 
 ## Quick Prompt
 
-Use this prompt when you want the minimal editorial illustration style shown above.
+The shortest route to the style shown above is to name the preset:
+
+```text
+preset: ivory-postcard
+```
+
+To paste straight into a model without the engine, use the prompt below — it is `ivory-postcard` expanded.
 
 ```text
 Create a minimal editorial gallery illustration, not a photo-to-illustration conversion.
@@ -146,6 +154,7 @@ Avoid wires, realistic tower latticework, glass reflections, dense windows, deta
 ```text
 .
 ├── SKILL.md                 # Full Codex skill entrypoint
+├── presets/                 # Shipped fixed templates: ivory postcard, travel poster, papercraft diorama
 ├── prompts/                 # Intent, analyzer, art direction, planner, compiler, reviewer, evaluator, iteration, visual memory, series
 ├── styles/                  # Style DNA: Swiss, MUJI, Kinfolk, Monocle, COS, and more
 ├── layouts/                 # Output families such as poster, zine, gallery, hero, campaign

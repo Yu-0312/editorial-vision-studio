@@ -20,9 +20,11 @@ For Black Forest Labs Flux (Flux Pro, Flux Dev, fal.ai, Replicate, etc.).
 
 **Compact 2–3 sentences.** Flux responds to dense visual nouns, not paragraphs.
 
+`{ground}` and `{render_mode}` are required slots. Resolve both to prose through [../assets/ground.md](../assets/ground.md) — never emit the enum token itself. Flux latches hard onto whatever ground word appears first, so a hardcoded one silently overrides the spec.
+
 ```
-{aspect} aged ivory editorial poster, {photo_or_subject clause}, {palette} palette,
-{focal texture}, {atmosphere}, {typography hint}, {recovery keyword}
+{aspect} {ground} {render_mode} editorial poster, {photo_or_subject clause},
+{palette} palette, {focal texture}, {atmosphere}, {typography hint}, {recovery keyword}
 ```
 
 ## Negative Prompt
@@ -66,9 +68,10 @@ extra_params:
 generation_request:
   model: flux
   prompt: |
-    Vertical 3:4 warm ivory editorial poster, upper street photo preserved,
-    lower abstract geometric panel, flat uniform ground, warm amber and slate blocks,
-    small serif "After Rain", quiet urban mood, flat scan view.
+    Vertical 3:4 editorial poster on a warm ivory paper ground, flat and uniform.
+    Upper street photo preserved, lower abstract geometric panel, hard boundary
+    between them, warm amber and slate blocks, small serif "After Rain", quiet
+    urban mood, flat scan view.
   negative_prompt: "glossy, commercial, HDR, cinematic, 3D, neon, mockup, watermark, photo redraw"
   aspect_ratio: "3:4"
   reference_image: none

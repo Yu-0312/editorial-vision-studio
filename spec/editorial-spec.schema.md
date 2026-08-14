@@ -37,6 +37,7 @@ art_direction:
   runner_up: string | null # candidate id — switchable without re-analysis
 
 # --- Series / memory linkage (null for a standalone run) ---
+preset: string | null      # preset id from presets/registry.md; resolves to a VisualMemory
 series_id: string | null   # set by prompts/series.md when the request is a set
 memory_id: string | null   # set by prompts/visual-memory.md; locked fields become hard constraints
 
@@ -58,7 +59,8 @@ direction:
   layout: poster | magazine-cover | gallery-print | zine | editorial-spread | campaign-poster | photo-abstract-diptych | brand-key-visual | product-editorial | website-hero | social-asset | moodboard | interface-asset | presentation-deck
   style: string  # swiss, kinfolk, muji, ...
   editorial_mode: premium | standard | compensation | reconstruction
-  abstraction_level: relationship-first | identity-cue | full-abstract
+  abstraction_level: relationship-first | identity-cue | full-abstract   # HOW ABSTRACT
+  render_mode: photographic | photo-plus-graphic | graphic | painterly | mixed   # WHAT MEDIUM — required, no default
   composition:
     photo_ratio: 0.0-1.0      # 0 if no photo
     abstract_ratio: 0.0-1.0
@@ -71,6 +73,8 @@ direction:
 
 # --- From Style + Assets modules ---
 design_tokens:
+  ground: paper-light | neutral-gray | dark | saturated | full-bleed-photo | duotone
+                              # the canvas field itself — required, no default. See assets/ground.md
   palette: [string]           # named hues, not hex-only
   typography: string          # e.g. "thin serif, caption scale"
   texture_tier: FLAT | SURFACE | PRINT   # resolved tier — the lockable field. See assets/texture.md
@@ -108,6 +112,11 @@ target:
 
 ## Validation Rules
 
+- `design_tokens.ground` and `direction.render_mode` are **required with no default**. An unset value is a rejection, not a fallback — this is what stops every run drifting to ivory paper
+- `direction.render_mode` and `direction.abstraction_level` are independent: `render_mode` is the medium, `abstraction_level` is how far from the source it travels. A `photographic` image can still be `full-abstract`
+- If `preset` is set, it resolves to a VisualMemory with `source: preset` and the same lock rules apply ([../presets/registry.md](../presets/registry.md))
+- `design_tokens.ground: full-bleed-photo` requires either `photo_policy.reference_image: uploaded` (a supplied photograph) or `direction.render_mode: photographic` (the model generates one). One of the two, never neither
+- `design_tokens.ground` values `saturated` and `duotone` require the ground hue to be a member of `design_tokens.palette` ([../assets/ground.md](../assets/ground.md))
 - `art_direction.thesis` is required and must be traceable to a photo fact, brand cue, or stated goal — a direction with no argument is decoration
 - `direction.layout` must appear in `intent.allowed_outputs` and must not appear in `intent.blocked_outputs`
 - If `memory_id` is set, every field locked by that memory must match it exactly ([visual-memory.schema.md](visual-memory.schema.md)). A mismatch is a rejection, not a warning
@@ -149,6 +158,7 @@ art_direction:
   fit_score: 0.87
   selection_mode: auto
   runner_up: B
+preset: null
 series_id: null
 memory_id: null
 image_report:
@@ -167,6 +177,7 @@ direction:
   style: swiss
   editorial_mode: compensation
   abstraction_level: relationship-first
+  render_mode: photo-plus-graphic
   composition:
     photo_ratio: 0.65
     abstract_ratio: 0.25
@@ -176,6 +187,7 @@ direction:
   title: "After Rain"
   subtitle: null
 design_tokens:
+  ground: paper-light
   palette: [warm ivory, compensated amber, cool slate, cobalt anchor]
   typography: "thin Helvetica caption"
   texture_tier: FLAT

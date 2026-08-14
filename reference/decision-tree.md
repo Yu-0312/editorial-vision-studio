@@ -5,9 +5,11 @@ START: User request + optional image / brand / product / theme
 │
 ├─ Named a preset ("preset: ivory-postcard", "用時代海報那組")?
 │   └─ YES → presets/registry.md → load as VisualMemory (source: preset)
+│            → Style Gate skips (reason: named_in_request, outcome: commit)
 │            → Art Direction auto-commits, ZERO questions
 │            → Analyzer still runs if a photo was given
 │
+
 ├─ Asking for a SET (N pages, all sizes, carousel)?
 │   └─ YES → prompts/series.md → run Intent…Art Direction ONCE
 │            → hero first, QC, then fan out derivatives
@@ -24,6 +26,12 @@ START: User request + optional image / brand / product / theme
 └─ Has image
     │
     ├─ Step 0: Intent Engine → output family + allowed layouts
+    │
+    ├─ Step 0.5: Style Gate → emits style_gate.outcome (commit | offer)
+    │   menu shown ONLY when: no preset/style named · no memory/series ·
+    │   no direction committed this session · ≥2 presets fit · someone is there
+    │   ├─ preset picked / free text / 「你決定」 / skipped → outcome: commit
+    │   └─ 「讓 AI 提案」 / <2 presets fit                  → outcome: offer
     │
     ├─ Step 1: Analyzer → Image Report + Editorial Score
     │
@@ -44,9 +52,9 @@ START: User request + optional image / brand / product / theme
     ├─ Step 2: Visual Language Engine → derive style/layout/palette
     │   (override if user said style: X)
     │
-    ├─ Step 3: Art Direction → 2–3 candidates → commit one, keep runner-up
-    │   auto-commit if: preset named · style override · narrow family · memory
-    │   offer choices if: close scores · theme-only · score <50
+    ├─ Step 3: Art Direction → branch on style_gate.outcome, nothing else
+    │   commit → build one direction silently, never offer
+    │   offer  → 2–3 candidates → user picks → sticks for the session
     │   EVERY candidate must set a different ground — no all-ivory sets
     │   ground + render_mode are required here; there is no default
     │

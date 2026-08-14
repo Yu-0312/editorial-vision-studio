@@ -48,7 +48,7 @@ Record which values were inferred, so the Art Direction fit score knows what it 
 3. Resolve the six intent dimensions above; mark each stated or inferred
 4. Set `allowed_outputs[]` and `blocked_outputs[]` using the kebab-case layout vocabulary from [../spec/editorial-spec.schema.md](../spec/editorial-spec.schema.md)
 5. Derive `aspect_ratio` from `platform` when not stated: `instagram` → 4:5 (9:16 for a story or reel), `presentation` → 16:9 (4:3 only for a legacy projector), `print` → 2:3, 3:4, or A4, `website` → 16:9, `app` → 1:1
-6. Pass intent object to Art Direction and Planner as hard constraint
+6. Pass intent object to the [Style Gate](style-gate.md), then to Art Direction and Planner as a hard constraint
 
 ## Intent Object Schema
 
@@ -81,8 +81,11 @@ memory_id: null                        # string → prompts/visual-memory.md
 |--------|-----|
 | "一套", "全尺寸", "N 頁", "carousel", "all platform sizes" | `series_id` → [series.md](series.md) |
 | "同一套視覺", "延續上一張", "same look as before", brand assets supplied | `memory_id` → [visual-memory.md](visual-memory.md) |
-| `preset: <id>`, or a named look from [../presets/registry.md](../presets/registry.md) | `preset` → auto-commit, Art Direction asks nothing |
-| Neither | single run |
+| `preset: <id>`, or a named look from [../presets/registry.md](../presets/registry.md) | `preset` |
+| `style: swiss`, or any named style | `user_style_override` |
+| None of the above | neither; single run |
+
+Then hand off to the [Style Gate](style-gate.md), which decides from these values whether to show a menu. `series_id`, `memory_id`, `preset`, and `user_style_override` each make it skip; none of them set together is what makes the menu appear.
 
 Detect this at Intent, not later. A series discovered at the Compiler has already wasted a full pipeline pass.
 

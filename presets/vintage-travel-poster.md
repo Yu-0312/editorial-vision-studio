@@ -18,6 +18,7 @@ locked:
   render_mode: graphic
   style: travel-poster
   visual_language: Poster Graphic
+  intended_layouts: [poster, campaign-poster, social-asset, magazine-cover]
   abstraction_level: full-abstract
   palette: [deep teal, burnt orange, ochre, cream, ink navy]   # 4–6 flat inks
   typography: "condensed geometric sans, wordmark scale, letterspaced; one secondary line max"

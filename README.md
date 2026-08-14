@@ -43,7 +43,9 @@ Editorial Vision Studio 是一套給 AI 圖像與編輯設計使用的「視覺�
 
 ## 快速提示詞
 
-想產出上面這種極簡編輯插畫，最短的方式是指定 preset：
+跑這個 skill 時，第一步會先問你要什麼風格 —— 米色明信片、時代海報、紙雕明信片，或讓 AI 看過素材後提案。只問一次，選完整個 session 沿用。
+
+想直接指定、跳過選單：
 
 ```text
 preset: ivory-postcard

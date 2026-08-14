@@ -43,7 +43,9 @@ This is **one preset, not the engine's default**. Ground and medium are set by t
 
 ## Quick Prompt
 
-The shortest route to the style shown above is to name the preset:
+The first thing a run does is ask which look you want — ivory postcard, period travel poster, papercraft diorama, or let the engine propose after seeing your material. Asked once, reused for the session.
+
+To skip the menu and name it directly:
 
 ```text
 preset: ivory-postcard

@@ -13,23 +13,27 @@ Presets reuse the entire memory mechanism. Nothing new enforces them:
 
 ## Available Presets
 
-| Preset | Ground | Render mode | Use when |
-|--------|--------|-------------|----------|
-| [ivory-postcard](ivory-postcard.md) | `paper-light` | `painterly` | Quiet minimal editorial illustration from a photo; the repo's original hardcoded look |
-| [vintage-travel-poster](vintage-travel-poster.md) | `saturated` | `graphic` | Period travel/exhibition poster; flat colour fields, bold type, no photographic surface |
-| [papercraft-diorama-postcard](papercraft-diorama-postcard.md) | `full-bleed-photo` | `photographic` | Photoreal papercraft diorama emerging from a postcard; social-first, 1:1 |
+| Preset | Ground | Render mode | Intended layouts | Use when |
+|--------|--------|-------------|------------------|----------|
+| [ivory-postcard](ivory-postcard.md) | `paper-light` | `painterly` | poster, gallery-print, social-asset, magazine-cover, moodboard | Quiet minimal editorial illustration from a photo; the repo's original hardcoded look |
+| [vintage-travel-poster](vintage-travel-poster.md) | `saturated` | `graphic` | poster, campaign-poster, social-asset, magazine-cover | Period travel/exhibition poster; flat colour fields, bold type, no photographic surface |
+| [papercraft-diorama-postcard](papercraft-diorama-postcard.md) | `full-bleed-photo` | `photographic` | social-asset | Photoreal papercraft diorama emerging from a postcard; social-first, 1:1 |
+
+`intended_layouts` is what the [Style Gate](../prompts/style-gate.md) filters on. No preset currently covers `website-hero`, `interface-asset`, `presentation-deck`, `zine`, or `editorial-spread` — briefs in those families skip the menu and go to Art Direction candidates.
 
 Three presets, three different grounds. That is deliberate — see [../prompts/art-direction.md](../prompts/art-direction.md), where candidate directions must differ on `ground`.
 
 ## Invoking
 
+The primary path is the [Style Gate](../prompts/style-gate.md): at the start of a run the user is shown these presets as a numbered menu plus 「讓 AI 提案」, and picks one. The chosen preset becomes the session's active Visual Memory, so the question is asked once, not once per image.
+
+The shortcut skips the menu — for automation, series work, and users who already know what they want:
+
 ```
 preset: ivory-postcard
 ```
 
-A named preset **skips the direction question entirely**. Intent and Analyzer still run; the preset supplies everything Art Direction would have decided.
-
-Without a named preset, Art Direction proposes candidates as normal and may draw on presets as candidate seeds.
+Either way, a preset **removes the direction question entirely**. Intent and Analyzer still run; the preset supplies everything Art Direction would have decided. Art Direction must not ask again — that would be the user choosing a look twice.
 
 ## Preset vs. Series Memory
 
@@ -47,7 +51,7 @@ A preset is avowedly a template, so it may lock composition. A series memory may
 ## Adding a Preset
 
 1. Copy [_template.md](_template.md) → `presets/your-preset.md`
-2. Fill every locked field — a preset with an unset `ground` or `render_mode` is not a preset
+2. Fill every locked field — a preset with an unset `ground`, `render_mode`, or `intended_layouts` is not a preset
 3. Account for every field in the schema's canonical `free` list: each goes in `locked` or `free`. If `layout` stays free, list `blocked_layouts`
 4. Set `version`, and bump it whenever you edit a locked value
 5. Register it in the table above

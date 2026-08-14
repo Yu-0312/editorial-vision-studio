@@ -20,6 +20,7 @@ locked:
   render_mode: painterly
   style: muji
   visual_language: Museum          # Museum row lists Swiss / MUJI
+  intended_layouts: [poster, gallery-print, social-asset, magazine-cover, moodboard]
   abstraction_level: full-abstract
   palette: [warm ivory, charcoal brown, one muted earth tone, one cool neutral]
   typography: "one small fine serif title at the lower margin, or none"

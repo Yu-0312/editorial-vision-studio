@@ -38,7 +38,7 @@ Two rows name the **Compiler**. Those are schema-conformance corrections — the
 | `texture` | Compiler | Correct `design_tokens.texture_tier` and drop disallowed tokens per [../assets/texture.md](../assets/texture.md) |
 | `photo_fidelity` | Compiler | Set `photo_policy.fidelity: required` and add `photo redraw` to `avoids`; the adapter emits the stronger clause on recompile |
 | `style_coherence` | Art Direction | One grammar must dominate; if two are still fighting, switch to `runner_up` ([art-direction.md](art-direction.md)). **On a memory or series run the direction is locked** — the fix is a Compiler recompile against the locked DNA, never a `runner_up` swap |
-| `intent_fit` | Art Direction | The direction is wrong, not the execution — switch to `runner_up` |
+| `intent_fit` | Art Direction | The direction is wrong, not the execution — switch to `runner_up`. **When a preset or memory is active there is no `runner_up`** — stop and tell the user the chosen look does not fit the brief, so they can pick another at the [Style Gate](style-gate.md) |
 | `platform_fit` | Planner | Re-apply layout copy-safe / margin rules ([../layouts/](../layouts/)) |
 
 **One mutation per iteration.** Two simultaneous fixes make the next score unattributable.

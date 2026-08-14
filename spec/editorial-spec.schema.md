@@ -38,6 +38,11 @@ art_direction:
 
 # --- Series / memory linkage (null for a standalone run) ---
 preset: string | null      # preset id from presets/registry.md; resolves to a VisualMemory
+style_gate:                # set by prompts/style-gate.md
+  outcome: commit | offer  # THE ONLY VALUE Art Direction reads
+  reason: preset_chosen | freeform | deferred | named_in_request | memory_active |
+          series | unattended | direction_committed | proposals_requested | too_few_presets
+  preset: string | null
 series_id: string | null   # set by prompts/series.md when the request is a set
 memory_id: string | null   # set by prompts/visual-memory.md; locked fields become hard constraints
 
@@ -117,6 +122,8 @@ target:
 - If `preset` is set, it resolves to a VisualMemory with `source: preset` and the same lock rules apply ([../presets/registry.md](../presets/registry.md))
 - `design_tokens.ground: full-bleed-photo` requires either `photo_policy.reference_image: uploaded` (a supplied photograph) or `direction.render_mode: photographic` (the model generates one). One of the two, never neither
 - `design_tokens.ground` values `saturated` and `duotone` require the ground hue to be a member of `design_tokens.palette` ([../assets/ground.md](../assets/ground.md))
+- `style_gate.outcome` must be set before Art Direction runs. `commit` forbids offering candidates; `offer` requires it. There is no third behaviour
+- `style_gate.reason: preset_chosen` requires `style_gate.preset` and `preset` to be the same non-null id
 - `art_direction.thesis` is required and must be traceable to a photo fact, brand cue, or stated goal — a direction with no argument is decoration
 - `direction.layout` must appear in `intent.allowed_outputs` and must not appear in `intent.blocked_outputs`
 - If `memory_id` is set, every field locked by that memory must match it exactly ([visual-memory.schema.md](visual-memory.schema.md)). A mismatch is a rejection, not a warning

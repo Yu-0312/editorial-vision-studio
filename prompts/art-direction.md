@@ -2,6 +2,8 @@
 
 Run **after** Visual Language, **before** Planner.
 
+**Read `style_gate.outcome` first.** `commit` means the look is already settled — auto-commit and ask nothing, because asking again makes the user choose twice. Only `offer` reaches this layer's question. See [style-gate.md](style-gate.md).
+
 Visual Language derives *one* likely reading of the brief. Art Direction proves it was a choice, not a reflex: draft **2–3 competing directions**, score them, commit to one, and record the runner-up so the user can switch without re-running the pipeline.
 
 ## Why This Layer Exists
@@ -12,15 +14,16 @@ A single auto-derived direction hides the decision. When the user says "not quit
 
 | Condition | Behaviour |
 |-----------|-----------|
-| User named a `preset:` | **Auto-commit, no candidates, no question.** The preset already decided everything this layer would ([../presets/registry.md](../presets/registry.md)). |
-| User set explicit `style:` | **Auto-commit.** Build one direction from the override. Name the runner-up in one line. |
-| Intent family is narrow (Interface Asset, Product / Object) | **Auto-commit.** Name the runner-up in one line. |
-| Series continuation (`memory_id` set) | **Auto-commit** to the locked DNA. The layer still runs and still emits `art_direction` — it just offers no candidates. See [visual-memory.md](visual-memory.md) |
-| Top two candidates within 0.15 `fit_score` | **Offer 2–3.** Ask the user to pick. |
-| No image and no style (theme-only brief) | **Offer 2–3.** The brief underdetermines the look. |
-| Editorial Score <50 (reconstruction) | **Offer 2–3.** Reconstruction is an interpretive act; show the interpretations. |
+| `outcome: commit`, any reason | **Auto-commit. No candidates, no question.** Name the runner-up in one line when one exists. |
+| `outcome: offer` + narrow intent family (Interface Asset, Product / Object) | Offer 2, not 3 — the space is small. |
+| `outcome: offer` + theme-only brief, or Editorial Score <50 | Offer 3. The brief underdetermines the look, and reconstruction is interpretive. |
+| `outcome: offer`, anything else | Offer 2–3. |
 
 Never offer more than three. Three directions that genuinely differ beat five that are palette swaps.
+
+Every case the gate can produce — preset chosen, free-text look, 「你決定」, explicit `style:`, memory active, series, unattended, too few presets — already resolved to a `commit` or an `offer` before this layer ran. Do not re-derive it here.
+
+**A committed direction sticks for the session.** After committing on an `offer` run, later images skip the gate with `reason: direction_committed` and arrive here as `commit`. That is what stops 「讓 AI 提案」 re-asking on every image.
 
 ## Direction Requirements
 
@@ -99,7 +102,7 @@ Score each candidate 0.0–1.0. Not a quality rating — a **fit to brief** rati
 
 Ground and render mode are **not** scored. They are diversity constraints on the candidate set, not merits of any one candidate.
 
-Auto-commit to the highest score. If the top two are within 0.15 `fit_score` and the table above says "offer," ask. This 0.15 gap is the only quantitative trigger — there is no separate Visual Language score.
+Within `offer`, present the top candidates. Within `commit`, take the highest silently. The 0.15 gap describes how close a set is; it never starts a question — `style_gate.outcome` alone decides whether one happens.
 
 ## Asking the User
 

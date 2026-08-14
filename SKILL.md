@@ -64,6 +64,8 @@ User Request
     ↓
 Intent Engine          → [prompts/intent.md](prompts/intent.md)
     ↓                    (series? → [prompts/series.md](prompts/series.md) · memory? → [prompts/visual-memory.md](prompts/visual-memory.md))
+Style Gate             → [prompts/style-gate.md](prompts/style-gate.md)  ← ask the user once, up front
+    ↓
 Visual Analyzer        → [prompts/analyzer.md](prompts/analyzer.md)  (skip if theme-only / prompt-only)
     ↓
 Visual Language Engine → [prompts/visual-language.md](prompts/visual-language.md)
@@ -114,6 +116,39 @@ Detect scope here, not later: `series_id` for a set ([prompts/series.md](prompts
 
 Read [prompts/intent.md](prompts/intent.md). Reject mismatched formats (e.g. gallery print for TEDx campaign).
 
+## Step 0.5: Style Gate
+
+**The first question about how the image should look.** Before analysing a single pixel, ask which look they want — a numbered menu of the compatible presets plus 「讓 AI 提案」. (Intent may have asked about purpose or platform first; that is a different question.)
+
+Half a step because it computes nothing. It asks one question and turns the answer into a lock.
+
+```
+要什麼風格？
+
+1. 米色明信片 —— 米白紙底，照片重畫成簡化色塊，大量留白。
+2. 時代海報 —— 飽和油墨滿版，硬邊平面色塊，地名做成版面。
+3. 紙雕明信片 —— 寫實照片，明信片上長出立體紙雕世界。1:1。
+4. 讓 AI 提案 —— 看過照片和用途後給你三個方向再選。
+```
+
+**Nobody chooses a look twice unless they asked to see proposals.** The gate emits a single field, `style_gate.outcome`, and Art Direction branches on that and nothing else:
+
+| Gate answer | `outcome` | Art Direction |
+|-------------|-----------|---------------|
+| A preset | `commit` | Becomes the session's Visual Memory; auto-commits, asks nothing |
+| Free text (「暗一點、像雜誌」) | `commit` | Builds one direction from the description — a description is not answered with a menu |
+| 「讓 AI 提案」 | `offer` | Offers 2–3 candidates. This is the one path with two prompts, and the user asked for it |
+
+It skips — `outcome: commit`, no menu — when a preset or style is already named, a memory or series is active, a direction was committed earlier this session, or the run is unattended. It skips to `outcome: offer` when fewer than two presets fit the intent, because a one-item menu is not a choice. Unattended runs pick the highest-fit preset with intent-only weights and say which in one line — never silently.
+
+Presets declare `intended_layouts`; the gate offers only those that intersect `intent.allowed_outputs`.
+
+Show looks, not internal vocabulary. Nobody outside this repo knows what Kinfolk means.
+
+The gate settles **ground and medium only**. Layout, composition, abstraction, and copy stay with the Planner.
+
+Read [prompts/style-gate.md](prompts/style-gate.md).
+
 ## Step 1: Visual Analyzer
 
 Produce structured **Image Report** with star ratings and Editorial Score (0–100).
@@ -132,13 +167,16 @@ Read [prompts/visual-language.md](prompts/visual-language.md). User `style:` ove
 
 ## Step 3: Art Direction Engine
 
-Do not generate the first plausible reading of the brief. Draft **2–3 competing directions**, each with a one-sentence thesis and a named trade-off, score them for fit, commit to one, and keep the runner-up.
+Do not generate the first plausible reading of the brief. Draft competing directions, each with a one-sentence thesis and a named trade-off, score them for fit, commit to one, and keep the runner-up.
 
-| Situation | Behaviour |
+**Branch on `style_gate.outcome` and nothing else.** The gate already resolved every case — preset chosen, free text, 「你決定」, explicit `style:`, memory, series, unattended, too few presets — into one of two values:
+
+| `outcome` | Behaviour |
 |-----------|-----------|
-| A `preset:` is named | Auto-commit, no candidates, no question — the preset already decided ([presets/registry.md](presets/registry.md)) |
-| Explicit `style:`, narrow intent family, or active Visual Memory | Auto-commit; name the runner-up in one line. The layer still runs — every spec needs an `art_direction` block |
-| Top two candidates within 0.15 `fit_score`, theme-only brief, or Editorial Score <50 | Offer 2–3 and let the user pick |
+| `commit` | Build one direction, commit silently. **Never offer candidates** — that would be the user's second time choosing a look. Name the runner-up in one line when one exists |
+| `offer` | Present 2–3 candidates and ask. Two for a narrow intent family, three for a theme-only brief or Editorial Score <50 |
+
+The layer always runs, even on `commit` — every spec needs an `art_direction` block with a thesis.
 
 **Every candidate must set a different `ground`.** Eight of the eleven style DNAs resolve to a light paper field, so candidates chosen on style alone come back as three shades of ivory. Beyond that, candidates must differ on at least two of: render mode, visual language, layout family, abstraction level, typography weight. Palette swaps are not directions.
 
@@ -261,7 +299,7 @@ A preset is a shipped [VisualMemory](spec/visual-memory.schema.md) with `source:
 | [vintage-travel-poster](presets/vintage-travel-poster.md) | `saturated` | `graphic` |
 | [papercraft-diorama-postcard](presets/papercraft-diorama-postcard.md) | `full-bleed-photo` | `photographic` |
 
-`preset: ivory-postcard` reproduces the repo's original look exactly, with no direction question. Three different grounds is deliberate — it is what gives the candidate-diversity rule something to draw on. Registry and authoring guide: [presets/registry.md](presets/registry.md).
+The [Style Gate](prompts/style-gate.md) offers these as a numbered menu at the start of a run; `preset: ivory-postcard` is the shortcut that skips the menu, for automation and series work. Three different grounds is deliberate — it is what gives the candidate-diversity rule something to draw on. Registry and authoring guide: [presets/registry.md](presets/registry.md).
 
 Unlike a series memory, a preset **may lock `composition`, `aspect_ratio`, and `layout`**: a preset is avowedly a template, which is what it is for.
 
@@ -413,6 +451,7 @@ Add new magazines/brands by creating `styles/your-style.md` with Style DNA table
 | Layer | File |
 |-------|------|
 | Intent Engine | [prompts/intent.md](prompts/intent.md) |
+| Style Gate | [prompts/style-gate.md](prompts/style-gate.md) |
 | Visual Analyzer | [prompts/analyzer.md](prompts/analyzer.md) |
 | Visual Language Engine | [prompts/visual-language.md](prompts/visual-language.md) |
 | Art Direction Engine | [prompts/art-direction.md](prompts/art-direction.md) |

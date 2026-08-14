@@ -23,7 +23,10 @@ project:
   name: tokyo-tower-editorial     # slug, stable across regenerations
   run_id: tokyo-tower-editorial-r2
   series_id: null                 # set when part of a series
-  preset: null                    # preset id when one was named
+  preset: null                    # preset id when one was named or chosen at the gate
+  style_gate:                     # outcome + reason, verbatim from prompts/style-gate.md
+    outcome: commit
+    reason: preset_chosen
   memory_id: null                 # set when a Visual Memory applied; this run establishes one instead
   memory_version: null            # the preset/memory `version` this run compiled against
 

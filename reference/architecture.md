@@ -9,8 +9,8 @@ Only the adapter layer changes when switching image models. The decision pipelin
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  DECISION ENGINE (model-agnostic)                       │
-│  Intent → Analyzer → Visual Language → Art Direction    │
-│         → Planner → Recovery                            │
+│  Intent → Style Gate → Analyzer → Visual Language       │
+│         → Art Direction → Planner → Recovery            │
 └──────────────────────────┬──────────────────────────────┘
                            ▼
 ┌─────────────────────────────────────────────────────────┐
@@ -52,6 +52,7 @@ These modules are **pure editorial logic** — no model syntax:
 | Layer | Output |
 |-------|--------|
 | Intent Engine | output family, allowed layouts, intent dimensions |
+| Style Gate | the user's chosen look, as a session lock |
 | Visual Analyzer | Image Report, Editorial Score |
 | Visual Language Engine | language → style derivation |
 | Art Direction Engine | candidate directions, fit scores, committed direction |

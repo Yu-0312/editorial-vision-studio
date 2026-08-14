@@ -35,6 +35,8 @@ Run **after** Model Adapter, **before** image generation. Validates the `Generat
 | Interface asset + fake UI text | Reject | Remove fake controls/text; use symbolic visual |
 | Product editorial + distorted product identity | Reject | Add silhouette/proportion preservation clause |
 | `ground` or `render_mode` unset | Reject | Both are required with no default. Send it back to Art Direction rather than letting it fall through to a paper ground |
+| `style_gate.outcome: commit` + Art Direction offered candidates | Reject | The user already chose, or opted out. A second menu is a defect ([style-gate.md](style-gate.md)) |
+| `style_gate.outcome: offer` + Art Direction committed silently | Reject | The user asked to see options and never got them |
 | Prompt describes a ground that contradicts `design_tokens.ground` | Reject | The ground is the one thing a stray "ivory" or "white background" clause silently overwrites |
 | `render_mode: photographic` + flat paint / illustration wording | Reject | Pick one medium |
 | `render_mode: painterly` or `graphic` + "photorealistic", "8K", depth-of-field wording | Reject | Same, inverted |

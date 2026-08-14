@@ -16,6 +16,7 @@ locked:
   render_mode: photographic | photo-plus-graphic | graphic | painterly | mixed
   style: swiss | kinfolk | ...          # must have a styles/ file
   visual_language: ...                  # must be a row in prompts/visual-language.md
+  intended_layouts: [...]               # what the Style Gate filters on — state the fit positively
   palette: [...]                        # named hues; hex only for an exact brand/ground value
   typography: "..."
   texture_tier: FLAT | SURFACE | PRINT

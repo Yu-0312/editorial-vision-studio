@@ -21,6 +21,7 @@ locked:
   style: wallpaper                      # design-forward, cosmopolitan, product-friendly
   visual_language: Product Stillness
   layout: social-asset                  # presets may lock layout; this one is 1:1 social by definition
+  intended_layouts: [social-asset]
   abstraction_level: identity-cue
   aspect_ratio: "1:1"                   # locked, unlike the other presets
   palette: derived-from-destination     # climate and culture of [destination], not a fixed set

@@ -17,7 +17,7 @@ A series **establishes** a memory. They compose: plan the set here, lock the DNA
 ## Pipeline Position
 
 ```
-Intent → Analyzer → Visual Language → Art Direction
+Intent → Style Gate → Analyzer → Visual Language → Art Direction
     ↓
 Series Planner   ← you are here
     ↓
@@ -26,14 +26,18 @@ for each output: Planner → Compiler → Adapter → Reviewer → Generate
 Series QC (cross-image consistency)
 ```
 
-Run Intent, Analyzer, Visual Language, and Art Direction **once** for the whole series. Only the Planner and downstream run per output.
+Run Intent, the Style Gate, Analyzer, Visual Language, and Art Direction **once** for the whole series. Only the Planner and downstream run per output. Every output after the hero skips the gate with `reason: series`.
+
+If a preset is active — named, or chosen at the gate — the series **adopts it as the system** rather than establishing a new memory. `memory_id` is the preset's id, `system` is copied from its locked DNA, and no new memory is emitted on pass. Only a series with no preset establishes one of its own.
 
 ## Series Spec
 
 ```yaml
 series:
   series_id: tedx-2026-kv
-  memory_id: tedx-2026          # emitted to visual-memory once the hero passes QC
+  memory_id: tedx-2026          # emitted to visual-memory once the hero passes QC.
+                                # When a preset is active this is the preset id instead,
+                                # and nothing new is emitted.
   system:                        # locked across every output
     style: swiss
     visual_language: Campaign Bold

@@ -128,7 +128,8 @@ Half a step because it computes nothing. It asks one question and turns the answ
 1. 米色明信片 —— 米白紙底，照片重畫成簡化色塊，大量留白。
 2. 時代海報 —— 飽和油墨滿版，硬邊平面色塊，地名做成版面。
 3. 紙雕明信片 —— 寫實照片，明信片上長出立體紙雕世界。1:1。
-4. 讓 AI 提案 —— 看過照片和用途後給你三個方向再選。
+4. 自己描述 —— 你說想要的樣子，我拆解照片後照你的描述重畫。
+5. 讓 AI 提案 —— 看過照片和用途後給你三個方向再選。
 ```
 
 **Nobody chooses a look twice unless they asked to see proposals.** The gate emits a single field, `style_gate.outcome`, and Art Direction branches on that and nothing else:
@@ -136,7 +137,7 @@ Half a step because it computes nothing. It asks one question and turns the answ
 | Gate answer | `outcome` | Art Direction |
 |-------------|-----------|---------------|
 | A preset | `commit` | Becomes the session's Visual Memory; auto-commits, asks nothing |
-| Free text (「暗一點、像雜誌」) | `commit` | Builds one direction from the description — a description is not answered with a menu |
+| 自己描述, or just typing a description | `commit` | Captured verbatim; the Analyzer deconstructs the photo, then [prompts/style-brief.md](prompts/style-brief.md) rebuilds it to the description. A description is never answered with a menu |
 | 「讓 AI 提案」 | `offer` | Offers 2–3 candidates. This is the one path with two prompts, and the user asked for it |
 
 It skips — `outcome: commit`, no menu — when a preset or style is already named, a memory or series is active, a direction was committed earlier this session, or the run is unattended. It skips to `outcome: offer` when fewer than two presets fit the intent, because a one-item menu is not a choice. Unattended runs pick the highest-fit preset with intent-only weights and say which in one line — never silently.
@@ -452,6 +453,7 @@ Add new magazines/brands by creating `styles/your-style.md` with Style DNA table
 |-------|------|
 | Intent Engine | [prompts/intent.md](prompts/intent.md) |
 | Style Gate | [prompts/style-gate.md](prompts/style-gate.md) |
+| Style Brief | [prompts/style-brief.md](prompts/style-brief.md) |
 | Visual Analyzer | [prompts/analyzer.md](prompts/analyzer.md) |
 | Visual Language Engine | [prompts/visual-language.md](prompts/visual-language.md) |
 | Art Direction Engine | [prompts/art-direction.md](prompts/art-direction.md) |

@@ -27,6 +27,7 @@ project:
   style_gate:                     # outcome + reason, verbatim from prompts/style-gate.md
     outcome: commit
     reason: preset_chosen
+    description: null             # the user's words verbatim when reason is freeform — required for replay
   memory_id: null                 # set when a Visual Memory applied; this run establishes one instead
   memory_version: null            # the preset/memory `version` this run compiled against
 

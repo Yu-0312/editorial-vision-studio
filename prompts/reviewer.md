@@ -37,6 +37,9 @@ Run **after** Model Adapter, **before** image generation. Validates the `Generat
 | `ground` or `render_mode` unset | Reject | Both are required with no default. Send it back to Art Direction rather than letting it fall through to a paper ground |
 | `style_gate.outcome: commit` + Art Direction offered candidates | Reject | The user already chose, or opted out. A second menu is a defect ([style-gate.md](style-gate.md)) |
 | `style_gate.outcome: offer` + Art Direction committed silently | Reject | The user asked to see options and never got them |
+| `reason: freeform` + a stated cue from `description` is absent from the prompt | Reject | The user's own words are the brief; a dropped cue is a dropped requirement ([style-brief.md](style-brief.md)) |
+| `reason: freeform` + a negation set an axis by itself | Reject | 「不要太亮」 is an avoid plus a positive value, never `ground: not-paper-light` |
+| `reason: freeform` + the description overrode what the photograph contains | Reject | Description governs treatment; the photo governs content |
 | Prompt describes a ground that contradicts `design_tokens.ground` | Reject | The ground is the one thing a stray "ivory" or "white background" clause silently overwrites |
 | `render_mode: photographic` + flat paint / illustration wording | Reject | Pick one medium |
 | `render_mode: painterly` or `graphic` + "photorealistic", "8K", depth-of-field wording | Reject | Same, inverted |
@@ -65,6 +68,7 @@ Each style file defines dimension stars (Typography, Geometry, Negative Space, T
 - [ ] Product/brand outputs avoid fake logos, fake labels, and distorted identity
 - [ ] Supplied in-image copy is short enough to render and has an explicit placement
 - [ ] `ground` and `render_mode` are set, and the prompt says the same thing they do
+- [ ] On a freeform run, every cue in `style_gate.description` appears in the prompt or in `avoids`
 - [ ] Every locked field from an active Visual Memory or preset survives into the prompt
 - [ ] Series derivatives carry the hero's palette, typeface, and texture tier unchanged
 - [ ] Hard avoids paragraph present

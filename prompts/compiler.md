@@ -100,5 +100,6 @@ Keep the manifest internal unless the user asks for it or the run is part of a s
 | layout = presentation-deck | [layouts/presentation-deck.md](../layouts/presentation-deck.md) |
 | `series_id` set | [series.md](series.md) |
 | `preset` set | [presets/registry.md](../presets/registry.md) |
+| `style_gate.reason: freeform` | [style-brief.md](style-brief.md) |
 | `memory_id` set, or brand assets supplied | [visual-memory.md](visual-memory.md) |
 | architecture overview | [reference/architecture.md](../reference/architecture.md) |

@@ -83,9 +83,10 @@ memory_id: null                        # string → prompts/visual-memory.md
 | "同一套視覺", "延續上一張", "same look as before", brand assets supplied | `memory_id` → [visual-memory.md](visual-memory.md) |
 | `preset: <id>`, or a named look from [../presets/registry.md](../presets/registry.md) | `preset` |
 | `style: swiss`, or any named style | `user_style_override` |
+| A free-text description of a look (「暗一點、像雜誌」) | `style_gate.description` → [style-brief.md](style-brief.md) |
 | None of the above | neither; single run |
 
-Then hand off to the [Style Gate](style-gate.md), which decides from these values whether to show a menu. `series_id`, `memory_id`, `preset`, and `user_style_override` each make it skip; none of them set together is what makes the menu appear.
+Then hand off to the [Style Gate](style-gate.md), which decides from these values whether to show a menu. `series_id`, `memory_id`, `preset`, `user_style_override`, and a `style_gate.description` already present in the brief each make it skip the menu; none of them set is what makes the menu appear.
 
 Detect this at Intent, not later. A series discovered at the Compiler has already wasted a full pipeline pass.
 

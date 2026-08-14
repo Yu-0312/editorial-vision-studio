@@ -30,7 +30,8 @@ START: User request + optional image / brand / product / theme
     ├─ Step 0.5: Style Gate → emits style_gate.outcome (commit | offer)
     │   menu shown ONLY when: no preset/style named · no memory/series ·
     │   no direction committed this session · ≥2 presets fit · someone is there
-    │   ├─ preset picked / free text / 「你決定」 / skipped → outcome: commit
+    │   ├─ preset picked / 「你決定」 / skipped              → outcome: commit
+    │   ├─ 自己描述 → capture verbatim, resolve AFTER Analyzer → outcome: commit
     │   └─ 「讓 AI 提案」 / <2 presets fit                  → outcome: offer
     │
     ├─ Step 1: Analyzer → Image Report + Editorial Score

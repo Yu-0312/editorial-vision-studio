@@ -14,7 +14,8 @@ A single auto-derived direction hides the decision. When the user says "not quit
 
 | Condition | Behaviour |
 |-----------|-----------|
-| `outcome: commit`, any reason | **Auto-commit. No candidates, no question.** Name the runner-up in one line when one exists. |
+| `outcome: commit`, `reason: freeform` | **Auto-commit** to the direction resolved from `style_gate.description` — see [style-brief.md](style-brief.md). No runner-up: a description commits to one reading. |
+| `outcome: commit`, any other reason | **Auto-commit. No candidates, no question.** Name the runner-up in one line when one exists. |
 | `outcome: offer` + narrow intent family (Interface Asset, Product / Object) | Offer 2, not 3 — the space is small. |
 | `outcome: offer` + theme-only brief, or Editorial Score <50 | Offer 3. The brief underdetermines the look, and reconstruction is interpretive. |
 | `outcome: offer`, anything else | Offer 2–3. |
@@ -22,6 +23,8 @@ A single auto-derived direction hides the decision. When the user says "not quit
 Never offer more than three. Three directions that genuinely differ beat five that are palette swaps.
 
 Every case the gate can produce — preset chosen, free-text look, 「你決定」, explicit `style:`, memory active, series, unattended, too few presets — already resolved to a `commit` or an `offer` before this layer ran. Do not re-derive it here.
+
+**On `reason: freeform` this layer does real work**, not a lookup. It reads `style_gate.description` together with the Image Report and lands both required axes: the photo supplies what is in the scene, the description supplies how it is treated. Cue→axis tables, the negation rule, and the one-clarifying-question cap live in [style-brief.md](style-brief.md). Restate the resolution in one line before generating.
 
 **A committed direction sticks for the session.** After committing on an `offer` run, later images skip the gate with `reason: direction_committed` and arrive here as `commit`. That is what stops 「讓 AI 提案」 re-asking on every image.
 

@@ -14,7 +14,9 @@ A visual engine that starts working before the user has said what the thing shou
 
 **Nobody is asked to choose a look twice unless they asked to see proposals.**
 
-The gate and the [Art Direction](art-direction.md) question are the same question at different depths. Picking a preset ends it. Picking 「讓 AI 提案」 is an explicit request for a second, better-informed question — that is the option's entire purpose, and it is the only path where two prompts appear.
+The gate and the [Art Direction](art-direction.md) question are the same question at different depths. Picking a preset ends it. Picking 「讓 AI 提案」 is an explicit request for a second, better-informed question — that is the option's entire purpose, and it is the only path where a second menu appears.
+
+Describing a look can produce **one narrow follow-up** — naming a single unresolved axis, never the menu again, capped at one per run ([style-brief.md](style-brief.md)). That is a clarification of the user's own words, not a second choice of look.
 
 ## The Only Field Art Direction Reads
 
@@ -25,12 +27,13 @@ style_gate:
   outcome: commit | offer      # the only value Art Direction reads
   reason: <see table>          # for the record and the manifest
   preset: ivory-postcard       # null unless a preset was chosen
+  description: null            # the user's own words, verbatim, when reason is freeform
 ```
 
 | `reason` | `outcome` | Why |
 |----------|-----------|-----|
 | `preset_chosen` | `commit` | User picked from the menu |
-| `freeform` | `commit` | User described a look — build one direction from it, do not offer a menu on top |
+| `freeform` | `commit` | User described a look — [style-brief.md](style-brief.md) resolves it. Never answer a description with a menu |
 | `deferred` | `commit` | User said 「你決定」/「隨便」 — they opted out of choosing |
 | `named_in_request` | `commit` | A preset or style was already in the brief |
 | `memory_active` | `commit` | A memory, preset, or series system is already locked |
@@ -46,7 +49,9 @@ There is no null state once Intent has run. Every path sets both fields.
 
 ## When the Gate Shows a Menu
 
-Only on `proposals_requested`'s siblings — that is, when none of the skip reasons above apply. Concretely, the menu appears when the request names no look, no memory or series is active, no direction has been committed this session, at least two presets fit the intent, and someone is there to answer.
+Only when none of the `commit` reasons above already apply. Concretely: the request names no preset and no style, does not already describe a look in the user's own words, no memory or series is active, no direction has been committed this session, at least two presets fit the intent, and someone is there to answer.
+
+A description that arrives in the opening brief is treated exactly like picking option 4 — `reason: freeform`, captured verbatim, no menu. Answering a description with a menu is the one thing this layer must never do.
 
 ## Compatibility Filter
 
@@ -66,18 +71,33 @@ Show **looks, not internal vocabulary.** Nobody outside this repo knows what Kin
 1. 米色明信片 —— 米白紙底，照片重畫成三到五個簡化色塊，大量留白。安靜、克制。
 2. 時代海報 —— 飽和油墨滿版，硬邊平面色塊，地名做成版面的一部分。明亮、圖像感。
 3. 紙雕明信片 —— 寫實照片，復古明信片上長出立體紙雕世界，背景散景。1:1。
-4. 讓 AI 提案 —— 我看過你的照片和用途後，給你三個方向再選。
+4. 自己描述 —— 你說想要的樣子，我拆解照片後照你的描述重畫。
+5. 讓 AI 提案 —— 我看過你的照片和用途後，給你三個方向再選。
 
-回數字，或直接描述你想要的樣子。
+回數字，或直接把想要的樣子講出來。
 ```
 
 Rules for the menu:
 
 - **Numbered, not lettered.** Users reply with digits.
-- **The AI-proposes option is always last**, and always present. The gate is a shortcut, not a cage.
-- **Never more than five options** — the compatible presets plus the escape hatch.
+- **Two escape hatches, always present, always last two**: 自己描述 then 讓 AI 提案. The gate is a shortcut, not a cage.
+- **Never more than five options** — at most three compatible presets, plus those two. Trim presets by fit score, never the escape hatches.
 - **No YAML, no field names, no star ratings.** Those belong in [../presets/registry.md](../presets/registry.md).
-- A free-text answer (「想要暗一點的、有點像雜誌」) is valid and sets `reason: freeform`, `outcome: commit`. Art Direction builds one direction from that description. Do not answer a description with a menu.
+- Picking 自己描述, or simply typing a description instead of a digit, both set `reason: freeform`, `outcome: commit`, and store the words verbatim in `style_gate.description`. Resolution happens later — see [style-brief.md](style-brief.md).
+
+## The 自己描述 Path
+
+The gate **captures and stops**. It does not parse the description, and it does not resolve `ground` or `render_mode` — the Analyzer has not run yet, and the whole promise of this option is that the photo gets deconstructed first and rebuilt to the description afterwards.
+
+```
+Gate captures 「想要暗一點、有點像雜誌」
+    ↓
+Analyzer deconstructs the photo → Image Report
+    ↓
+Art Direction resolves description + Image Report → one direction
+```
+
+The photo supplies **what is in the scene**; the description supplies **how it is treated**. Full cue→axis mapping, negation handling, and the one-follow-up rule: [style-brief.md](style-brief.md).
 
 ## Turning the Answer Into a Lock
 

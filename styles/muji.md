@@ -27,8 +27,10 @@ white, wood tone, gray, earth tone
 
 ```
 Extreme negative space, white and warm gray palette, no decorative type,
-single small caption, natural material texture, functional calm composition.
+single small caption, functional calm composition.
 ```
+
+Append `natural material texture` **only** when `design_tokens.texture_tier` resolves to SURFACE. On a FLAT target the clause is dropped, not softened — see [../assets/texture.md](../assets/texture.md).
 
 ## Mood
 

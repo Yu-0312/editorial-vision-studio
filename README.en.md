@@ -8,7 +8,9 @@ Editorial Vision Studio helps you turn a theme, photo, brand idea, or rough refe
 
 ## Example Style
 
-These eight finished pieces show how a photograph can be used as content reference and reconstructed as a minimal postcard: ivory paper ground, generous negative space, restrained geometry, simplified marks, and a muted palette. This is not a photo filter; the workflow selects the subject, removes detail, and rebuilds the composition.
+These eight finished pieces are all output of the **[`ivory-postcard`](presets/ivory-postcard.md) preset**: a photograph used as content reference and reconstructed as a minimal postcard — ivory paper ground, generous negative space, restrained geometry, simplified marks, muted palette. This is not a photo filter; the workflow selects the subject, removes detail, and rebuilds the composition.
+
+This is **one preset, not the engine's default**. Ground and medium are set by the required `ground` and `render_mode` fields, which have no fallback value. Two other presets ship with the repo: [`vintage-travel-poster`](presets/vintage-travel-poster.md) (saturated ink field, flat graphic shapes) and [`papercraft-diorama-postcard`](presets/papercraft-diorama-postcard.md) (photograph as ground, papercraft diorama). Full list: [presets/registry.md](presets/registry.md).
 
 <p>
   <img src="assets/examples/pavilion-postcard.webp" alt="Pavilion Over Still Water minimal postcard" width="48%">
@@ -34,10 +36,22 @@ These eight finished pieces show how a photograph can be used as content referen
 - Plans layout, typography, palette, abstraction level, texture permission, and recovery fixes.
 - Converts the plan into model-ready prompts through adapters for GPT Image, Flux, Ideogram, or generic tools.
 - Reviews the prompt for conflicts, such as MUJI with heavy type, gallery print with dense typography, or non-zine layouts using riso texture.
+- Proposes two or three competing art directions, each with a thesis and a trade-off, then commits to one and keeps the runner-up switchable.
+- Scores the result across ten dimensions after generation and fixes only the single layer responsible, up to three passes.
+- Remembers a visual system so the second and tenth image read as the same publication: style, palette, typography, and texture tier stay locked while layout and composition adapt per image.
+- Expands one visual system into a full set: campaign at every size, carousels, multi-page decks.
 
 ## Quick Prompt
 
-Use this prompt when you want the minimal editorial illustration style shown above.
+The first thing a run does is ask which look you want — ivory postcard, period travel poster, papercraft diorama, or let the engine propose after seeing your material. Asked once, reused for the session.
+
+To skip the menu and name it directly:
+
+```text
+preset: ivory-postcard
+```
+
+To paste straight into a model without the engine, use the prompt below — it is `ivory-postcard` expanded.
 
 ```text
 Create a minimal editorial gallery illustration, not a photo-to-illustration conversion.
@@ -69,17 +83,29 @@ Do not make a magazine cover. Do not add a frame, barcode, cover lines, or headl
 
    Example: `Museum`, `Architectural`, `Product Stillness`, `Quiet Human`, `Urban Documentary`.
 
-3. Select the layout and style DNA.
+3. Commit to an art direction.
+
+   Compare two or three directions by thesis and trade-off instead of accepting the first plausible reading. The committed direction constrains everything below it.
+
+4. Set the layout and composition inside that direction.
 
    Example: `Gallery Print + MUJI`, `Swiss Poster + Architectural`, `Magazine Cover + Kinfolk`.
 
-4. Compile a model prompt.
+5. Compile a model prompt.
 
    Use the files in `adapters/` to translate the same visual plan for GPT Image, Flux, Ideogram, or a generic image tool.
 
-5. Review before generation.
+6. Review before generation.
 
    Check that typography, texture, palette, and layout do not contradict each other.
+
+7. Score and iterate after generation.
+
+   Find the lowest-scoring dimension, fix the one layer responsible, recompile, regenerate.
+
+8. Lock the system for a set.
+
+   Once the first image passes, lock style, palette, typography, and texture tier so every later image inherits them.
 
 ## Prompt Recipes
 
@@ -130,7 +156,8 @@ Avoid wires, realistic tower latticework, glass reflections, dense windows, deta
 ```text
 .
 ├── SKILL.md                 # Full Codex skill entrypoint
-├── prompts/                 # Intent, analyzer, planner, compiler, reviewer, evaluator
+├── presets/                 # Shipped fixed templates: ivory postcard, travel poster, papercraft diorama
+├── prompts/                 # Intent, analyzer, art direction, planner, compiler, reviewer, evaluator, iteration, visual memory, series
 ├── styles/                  # Style DNA: Swiss, MUJI, Kinfolk, Monocle, COS, and more
 ├── layouts/                 # Output families such as poster, zine, gallery, hero, campaign
 ├── adapters/                # Model-specific prompt adapters
@@ -138,7 +165,7 @@ Avoid wires, realistic tower latticework, glass reflections, dense windows, deta
 ├── assets/                  # Palette, typography, texture rules, and examples
 ├── reference/               # Architecture and decision tree
 ├── references/              # Reusable photo-abstract prompts
-└── spec/                    # EditorialSpec schema
+└── spec/                    # EditorialSpec, VisualManifest, and VisualMemory schemas
 ```
 
 ## Install as a Codex Skill

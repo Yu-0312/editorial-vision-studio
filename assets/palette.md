@@ -1,8 +1,10 @@
 # Palette System
 
+The ground is chosen by `design_tokens.ground`, not by this file — see [ground.md](ground.md). A palette supplies marks; it does not decide the field they sit on. On `ground: saturated` or `duotone` the ground hue must itself be a palette member.
+
 ## Neutrals
 
-- Warm ivory: #F5F0E6 (photo-abstract-editorial default panel)
+- Warm ivory: #F5F0E6 — the [ivory-postcard](../presets/ivory-postcard.md) preset's ground, and the photo-abstract panel. **Not an engine default**: `design_tokens.ground` is required with no fallback
 - Aged paper: cream, oatmeal, warm gray
 - Gallery mat: off-white, soft gray
 

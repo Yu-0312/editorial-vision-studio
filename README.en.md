@@ -164,7 +164,6 @@ Avoid wires, realistic tower latticework, glass reflections, dense windows, deta
 ├── recovery/                # Targeted fixes for weak contrast, subject, palette, geometry
 ├── assets/                  # Palette, typography, texture rules, and examples
 ├── reference/               # Architecture and decision tree
-├── references/              # Reusable photo-abstract prompts
 └── spec/                    # EditorialSpec, VisualManifest, and VisualMemory schemas
 ```
 

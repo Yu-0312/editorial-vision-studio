@@ -18,7 +18,7 @@ AI Creative Director for Visual Generation.
 
 **Philosophy:** Do not decorate. Always interpret.
 
-This skill evolves [photo-abstract-editorial](https://github.com/ZzzLc0405/photo-abstract-editorial) (faithful photo + derived abstraction) and [gc-minimal-zine-poster](https://github.com/LiamGvchi/gc-minimal-zine-poster) (modular prompt compiler). It is an **extensible Editorial Design Engine**: one decision pipeline, swappable model adapters.
+An **extensible Editorial Design Engine**: one decision pipeline, swappable model adapters. Every layer — intent, analysis, art direction, planning, recovery, compilation, review, iteration — is a separate module with a single job, and the contract between them is a model-agnostic spec.
 
 **Architecture:** [reference/architecture.md](reference/architecture.md)
 
@@ -375,7 +375,7 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 ## Guardrails
 
 **Never:**
-- Redraw, filter, or stylize the original photo region (photo-abstract-editorial principle)
+- Redraw, filter, or stylize the original photo region when `photo_policy.fidelity: required`
 - Blindly copy fixed 60/30/10 layout — adapt proportions to subject
 - Mix style languages without Reviewer pass
 - Overload typography or decorative elements
@@ -429,6 +429,7 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 | Social Asset | [layouts/social-asset.md](layouts/social-asset.md) |
 | Moodboard | [layouts/moodboard.md](layouts/moodboard.md) |
 | Interface Asset | [layouts/interface-asset.md](layouts/interface-asset.md) |
+| Photo-Abstract Diptych | [layouts/photo-abstract-diptych.md](layouts/photo-abstract-diptych.md) |
 | Presentation Deck | [layouts/presentation-deck.md](layouts/presentation-deck.md) |
 
 ## Extending the Engine

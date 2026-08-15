@@ -101,7 +101,7 @@ design_tokens:
 recoveries: [string]          # module IDs: panter_mode, silhouette_boost, ...
                               # riso_texture is valid only when direction.layout == zine
 
-# --- Photo fidelity (photo-abstract-editorial lineage) ---
+# --- Photo fidelity ---
 photo_policy:
   fidelity: required | optional | none     # required = never redraw source region
   reference_image: uploaded | none

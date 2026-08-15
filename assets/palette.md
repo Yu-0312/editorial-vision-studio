@@ -14,7 +14,7 @@ The ground is chosen by `design_tokens.ground`, not by this file — see [ground
 - Mute saturation 10% for premium mode
 - Panter mode: conflict hues at 70–75% saturation — colour compensation only, never a licence for texture ([texture.md](texture.md))
 
-## Accent strategy (gc-minimal-zine)
+## Accent strategy
 
 - One high-chroma anchor per composition
 - Cobalt/ultramarine default; rotate cyan, violet, lemon, pear green, tomato red

@@ -18,7 +18,7 @@
 ## Variants
 
 - Full bleed hero + bottom type strip
-- Photo-abstract diptych (photo-abstract-editorial)
+- Photo-abstract diptych ([photo-abstract-diptych.md](photo-abstract-diptych.md))
 - Split layout with geometric side panel
 
 ## Compiler anchor

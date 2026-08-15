@@ -2,7 +2,7 @@
 
 ## DNA
 
-Inherits gc-minimal-zine-poster grammar:
+Zine grammar:
 
 - Vertical 3:5 aged-paper canvas
 - 70–90% negative space

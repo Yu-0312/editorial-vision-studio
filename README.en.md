@@ -31,6 +31,7 @@ This is **one preset, not the engine's default**. Ground and medium are set by t
 
 ## What It Does
 
+- **Asks which look you want, up front** — ivory postcard, period travel poster, papercraft diorama, describe your own, or let the engine propose. Asked once, reused for the session.
 - Resolves the user goal into an output family such as gallery print, poster, campaign key visual, product editorial, website hero, zine, or moodboard.
 - Analyzes the visual language before choosing a style, so the result is driven by intent instead of random style words.
 - Plans layout, typography, palette, abstraction level, texture permission, and recovery fixes.
@@ -40,6 +41,7 @@ This is **one preset, not the engine's default**. Ground and medium are set by t
 - Scores the result across ten dimensions after generation and fixes only the single layer responsible, up to three passes.
 - Remembers a visual system so the second and tenth image read as the same publication: style, palette, typography, and texture tier stay locked while layout and composition adapt per image.
 - Expands one visual system into a full set: campaign at every size, carousels, multi-page decks.
+- Keeps spatial relationships when it simplifies a photograph: one projection, one ground plane, one light with contact shadows — a cluster does not come back as a row of isolated objects.
 
 ## Quick Prompt
 
@@ -79,31 +81,35 @@ Do not make a magazine cover. Do not add a frame, barcode, cover lines, or headl
 
    Example: `gallery print`, `editorial poster`, `brand key visual`, `website hero`, or `social asset`.
 
-2. Choose the visual language.
+2. Pick a look.
+
+   The first question a run asks. Choose a shipped preset, describe what you want in your own words, or let the engine propose after seeing your material. Asked once.
+
+3. Choose the visual language.
 
    Example: `Museum`, `Architectural`, `Product Stillness`, `Quiet Human`, `Urban Documentary`.
 
-3. Commit to an art direction.
+4. Commit to an art direction.
 
-   Compare two or three directions by thesis and trade-off instead of accepting the first plausible reading. The committed direction constrains everything below it.
+   A preset or a description at step 2 settles this silently. Only "let the engine propose" shows two or three directions to choose between.
 
-4. Set the layout and composition inside that direction.
+5. Set the layout and composition inside that direction.
 
    Example: `Gallery Print + MUJI`, `Swiss Poster + Architectural`, `Magazine Cover + Kinfolk`.
 
-5. Compile a model prompt.
+6. Compile a model prompt.
 
    Use the files in `adapters/` to translate the same visual plan for GPT Image, Flux, Ideogram, or a generic image tool.
 
-6. Review before generation.
+7. Review before generation.
 
-   Check that typography, texture, palette, and layout do not contradict each other.
+   Check that ground, render mode, typography, texture, palette, and layout do not contradict each other.
 
-7. Score and iterate after generation.
+8. Score and iterate after generation.
 
    Find the lowest-scoring dimension, fix the one layer responsible, recompile, regenerate.
 
-8. Lock the system for a set.
+9. Lock the system for a set.
 
    Once the first image passes, lock style, palette, typography, and texture tier so every later image inherits them.
 
@@ -157,12 +163,12 @@ Avoid wires, realistic tower latticework, glass reflections, dense windows, deta
 .
 ├── SKILL.md                 # Full Codex skill entrypoint
 ├── presets/                 # Shipped fixed templates: ivory postcard, travel poster, papercraft diorama
-├── prompts/                 # Intent, analyzer, art direction, planner, compiler, reviewer, evaluator, iteration, visual memory, series
+├── prompts/                 # Intent, style gate, style brief, analyzer, art direction, planner, compiler, reviewer, evaluator, iteration, visual memory, series
 ├── styles/                  # Style DNA: Swiss, MUJI, Kinfolk, Monocle, COS, and more
 ├── layouts/                 # Output families such as poster, zine, gallery, hero, campaign
 ├── adapters/                # Model-specific prompt adapters
 ├── recovery/                # Targeted fixes for weak contrast, subject, palette, geometry
-├── assets/                  # Palette, typography, texture rules, and examples
+├── assets/                  # Ground and render mode, scene construction, palette, typography, texture rules, examples
 ├── reference/               # Architecture and decision tree
 └── spec/                    # EditorialSpec, VisualManifest, and VisualMemory schemas
 ```

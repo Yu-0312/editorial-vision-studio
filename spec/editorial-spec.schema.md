@@ -58,6 +58,13 @@ image_report:
   emotion: string
   editorial_score: 0-100
   flags: [string]  # e.g. low_saturation, panter_mode
+  spatial:         # what abstraction must preserve — see prompts/analyzer.md
+    arrangement: string
+    overlaps: [string]
+    relative_scale: string
+    ground_plane: string
+    light_direction: string
+    element_kinds: {}
 
 # --- From Visual Language + Planner ---
 direction:
@@ -127,6 +134,8 @@ target:
 - `style_gate.reason: preset_chosen` requires `style_gate.preset` and `preset` to be the same non-null id
 - `style_gate.reason: freeform` requires a non-null `style_gate.description`, and `art_direction.runner_up` must be null — a description commits to one reading
 - On `reason: freeform`, `design_tokens.ground` and `direction.render_mode` must each trace to a cue in the description or to the single permitted clarifying question ([../prompts/style-brief.md](../prompts/style-brief.md)). Neither may be inferred silently
+- If `direction.abstraction_level` is `relationship-first`, `image_report.spatial` must be non-null and the compiled prompt must restate `arrangement`, `ground_plane`, and `light_direction`. Relationships cannot be preserved if they were never recorded
+- `direction.composition.form_types` counts **kinds** of form, never instances. It may reduce the vocabulary; it may not delete an element the arrangement depends on ([../assets/scene-construction.md](../assets/scene-construction.md))
 - `art_direction.thesis` is required and must be traceable to a photo fact, brand cue, or stated goal — a direction with no argument is decoration
 - `direction.layout` must appear in `intent.allowed_outputs` and must not appear in `intent.blocked_outputs`
 - If `memory_id` is set, every field locked by that memory must match it exactly ([visual-memory.schema.md](visual-memory.schema.md)). A mismatch is a rejection, not a warning

@@ -10,7 +10,7 @@ Pull modules from:
 
 - Layout: [layouts/](../layouts/)
 - Style DNA: [styles/](../styles/)
-- Assets: [assets/ground.md](../assets/ground.md), [assets/typography.md](../assets/typography.md), [assets/palette.md](../assets/palette.md), [assets/texture.md](../assets/texture.md)
+- Assets: [assets/ground.md](../assets/ground.md), [assets/scene-construction.md](../assets/scene-construction.md), [assets/typography.md](../assets/typography.md), [assets/palette.md](../assets/palette.md), [assets/texture.md](../assets/texture.md)
 - Recovery clauses: [recovery/](../recovery/)
 - Conditional: [references/photo-abstract-prompt.*](../references/) when diptych; [assets/variation-engine.md](../assets/variation-engine.md) when zine
 
@@ -47,10 +47,11 @@ User override: `model: flux` in request → sets `target.model` before Phase 2.
 Compile only information that can change final pixels. Convert the brief into this order:
 
 1. canvas and surface — state `design_tokens.ground` explicitly and first, resolved to prose via [assets/ground.md](../assets/ground.md); never emit the enum token. An unstated ground is the single most common way an image drifts back to paper white
-2. attention geometry and negative-space budget
-3. one primary image anchor and its treatment
-4. typography or copy-safe behavior
-5. palette, texture, lighting, and explicit avoids
+2. **space** — projection, shared ground plane, light direction and contact shadows, and the source's preserved arrangement ([assets/scene-construction.md](../assets/scene-construction.md)). Skipping this is what turns a reduced scene into floating clip art
+3. attention geometry and negative-space budget
+4. one primary image anchor and its treatment
+5. typography or copy-safe behavior
+6. palette, texture, lighting, and explicit avoids
 
 Exclude source paths, planning rationale, sample-specific copy, and generic checklist language. Keep exact in-image text short; image models are unreliable with long text. For zines, enforce the selected variation recipe and make its saturated anchor visible at thumbnail scale.
 

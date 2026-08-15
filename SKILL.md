@@ -381,6 +381,8 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 - Overload typography or decorative elements
 
 **Always:**
+- Preserve the source's arrangement, overlaps, and relative scale — abstraction removes detail, not relationships
+- Name one projection, one ground plane, one light direction; give every grounded object a contact shadow
 - Preserve visual identity of source photo when one is provided
 - Make every abstract mark traceable to a photo fact, theme fact, brand cue, or stated goal
 - Keep prompts imageable and concrete
@@ -394,6 +396,7 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 | Asset module | File |
 |--------------|------|
 | Ground & Render Mode | [assets/ground.md](assets/ground.md) |
+| Scene construction (space) | [assets/scene-construction.md](assets/scene-construction.md) |
 | Texture permission | [assets/texture.md](assets/texture.md) |
 | Palette | [assets/palette.md](assets/palette.md) |
 | Typography | [assets/typography.md](assets/typography.md) |

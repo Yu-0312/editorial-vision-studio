@@ -34,8 +34,8 @@ Rules:
 |-------|-----------|----------------|
 | `photographic` | a photograph: real light, real depth of field, real material | flat paint areas, vector edges, "illustration" |
 | `photo-plus-graphic` | a preserved photographic region plus flat graphic marks in separate zones | painterly blending between the two; the boundary stays hard |
-| `graphic` | flat colour areas, hard edges, no gradient modelling, vector-like | photographic surface detail, depth-of-field blur, airbrush |
-| `painterly` | opaque flat paint-like areas with slightly irregular hand-drawn edges | photographic detail, gloss, true perspective |
+| `graphic` | mathematically clean edges, one flat value per shape, no gradient modelling; repeated instances identical | photographic surface detail, depth-of-field blur, airbrush |
+| `painterly` | opaque paint-like areas, dabbed or brush-made, with slightly uneven edges and faint tonal variation inside each shape; repeated elements differ slightly | photographic detail, gloss, vector-clean outlines, deep perspective recession |
 | `mixed` | a declared combination — say which regions are which | an undeclared blend; `mixed` without a zone map is a rejection |
 
 Rules:
@@ -44,6 +44,8 @@ Rules:
 - `graphic` and `painterly` forbid depth-of-field language entirely — no bokeh, no shallow focus.
 - `photo-plus-graphic` is the `photo-abstract-diptych` lineage and implies `photo_policy.fidelity: required`.
 - A prompt that describes one medium while the spec declares another is a Reviewer rejection, not a warning ([../prompts/reviewer.md](../prompts/reviewer.md)).
+- `painterly` and `graphic` collapse into each other unless the mark-making is named. Say «dabbed», «brush-made», «slightly uneven edges» for painterly — otherwise the model reads «flat colour» as vector and delivers `graphic`. Full comparison: [scene-construction.md](scene-construction.md).
+- Forbidding **deep recession** is correct for both; forbidding *projection itself* is not. A medium with no viewpoint is what makes objects float.
 
 ## Worked substitutions
 
@@ -53,6 +55,10 @@ Rules:
 | `saturated` + `graphic` | `flat deep-teal ink field covering the canvas` | `bold flat colour shapes, hard edges, no gradient modelling` |
 | `full-bleed-photo` + `photographic` | `the photograph fills the frame; no field behind it` | `real light, shallow depth of field, realistic shadows` |
 | `dark` + `photo-plus-graphic` | `near-black ground` | `preserved photographic region above, flat graphic panel below, hard boundary` |
+
+## Space Is a Separate Axis
+
+Ground and render mode settle *what the image is made of*. They say nothing about *how things sit in it* — projection, ground plane, light direction, preserved arrangement. That is [scene-construction.md](scene-construction.md), and skipping it is what produces correctly-styled clip art.
 
 ## Preset defaults
 

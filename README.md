@@ -164,7 +164,6 @@ preset: ivory-postcard
 ├── recovery/                # 對比、主體、色盤、幾何等補救策略
 ├── assets/                  # 色盤、字體、材質規則與範例
 ├── reference/               # 架構與決策樹
-├── references/              # 可重複使用的照片抽象化提示詞
 └── spec/                    # EditorialSpec、VisualManifest、VisualMemory schema
 ```
 

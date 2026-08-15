@@ -1,6 +1,6 @@
 # Zine Variation Engine
 
-From gc-minimal-zine-poster. Use when layout = zine and Planner needs visual diversity.
+Use when `direction.layout = zine` and the Planner needs visual diversity across a batch.
 
 Before compiling, pick **one option per axis**. If recent outputs repeated the same combo, rotate.
 

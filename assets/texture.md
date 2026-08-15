@@ -37,7 +37,7 @@ For a deck, FLAT is the default and is mandatory whenever the deck contains a `d
 - Flat ivory panel — **no** gradient, shadow, grain, or paper stain on the panel ground
 - Depth comes from contrast, interval, and mark scale
 
-## Zine (gc-minimal) — PRINT
+## Zine — PRINT
 
 - Aged paper mottling, scan fibers
 - Xerox softness, risograph grain, halftone degradation

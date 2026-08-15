@@ -26,7 +26,7 @@ When `memory_id` or `preset` is set, fields locked by that memory are read-only.
 | Multi-page slide set | Presentation Deck | Swiss / MUJI / Monocle |
 | Theme-only mood | Concept Board or Zine | Flux texture / Ideogram type |
 | High abstraction potential | Editorial Poster + abstract panel | Swiss / Brutalist |
-| User: photo + abstraction diptych | Photo-Abstract Diptych | photo-abstract-editorial rules |
+| User: photo + abstraction diptych | Photo-Abstract Diptych | [layouts/photo-abstract-diptych.md](../layouts/photo-abstract-diptych.md) |
 | Intent: Event Campaign | Campaign Poster | Swiss / Brutalist |
 
 ## Planner Output Schema

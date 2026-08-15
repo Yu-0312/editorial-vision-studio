@@ -12,7 +12,7 @@ Pull modules from:
 - Style DNA: [styles/](../styles/)
 - Assets: [assets/ground.md](../assets/ground.md), [assets/scene-construction.md](../assets/scene-construction.md), [assets/typography.md](../assets/typography.md), [assets/palette.md](../assets/palette.md), [assets/texture.md](../assets/texture.md)
 - Recovery clauses: [recovery/](../recovery/)
-- Conditional: [references/photo-abstract-prompt.*](../references/) when diptych; [assets/variation-engine.md](../assets/variation-engine.md) when zine
+- Conditional: [layouts/photo-abstract-diptych.md](../layouts/photo-abstract-diptych.md) when diptych; [assets/variation-engine.md](../assets/variation-engine.md) when zine
 
 **Compiler never analyzes the image.** It validates VisionSpec / EditorialSpec against schema rules.
 
@@ -89,7 +89,7 @@ Keep the manifest internal unless the user asks for it or the run is part of a s
 
 | Condition | Read |
 |-----------|------|
-| layout = photo-abstract diptych | [references/photo-abstract-prompt.en.md](../references/photo-abstract-prompt.en.md) |
+| layout = photo-abstract diptych | [layouts/photo-abstract-diptych.md](../layouts/photo-abstract-diptych.md) |
 | layout = zine | [assets/variation-engine.md](../assets/variation-engine.md) |
 | intent = Event Campaign | [layouts/campaign-poster.md](../layouts/campaign-poster.md) |
 | intent = Branding | [layouts/brand-key-visual.md](../layouts/brand-key-visual.md) |

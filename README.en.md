@@ -53,16 +53,28 @@ To skip the menu and name it directly:
 preset: ivory-postcard
 ```
 
-To paste straight into a model without the engine, use the prompt below — it is `ivory-postcard` expanded.
+To paste straight into a model without the engine, use the block below. It is the `ivory-postcard` compiler anchor verbatim — [presets/ivory-postcard.md](presets/ivory-postcard.md) is the single source of truth; if the two ever diverge, the preset wins.
 
 ```text
-Create a minimal editorial gallery illustration, not a photo-to-illustration conversion.
-Reconstruct the scene with only three to five simplified symbolic forms on an ivory paper ground.
-Use opaque, flat gouache-like marks with gently irregular hand-painted edges; preserve no photographic surface detail.
-Composition: keep the motif small and centered in the upper-middle of the canvas, with at least 55% calm empty space.
-Palette: warm ivory, charcoal brown, one muted earthy accent, one cool neutral, and at most one small color anchor.
-Typography: optional; one small refined serif caption near the lower margin with the exact title "[TITLE]".
-Avoid: photorealism, transparent overlays, realistic perspective, wires, dense windows, detailed latticework, glossy gradients, neon, magazine-cover layout, watermark, fake logo, extra text.
+Minimal editorial illustration on a warm ivory paper ground, flat and uniform,
+no grain or stain. Rebuild the scene using three to five kinds of simplified
+form, repeated as often as the scene needs; keep the arrangement the
+photograph had — objects that clustered still cluster, overlaps and relative
+sizes survive. Single flat elevation viewpoint held across every object, never
+two angles within one object. All objects rest on one shared ground plane; one
+light from the upper left, and every object casts a flat contact shadow in
+that direction, one or two steps darker than the ground, never black. Subject
+reduced and placed upper-centre with at least 55 percent quiet empty field.
+Opaque paint-like colour areas, dabbed and brush-made, with slightly uneven
+edges and faint tonal variation inside each shape; repeated elements differ
+slightly from one another; no vector-clean outlines and zero photographic
+surface detail. Palette: warm ivory, charcoal brown, one muted earth tone, one
+cool neutral, plus at most one small muted chroma focus — never a saturated
+anchor. Type optional: a single small fine serif title at the lower margin.
+Avoid photographic realism, translucent overlays, deep perspective recession
+and converging vanishing points, objects floating with no contact shadow, a
+row of isolated objects where the source had a cluster, wires, dense window
+grids, glossy gradients, neon, cover furniture, watermark, extra text.
 ```
 
 ### Style Lock for Reference Photos

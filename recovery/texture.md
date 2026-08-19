@@ -1,6 +1,6 @@
 # Recovery: Texture
 
-**Trigger:** flat texture, lack of material depth
+**Module ID:** `riso_texture`  ·  **Trigger:** flat texture, lack of material depth
 
 **Gate:** check [../assets/texture.md](../assets/texture.md) → Texture Permission first. This module is a no-op on CLEAN layouts.
 
@@ -20,7 +20,7 @@ Do **not** add grain, noise, halftone, or paper stain. At most name the substrat
 
 ## Actions — FLAT targets
 
-`photo-abstract-diptych` panel ground, `interface-asset`, `website-hero` copy-safe area, `product-editorial` background: no texture language at all, not even SURFACE.
+`photo-abstract-diptych` panel ground, `interface-asset`, `website-hero` copy-safe area, `product-editorial` background, and every page of a `presentation-deck` that contains a `data` page: no texture language at all, not even SURFACE. Canonical list: [../assets/texture.md](../assets/texture.md).
 
 ## Compiler clauses
 

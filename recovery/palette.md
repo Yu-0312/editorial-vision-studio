@@ -1,6 +1,6 @@
 # Recovery: Palette
 
-**Trigger:** too many colors, dirty harmony
+**Module ID:** `palette_reduce`  ·  **Trigger:** too many colors, dirty harmony
 
 ## Actions
 

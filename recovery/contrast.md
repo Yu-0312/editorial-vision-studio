@@ -1,6 +1,6 @@
 # Recovery: Contrast / Panter Mode
 
-**Trigger:** saturation <30% OR contrast <40, muddy histogram
+**Module ID:** `panter_mode`  ·  **Trigger:** saturation <30% OR contrast <40, muddy histogram
 
 Panter is a **colour** compensation. Texture is not part of it — texture is gated separately by [../assets/texture.md](../assets/texture.md) → Texture Permission.
 

@@ -1,6 +1,6 @@
 # Recovery: Focus
 
-**Trigger:** no focal point
+**Module ID:** `color_anchor`  ·  **Trigger:** no focal point
 
 ## Actions
 

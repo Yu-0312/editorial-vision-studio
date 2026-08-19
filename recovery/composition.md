@@ -1,6 +1,6 @@
 # Recovery: Composition / Rhythm
 
-**Trigger:** no rhythm, static composition
+**Module ID:** `rhythm_shift`  ·  **Trigger:** no rhythm, static composition
 
 ## Actions
 

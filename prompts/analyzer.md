@@ -59,7 +59,7 @@ spatial:
 ## Image Report Schema
 
 ```yaml
-subject: person | architecture | landscape | street | food | object | abstract
+subject: person | architecture | landscape | street | food | object | product | interface | brand | abstract | null
 clarity: 82
 contrast: 41
 saturation: 28
@@ -69,13 +69,17 @@ geometry: low | medium | high
 lighting: flat | directional | dramatic
 emotion: quiet
 editorial_score: 81
-flags:
+flags:              # vocabulary below; recoveries are derived from these, never listed here
   - low_saturation
   - low_contrast
-recovery_candidates:
-  - panter_mode
-  - silhouette_boost
+spatial: {}         # required whenever abstraction_level is relationship-first — see Spatial Report
 ```
+
+Flag vocabulary — the Analyzer emits only these, and [recovery.md](recovery.md) maps each to exactly one module:
+
+`low_saturation` · `low_contrast` · `weak_subject` · `flat_lighting` · `busy_background` · `color_chaos` · `no_focal_point` · `no_rhythm` · `shape_overload` · `flat_texture` · `type_incompatible` · `panter_mode`
+
+This block is the same `image_report` the spec carries ([../spec/editorial-spec.schema.md](../spec/editorial-spec.schema.md)) — do not add fields here that the spec cannot hold.
 
 ## Panter Trigger
 

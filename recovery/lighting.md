@@ -1,6 +1,6 @@
 # Recovery: Lighting
 
-**Trigger:** flat lighting flag
+**Module ID:** `light_direction`  ·  **Trigger:** flat lighting flag
 
 ## Actions
 

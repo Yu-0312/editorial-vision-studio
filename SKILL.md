@@ -39,12 +39,13 @@ An **extensible Editorial Design Engine**: one decision pipeline, swappable mode
 
 ```
 DECISION ENGINE (fixed)          MODEL ADAPTER (swappable)
-Intent → Analyzer                     VisionSpec / EditorialSpec
-      → Visual Language      →      ↓
-      → Art Direction        →   adapters/{model}.md
-      → Planner              →      ↓
-      → Recovery             →   GenerationRequest → API
-      → VisionSpec
+Intent → Style Gate                   VisionSpec / EditorialSpec
+      → Analyzer             →      ↓
+      → Visual Language      →   adapters/{model}.md
+      → Art Direction        →      ↓
+      → Planner              →   GenerationRequest → API
+      → Recovery             →
+      → Compiler → VisionSpec
                                  SHARED POST-LAYER
                                  Reviewer → Generate → Evaluator → Iteration
                                                                        │
@@ -103,7 +104,7 @@ Before analyzing pixels, resolve **user goal → output family**:
 |-----------|--------|-----------------|
 | art book cover | Art Book | `magazine-cover`, `gallery-print`, `poster` |
 | TEDx key visual | Event Campaign | `campaign-poster`, `brand-key-visual`, `social-asset` |
-| skincare brand launch | Branding | `brand-key-visual`, `product-editorial`, `social-asset` |
+| skincare brand launch | Branding | `brand-key-visual`, `product-editorial`, `social-asset`, `campaign-poster`, `website-hero` |
 | app hero image | Digital Product | `website-hero`, `interface-asset`, `social-asset` |
 | zine page | Zine | `zine`, `poster`, `editorial-spread` |
 | gallery print | Gallery | `gallery-print`, `photo-abstract-diptych`, `poster` |
@@ -213,9 +214,9 @@ Apply **only** when Image Report flags weakness. Each recovery is one atomic fix
 | No focal point | Editorial color anchor |
 | No rhythm | Abstract panel |
 
-**Panter Mode** (from photo-panter lineage): discard dull grays; boost warm to 75% / cool to 70% saturation; add 8% high-chroma anchor block; widen tonal separation and mark scale. Panter is a **colour** compensation and never adds texture on its own. See [recovery/contrast.md](recovery/contrast.md).
+**Panter Mode**: discard dull grays; boost warm to 75% / cool to 70% saturation; add 8% high-chroma anchor block; widen tonal separation and mark scale. Panter is a **colour** compensation and never adds texture on its own. See [recovery/contrast.md](recovery/contrast.md).
 
-**Texture Permission** — single source of truth: [assets/texture.md](assets/texture.md). Three tiers: **PRINT** (riso/halftone/scan defects) is `zine` only; **SURFACE** (substrate character such as cotton paper) is allowed on CLEAN layouts whose style DNA rates Texture ★★★+; **FLAT** (zero texture words) covers the `photo-abstract-diptych` panel ground, `interface-asset`, the `website-hero` copy-safe area, and the `product-editorial` background. Recoveries never raise a layout's tier.
+**Texture Permission** — single source of truth: [assets/texture.md](assets/texture.md). Three tiers: **PRINT** (riso/halftone/scan defects) is `zine` only; **SURFACE** (substrate character such as cotton paper) is allowed on CLEAN layouts whose style DNA rates Texture ★★★+; **FLAT** (zero texture words) covers the `photo-abstract-diptych` panel ground, `interface-asset`, the `website-hero` copy-safe area, the `product-editorial` background, and every page of a `presentation-deck` that contains a `data` page. Recoveries never raise a layout's tier.
 
 Never redesign the entire image unless Editorial Score <50 (Concept Reconstruction).
 

@@ -97,9 +97,9 @@ colour grade drawn from the destination's own light. Handwritten line reads
 postcard, floating paper elements, watermark, mockup frame.
 ```
 
-## Original Source Prompt
+## Provenance
 
-Preserved verbatim as the known-good original. The compiler anchor above is the hygiene-compliant form — it drops `8K`, `masterpiece`, `premium`, `luxury`, and `杰作`, which [../prompts/compiler.md](../prompts/compiler.md) bans because they do not change pixels. Use this block directly if you want the original behaviour rather than the engine's.
+This preset was written from the author's own known-good prompt, kept below unedited so the preset's origin is auditable. It is **reference material, not an alternative path** — the compiler anchor above is what runs. The anchor drops `8K`, `masterpiece`, `premium`, `luxury`, and `杰作`, which [../prompts/compiler.md](../prompts/compiler.md) bans because they do not change pixels, and the [Reviewer](../prompts/reviewer.md) rejects any request that reintroduces them.
 
 ```text
 [目的地]： 一张高度详细的写实主义风格、适合Instagram发布的[目的地]旅行明信片立体模型，从略高的角度俯视。一张真实的复古明信片位于前景，带有圆角、纸张质感、邮票、手写旅行笔记和邮戳。从明信片中浮现出一个复杂的3D纸雕世界，展示了[目的地]最具标志性的元素，由层叠的剪纸地形、建筑、地标、植被和海岸线构建而成。

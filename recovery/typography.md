@@ -1,6 +1,6 @@
 # Recovery: Typography
 
-**Trigger:** typography incompatible with image (busy photo + large type)
+**Module ID:** `type_rescale`  ·  **Trigger:** typography incompatible with image (busy photo + large type)
 
 ## Actions
 

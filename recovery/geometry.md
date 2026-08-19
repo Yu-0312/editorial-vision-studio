@@ -1,6 +1,6 @@
 # Recovery: Geometry
 
-**Trigger:** shape complexity >90, chaotic forms
+**Module ID:** `shape_reduce`  ·  **Trigger:** shape complexity >90, chaotic forms
 
 ## Actions
 

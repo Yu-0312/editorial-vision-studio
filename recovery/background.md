@@ -1,6 +1,6 @@
 # Recovery: Background
 
-**Trigger:** busy background, visual noise
+**Module ID:** `background_quiet`  ·  **Trigger:** busy background, visual noise
 
 ## Actions
 

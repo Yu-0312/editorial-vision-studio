@@ -55,6 +55,8 @@ image_report:
   saturation: 0-100
   negative_space: 0-100
   composition: excellent | good | weak
+  geometry: low | medium | high      # read by prompts/visual-language.md
+  lighting: flat | directional | dramatic
   emotion: string
   editorial_score: 0-100
   flags: [string]  # e.g. low_saturation, panter_mode
@@ -79,6 +81,7 @@ direction:
     abstract_ratio: 0.0-1.0
     type_ratio: 0.0-1.0
     whitespace_ratio: 0.0-1.0
+    form_types: integer | "3-5"   # KINDS of form, not instances — excluded from the ratio sum
   aspect_ratio: "3:4" | "2:3" | "3:5" | "1:1" | "4:5" | "9:16" | "16:9" | "4:3" | "A4"
   title: string | null        # 2-5 word English title
   subtitle: string | null
@@ -148,10 +151,10 @@ target:
 - `recoveries` must match `image_report.flags` — no orphan recoveries
 - If `photo_policy.fidelity = required`, `avoids` must include `photo redraw`
 - If `layout = photo-abstract-diptych`, `photo_policy.fidelity` must be `required`
-- If `editorial_mode = reconstruction`, `abstraction_level` should be `full-abstract`
+- If `editorial_mode = reconstruction`, `abstraction_level` should be `full-abstract` — except on `layout: photo-abstract-diptych`, where `full-abstract` is invalid and `relationship-first` is the floor ([../layouts/photo-abstract-diptych.md](../layouts/photo-abstract-diptych.md))
 - If `production_context = web`, preserve copy-safe negative space and avoid fake UI unless requested
 - If `production_context = interface`, avoid fake text, fake controls, and unreadable UI details
-- Sum of composition ratios ≈ 1.0 (±0.1)
+- Sum of composition **ratios** ≈ 1.0 (±0.1). `form_types` is a count, not a ratio, and is excluded from the sum
 
 ## Example (minimal)
 

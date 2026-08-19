@@ -16,18 +16,20 @@ Texture permission belongs to `direction.layout`, not to a recovery module. Only
 
 ## Flag → Module Map
 
-| Flag | Module |
-|------|--------|
-| low_contrast, low_saturation | [contrast.md](../recovery/contrast.md) (Panter Mode) |
-| weak_subject | [subject.md](../recovery/subject.md) |
-| flat_lighting | [lighting.md](../recovery/lighting.md) |
-| busy_background | [background.md](../recovery/background.md) |
-| color_chaos | [palette.md](../recovery/palette.md) |
-| no_focal_point | [focus.md](../recovery/focus.md) |
-| no_rhythm | [composition.md](../recovery/composition.md) |
-| shape_overload | [geometry.md](../recovery/geometry.md) |
-| flat_texture | [texture.md](../recovery/texture.md) — PRINT layouts only; no-op on CLEAN |
-| type_incompatible | [typography.md](../recovery/typography.md) |
+`recoveries` in the spec carries **module IDs**, never filenames. Flag vocabulary is fixed by [analyzer.md](analyzer.md).
+
+| Flag | Module ID | File |
+|------|-----------|------|
+| low_contrast, low_saturation, panter_mode | `panter_mode` | [contrast.md](../recovery/contrast.md) |
+| weak_subject | `silhouette_boost` | [subject.md](../recovery/subject.md) |
+| flat_lighting | `light_direction` | [lighting.md](../recovery/lighting.md) |
+| busy_background | `background_quiet` | [background.md](../recovery/background.md) |
+| color_chaos | `palette_reduce` | [palette.md](../recovery/palette.md) |
+| no_focal_point | `color_anchor` | [focus.md](../recovery/focus.md) |
+| no_rhythm | `rhythm_shift` | [composition.md](../recovery/composition.md) |
+| shape_overload | `shape_reduce` | [geometry.md](../recovery/geometry.md) |
+| flat_texture | `riso_texture` | [texture.md](../recovery/texture.md) — `zine` only; no-op on CLEAN |
+| type_incompatible | `type_rescale` | [typography.md](../recovery/typography.md) |
 
 ## Panter Mode (Critical)
 

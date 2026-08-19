@@ -1,6 +1,6 @@
 # Recovery: Subject
 
-**Trigger:** weak subject, low clarity score
+**Module ID:** `silhouette_boost`  ·  **Trigger:** weak subject, low clarity score
 
 ## Actions
 

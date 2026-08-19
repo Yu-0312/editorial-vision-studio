@@ -99,7 +99,7 @@ Detect this at Intent, not later. A series discovered at the Compiler has alread
 → family: Event Campaign → allowed: `campaign-poster`, `brand-key-visual`, `social-asset`
 
 **"幫我做一張 skincare brand launch hero image"**
-→ family: Branding → allowed: `brand-key-visual`, `product-editorial`, `website-hero`
+→ family: Branding → allowed: `brand-key-visual`, `product-editorial`, `social-asset`, `campaign-poster`, `website-hero`
 
 **"SaaS landing page hero art，安靜、可信、不是插畫感"**
 → family: Digital Product → allowed: `website-hero`, `social-asset`, `interface-asset`

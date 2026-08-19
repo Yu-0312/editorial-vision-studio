@@ -9,7 +9,6 @@ START: User request + optional image / brand / product / theme
 │            → Art Direction auto-commits, ZERO questions
 │            → Analyzer still runs if a photo was given
 │
-
 ├─ Asking for a SET (N pages, all sizes, carousel)?
 │   └─ YES → prompts/series.md → run Intent…Art Direction ONCE
 │            → hero first, QC, then fan out derivatives
@@ -47,8 +46,8 @@ START: User request + optional image / brand / product / theme
     ├─ Score 70–89?
     │   └─ YES → editorial_mode: standard
     │
-    └─ Score 90+?
-        └─ YES → editorial_mode: premium (minimal recovery)
+    ├─ Score 90+?
+    │   └─ YES → editorial_mode: premium (minimal recovery)
     │
     ├─ Step 2: Visual Language Engine → derive style/layout/palette
     │   (override if user said style: X)

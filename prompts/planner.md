@@ -15,7 +15,7 @@ When `memory_id` or `preset` is set, fields locked by that memory are read-only.
 | Subject + Condition | Layout | Default Style |
 |---------------------|--------|---------------|
 | Portrait, negative space >50% | Magazine Cover | Kinfolk / Purple |
-| Portrait, tight crop | Editorial Portrait | Apartamento |
+| Portrait, tight crop | Editorial Spread | Apartamento |
 | Architecture, strong geometry | Swiss Poster | Swiss |
 | Landscape, quiet | Gallery Print | MUJI / Gallery |
 | Street, human story | Documentary Zine | POPEYE |

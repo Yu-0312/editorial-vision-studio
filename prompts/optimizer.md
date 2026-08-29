@@ -40,7 +40,7 @@ Every op reads the target adapter's **`optimizer_contract`** block ([adapters/_t
 
 | # | Op | Fires when | Rewrite | Never |
 |---|----|------------|---------|-------|
-| 1 | `provenance_strip` | A clause traces to no spec field | Delete it | Delete a clause backed by a locked memory or preset field |
+| 1 | `provenance_strip` | A clause traces to no spec field | Delete it | Delete a clause backed by a locked memory or preset field, or **any clause at or below the ladder's floor**. The spatial clauses have no spec field of their own on a theme-only run — `image_report.spatial` is null — yet [reviewer.md](reviewer.md) rejects a prompt without them. Requiring a clause in one layer and deleting it in the next is a loop, not a cleanup |
 | 2 | `ground_first` | The ground clause sits later than the adapter's `emphasis_order` allows | Move it to the front, or to the sentence immediately after the emphasis clause | Move it ahead of a `title-first` adapter's title — [ideogram.md](../adapters/ideogram.md) weights the first sentence for text, and reordering it costs a legible masthead |
 | 3 | `concretize` | A clause names a quality instead of a thing — "editorial feel", "sophisticated palette", "thoughtful composition" | Replace with the spec's own value | Invent a value the spec does not hold. Missing value → reject to Compiler |
 | 4 | `bind_numbers` | The spec holds a quantity but the prompt says a vague word — "a small accent", "lots of space", "a few colours" | Substitute the spec's number | Add a number the spec does not have |
@@ -66,6 +66,8 @@ projection, ground plane, light direction, contact shadows
 design_tokens.ground
 photo fidelity clause · locked memory or preset fields
 ```
+
+**Stated cues are exempt from the whole ladder.** On a `reason: freeform` run, [reviewer.md](reviewer.md) rejects any prompt that dropped a cue from `style_gate.description` — and the user's own words are frequently atmosphere words, which the ladder would drop first. Compressing a stated cue away manufactures the very rejection this layer exists to avoid. Treat every cue in `style_gate.description` as floor.
 
 Below the floor, `compress` does not fire. If the request is still over budget with only floor clauses left, that is a spec that does not fit the model — stop and report it, or switch adapters. Never shorten a prompt by dropping the thing that makes it reproducible.
 

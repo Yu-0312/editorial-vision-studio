@@ -19,6 +19,18 @@ Also append:
 {2-sentence dense version}
 ```
 
+## Optimizer Contract
+
+```yaml
+optimizer_contract:
+  sentence_budget: null
+  negative_prompt: field
+  emphasis_order: ground-first
+  clause_density: bound
+```
+
+The backend is unknown, so this is the adapter where [variant mode](../prompts/optimizer.md) earns its keep: the two dialects this adapter already emits are the `narrative` and `terse` variants of one spec. Score both, ship both, and label which is which — the user's tool decides.
+
 ## Reference Image
 
 Follow EditorialSpec `photo_policy` — note in output:

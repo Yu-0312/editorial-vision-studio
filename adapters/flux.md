@@ -38,6 +38,18 @@ blurry text, ugly typography, low quality, jpeg artifacts
 
 Add `photo redraw, altered faces` when fidelity=required.
 
+## Optimizer Contract
+
+```yaml
+optimizer_contract:
+  sentence_budget: 3
+  negative_prompt: field
+  emphasis_order: ground-first
+  clause_density: terse
+```
+
+Flux latches onto the first ground word it sees, so `ground_first` is load-bearing here rather than cosmetic. The 3-sentence budget means `compress` fires often — follow the provenance ladder in [../prompts/optimizer.md](../prompts/optimizer.md) and let atmosphere go before composition ratios.
+
 ## VisionSpec / EditorialSpec → Prompt Mapping
 
 | Spec field | Flux dialect |

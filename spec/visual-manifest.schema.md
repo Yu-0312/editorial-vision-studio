@@ -80,8 +80,17 @@ model:
   provider: openai
   adapter: gpt-image
   reference_image: edit
-  prompt_hash: sha256:…           # of the emitted GenerationRequest.prompt
+  prompt_hash: sha256:…           # of the emitted GenerationRequest.prompt, post-optimizer
   seed: null
+
+optimizer:                        # see ../prompts/optimizer.md
+  ruleset_version: "1.0"          # required for replay — the ops are versioned, not frozen
+  passes: 1
+  status: optimized               # optimized | unchanged | reverted | rejected_to_compiler
+  prompt_score_before: 74
+  prompt_score_after: 89
+  ops_applied: [ground_first, concretize]
+  variants: []                    # populated only in variant mode; the selected id is the shipped prompt
 
 quality:                          # all ten dimensions, verbatim from the evaluator
   subject: 0.96
@@ -117,22 +126,25 @@ provenance:
 - `project.memory_version` records which version of a preset or memory the run compiled against, so an edited preset does not silently invalidate old runs.
 - `art_direction.runner_up` must be a real candidate id, not a guess. Null when Art Direction auto-committed with no alternatives.
 - `quality.overall` is the weighted mean from [../prompts/evaluator.md](../prompts/evaluator.md), not an average of the listed dimensions.
-- `model.prompt_hash` makes "did this actually change?" answerable across iterations. A mutation that leaves the hash unchanged is a no-op — see the `no_op_mutation` stop rule.
+- `model.prompt_hash` makes "did this actually change?" answerable across iterations. A mutation that leaves the hash unchanged is a no-op — see the `no_op_mutation` stop rule. The hash is taken **after** the Optimizer, because that is the string the model received.
+- `optimizer.ruleset_version` is what makes the run replayable. The prompt string is a deterministic function of spec + adapter + ruleset; without the version, a later edit to [../prompts/optimizer.md](../prompts/optimizer.md) silently changes what "replay" reproduces. Same reason as `project.memory_version`.
+- `optimizer.status: unchanged` is the healthy default. `reverted` and a repeated op across passes both point at `adapters/{model}.md`, not at this run.
 - `provenance.parent_run_id` is set when the run reused a prior spec (model switch, direction switch, memory continuation).
 
 ## Replay
 
 | User says | Read from manifest | Re-run |
 |-----------|--------------------|--------|
-| "同一張，改用 Flux" | everything except `model` | Adapter → Reviewer → Generate |
-| "改用 B 那個方向" | intent, image_report | Planner → Compiler → Adapter → Reviewer → Generate |
-| "一模一樣再生一次" | everything | Generate only |
+| "同一張，改用 Flux" | everything except `model` | Adapter → Reviewer → Optimizer → Generate |
+| "改用 B 那個方向" | intent, image_report | Planner → Compiler → Adapter → Reviewer → Optimizer → Generate |
+| "一模一樣再生一次" | everything, `optimizer` included | Generate only — replay the recorded prompt, do not re-optimize |
+| "換一個寫法試試" | spec, `optimizer.variants` | Optimizer in variant mode → Generate |
 | "同一套視覺，換主題" | `visual_system` → Visual Memory | Analyzer → Art Direction (auto-commit) → Planner → downstream |
 
 Never re-run the Analyzer when the manifest already carries a valid `image_report` for the same source image.
 
 ## Emission
 
-The **Compiler owns the manifest**. It opens one when it first compiles a spec, the Evaluator appends the quality vector, the Iteration Engine appends each pass, and the Compiler finalizes it when the run settles. One writer per section, one owner for the file.
+The **Compiler owns the manifest**. It opens one when it first compiles a spec, the Optimizer appends its op block, the Evaluator appends the quality vector, the Iteration Engine appends each pass, and the Compiler finalizes it when the run settles. One writer per section, one owner for the file.
 
 Emit it to the user only when asked, or when the run is part of a series. Otherwise keep it internal and surface the two-line summary: direction name + quality grade.

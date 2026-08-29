@@ -1,6 +1,8 @@
 # Prompt Reviewer
 
-Run **after** Model Adapter, **before** image generation. Validates the `GenerationRequest` **against the spec it was compiled from** — it reads the spec to detect drift, but never edits it. Corrections are applied to the request; anything that needs a spec change is a rejection routed back to the Compiler.
+Run **after** Model Adapter, **before** [Prompt Optimizer](optimizer.md). Validates the `GenerationRequest` **against the spec it was compiled from** — it reads the spec to detect drift, but never edits it. Corrections are applied to the request; anything that needs a spec change is a rejection routed back to the Compiler.
+
+**Legality only.** This layer answers *is this request legal against its spec* — pass, corrected, or rejected. It does not improve wording, reorder clauses, or bind vague words to spec numbers; a legal-but-weak prompt passes here and is handed to [optimizer.md](optimizer.md). `rejected` never reaches the Optimizer.
 
 ## Model-Specific Checks
 

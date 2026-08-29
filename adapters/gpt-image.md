@@ -33,6 +33,18 @@ GPT Image: embed avoids in paragraph 4 as prose list. Separate `negative_prompt`
 Avoid: glossy ad, cinematic lighting, 3D, neon, photo redraw, mockup frame, watermark.
 ```
 
+## Optimizer Contract
+
+```yaml
+optimizer_contract:
+  sentence_budget: null           # four paragraphs, no hard sentence cap
+  negative_prompt: inline         # paragraph 4 — never strip it to an empty field
+  emphasis_order: ground-first    # paragraph 1 opens on canvas and surface
+  clause_density: narrative
+```
+
+`route_negatives` must **not** fire here: moving the avoid list out of paragraph 4 leaves the prompt with no negatives at all. With no sentence budget, `compress` fires only when the request is unreadably long — length is not the defect this model has.
+
 ## VisionSpec / EditorialSpec → Prompt Mapping
 
 | Spec field | Prompt clause |

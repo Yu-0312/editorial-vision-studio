@@ -18,7 +18,7 @@ Run **after** image generation (or on prompt-only requests, evaluate prompt fide
 
 ## Prompt-Only Evaluation
 
-When user skips generation, score the compiled prompt:
+Score the compiled prompt. Used in two places: when the user skips generation, and as the scorer [optimizer.md](optimizer.md) reads before and after its ops — that layer applies rewrites but owns no rubric of its own, so this table is the single scale for prompt text.
 
 | Dimension | Max | Criteria |
 |-----------|-----|----------|
@@ -29,6 +29,8 @@ When user skips generation, score the compiled prompt:
 | Hygiene | 20 | Zero banned adjectives |
 
 This 100-point total uses the same grade bands as the Quality Score below. There is no quality vector without a generated image.
+
+A low score here is a **wording** failure, not a decision failure: route it to [optimizer.md](optimizer.md), which rewrites expression within the existing spec. Only escalate to [iteration.md](iteration.md) when the Optimizer reports `rejected_to_compiler` — that is the signal the spec itself is missing a field.
 
 ## Quality Vector
 

@@ -47,9 +47,11 @@ Intent → Style Gate                   VisionSpec / EditorialSpec
       → Recovery             →
       → Compiler → VisionSpec
                                  SHARED POST-LAYER
-                                 Reviewer → Generate → Evaluator → Iteration
-                                                                       │
-                                 one spec mutation, re-enter Compiler ◄┘
+                                 Reviewer → Optimizer → Generate
+                                          → Evaluator → Iteration
+                                                             │
+                                 one spec mutation,          │
+                                 re-enter Compiler ◄─────────┘
                                  (max 3 passes)
 ```
 
@@ -81,7 +83,9 @@ VisionSpec             → [spec/editorial-spec.schema.md](spec/editorial-spec.s
     ↓
 Model Adapter          → [adapters/registry.md](adapters/registry.md)  ← swappable
     ↓
-Prompt Reviewer        → [prompts/reviewer.md](prompts/reviewer.md)
+Prompt Reviewer        → [prompts/reviewer.md](prompts/reviewer.md)  ← is it legal?
+    ↓
+Prompt Optimizer       → [prompts/optimizer.md](prompts/optimizer.md)  ← is it well said?
     ↓
 Image Generation
     ↓
@@ -248,6 +252,22 @@ Examples:
 
 Auto-correct incompatible pairings.
 
+## Step 7.5: Prompt Optimizer
+
+The Reviewer answers *is this prompt legal*. It cannot fix a prompt that is legal but weakly worded — the ground clause buried in sentence four, a spec number softened to "a small accent", the same instruction stated twice.
+
+Half a step because it decides nothing. **Every clause it emits must trace to a field the spec already holds**; a clause with no spec field behind it is a rejection back to the Compiler, not an invention. It never sets a ground, style, subject, layout, palette, or type scale.
+
+Seven ordered ops: `provenance_strip` · `ground_first` · `concretize` · `bind_numbers` · `dedupe` · `route_negatives` · `compress`. Most gain comes from `concretize` and `bind_numbers` — a model renders nouns and numbers, never an adjective about taste.
+
+This does **not** break the "mutate the spec, never the prompt string" rule in [prompts/iteration.md](prompts/iteration.md). That rule forbids **hand patches after generation**. The Optimizer is deterministic, pre-generation, and recorded: same spec + same adapter + same `ruleset_version` produces the same string, so the manifest still replays.
+
+**No op firing is the normal outcome.** The same op firing twice means the adapter emits that defect every time — fix `adapters/{model}.md`, not the string.
+
+Variant mode emits 2–3 prompts from **one** spec, differing only on `clause_density`, `specificity`, and `emphasis_order`. A variant that differs on any spec field is a second direction, not a variant. Offer it only when the user asks to compare wordings, when the model is `generic`, or when a prompt-attributed dimension failed last run.
+
+Read [prompts/optimizer.md](prompts/optimizer.md).
+
 ## Step 8: Quality Evaluator
 
 After generation, score a **quality vector** — not one number. Ten weighted dimensions: subject, composition, focal_point, palette, typography, texture, style_coherence, photo_fidelity, intent_fit, platform_fit. Each 0.00–1.00; inapplicable dimensions are `null`, never 0.
@@ -353,6 +373,7 @@ Match the requested depth. Default to a concise direction summary plus `Generati
 - Include a generated image only when an image-generation tool is available and the user asks for generation; otherwise return the model-ready prompt.
 - Include Quality Grade and evaluator notes after generating, or when the user requests review.
 - Include the full quality vector only when the user asks why, or when a dimension failed.
+- Include the optimizer op log only when the user asks what changed, or when it reverted. In variant mode show the prompts, never the op log — the user is choosing wordings, not reviewing edits.
 - Include the VisualManifest only on request, or when the run belongs to a series.
 - Present Art Direction candidates as a 3-line table — name, thesis, trade-off — never as raw YAML.
 
@@ -380,6 +401,7 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 - Blindly copy fixed 60/30/10 layout — adapt proportions to subject
 - Mix style languages without Reviewer pass
 - Overload typography or decorative elements
+- Let the Optimizer add a clause no spec field backs, or lengthen a prompt to strengthen it
 
 **Always:**
 - Preserve the source's arrangement, overlaps, and relative scale — abstraction removes detail, not relationships
@@ -444,6 +466,7 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 | New image model | Add `adapters/foo.md` + register | **No** |
 | New intent family | Edit `prompts/intent.md` | Yes (minimal) |
 | New QC dimension | Edit `prompts/evaluator.md` + map a layer in `prompts/iteration.md` | Yes (minimal) |
+| New prompt-wording op | Add a row to `prompts/optimizer.md` + bump `ruleset_version` | **No** |
 | New lockable DNA field | Edit `spec/visual-memory.schema.md` + enforce in `prompts/reviewer.md` | Yes (minimal) |
 
 See [adapters/_template.md](adapters/_template.md) for new models.
@@ -466,6 +489,7 @@ Add new magazines/brands by creating `styles/your-style.md` with Style DNA table
 | Recovery Engine | [prompts/recovery.md](prompts/recovery.md) |
 | Prompt Compiler | [prompts/compiler.md](prompts/compiler.md) |
 | Prompt Reviewer | [prompts/reviewer.md](prompts/reviewer.md) |
+| Prompt Optimizer | [prompts/optimizer.md](prompts/optimizer.md) |
 | Quality Evaluator | [prompts/evaluator.md](prompts/evaluator.md) |
 | Iteration Engine | [prompts/iteration.md](prompts/iteration.md) |
 | Visual Memory | [prompts/visual-memory.md](prompts/visual-memory.md) |

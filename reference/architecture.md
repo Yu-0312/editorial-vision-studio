@@ -26,7 +26,8 @@ Only the adapter layer changes when switching image models. The decision pipelin
                            ▼                                  │
 ┌─────────────────────────────────────────────────────────┐   │
 │  SHARED POST-LAYER                                      │   │
-│  Reviewer → Generate → Evaluator → Iteration ───────────┼───┘
+│  Reviewer → Optimizer → Generate                        │   │
+│                       → Evaluator → Iteration ──────────┼───┘
 └──────────────────────────┬──────────────────────────────┘  one spec
                            ▼ pass                            mutation,
 ┌─────────────────────────────────────────────────────────┐  max 3
@@ -88,13 +89,23 @@ Adapters **must not** re-analyze the image or override Planner decisions — onl
 3. Register in [adapters/registry.md](../adapters/registry.md)
 4. No changes to Analyzer, Planner, Recovery, or Style files
 
+## Where the Optimizer Sits
+
+[prompts/optimizer.md](../prompts/optimizer.md) is a **fixed layer with model-specific inputs** — the one module that is neither pure editorial logic nor part of the adapter.
+
+Its op set is stable across models. What varies is what it reads *from* the adapter: sentence budget, whether a `negative_prompt` field exists, whether the model weights early tokens. Those facts live in `adapters/{model}.md`, so adding a model still touches no shared layer.
+
+The boundary that keeps this honest: **the Optimizer decides nothing.** Every clause it emits traces to a spec field; a clause with no field behind it is a rejection to the Compiler, not an invention. It edits expression, never content — which is why it can sit downstream of the Reviewer without becoming a second decision engine.
+
+It runs **before** generation and is deterministic, so it does not violate the prompt-string rule below: the manifest records `ruleset_version` and every op, and replay reproduces the string exactly.
+
 ## Where Loops Are Allowed
 
 Exactly one edge closes a cycle: Evaluator → Iteration → **Compiler**. Iteration never re-enters higher than the Compiler. It mutates a spec field, then the run flows forward normally — Compiler → Adapter → Reviewer → Generate → Evaluator.
 
 Escalation (Compiler → Recovery → Planner → Art Direction → Intent) chooses *which spec field* the next mutation touches. It does not add extra edges: whichever layer's decision changed, the run still re-enters at the Compiler. The loop is bounded at three passes.
 
-Every other edge in the diagram is one-way. A layer that reaches backward — an Adapter that re-plans, a Compiler that re-analyzes, a Reviewer that edits the spec — is a bug, not an optimisation.
+Every other edge in the diagram is one-way. A layer that reaches backward — an Adapter that re-plans, a Compiler that re-analyzes, a Reviewer that edits the spec, an Optimizer that adds a clause the spec never held — is a bug, not an optimisation.
 
 ## Adding a Preset
 

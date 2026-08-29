@@ -32,8 +32,9 @@ User override always wins: `model: flux`
 2. Resolve target.model (user > auto-detect > generic)
 3. Load adapters/{model}.md
 4. Translate VisionSpec / EditorialSpec → GenerationRequest
-5. Prompt Reviewer validates output
-6. Route to image API
+5. Prompt Reviewer validates output — legality
+6. Prompt Optimizer rewrites wording against the adapter's `optimizer_contract`
+7. Route to image API
 ```
 
 ## GenerationRequest (adapter output)
@@ -50,6 +51,15 @@ generation_request:
   extra_params: {}   # model-specific, documented per adapter
 ```
 
+Every adapter also declares an `optimizer_contract` block — sentence budget, negative-prompt support, emphasis order, clause density. [../prompts/optimizer.md](../prompts/optimizer.md) reads it and holds no per-model knowledge of its own, which is what keeps a new model from touching a shared layer.
+
+| Model ID | Budget | Negatives | Emphasis |
+|----------|--------|-----------|----------|
+| `gpt-image` | none | inline (paragraph 4) | ground-first |
+| `flux` | 3 sentences | `negative_prompt` field | ground-first |
+| `ideogram` | 4 sentences | `negative_prompt` field | **title-first** |
+| `generic` | none | `negative_prompt` field | ground-first |
+
 ## Extending
 
-Copy [_template.md](_template.md), register here. Do **not** fork the Decision Engine.
+Copy [_template.md](_template.md), register here — the `optimizer_contract` block included. Do **not** fork the Decision Engine.

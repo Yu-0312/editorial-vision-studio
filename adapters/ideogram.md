@@ -35,6 +35,18 @@ misspelled text, garbled letters, watermark, logo, stock photo badge,
 glossy advertisement, 3D render, neon, cluttered layout, low resolution
 ```
 
+## Optimizer Contract
+
+```yaml
+optimizer_contract:
+  sentence_budget: 4
+  negative_prompt: field
+  emphasis_order: title-first
+  clause_density: bound
+```
+
+**`title-first` overrides `ground_first`.** The title holds the first sentence; the ground clause moves to the second, never ahead of it. An optimizer that front-loads the ground here trades a legible masthead for a correct paper colour, which is the wrong trade on the one model chosen for its typography.
+
 ## VisionSpec / EditorialSpec → Prompt Mapping
 
 | Spec field | Ideogram dialect |

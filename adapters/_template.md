@@ -26,6 +26,20 @@ Copy to `adapters/your-model.md` and register in [registry.md](registry.md).
 
 [Separate field? Inline? Not supported?]
 
+## Optimizer Contract
+
+Model facts [../prompts/optimizer.md](../prompts/optimizer.md) reads. Required — an adapter without this block makes `compress`, `route_negatives`, and `ground_first` unrunnable.
+
+```yaml
+optimizer_contract:
+  sentence_budget: null           # int, or null for no stated limit
+  negative_prompt: field          # field | inline | unsupported
+  emphasis_order: ground-first    # ground-first | subject-first | title-first
+  clause_density: bound           # terse | bound | narrative — what this model responds to
+```
+
+`emphasis_order` is the clause this model weights most heavily, and it is **not** a preference — it is why `ground_first` fires differently per model. Declare it from the model's documented behaviour, not from taste.
+
 ## VisionSpec / EditorialSpec → Prompt Mapping
 
 | Spec field | This model's dialect |

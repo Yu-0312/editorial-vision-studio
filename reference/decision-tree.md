@@ -69,6 +69,13 @@ START: User request + optional image / brand / product / theme
     │   resolve target.model → adapters/{model}.md → GenerationRequest
     │
     ├─ Step 7: Reviewer → validate GenerationRequest + memory locks
+    │   pass | corrected → Step 7.5 · rejected → back to Compiler
+    │
+    ├─ Step 7.5: Optimizer → wording only, zero new decisions
+    │   ops: provenance_strip · ground_first · concretize · bind_numbers
+    │        · dedupe · route_negatives · compress
+    │   no op fired = normal · same op twice = fix adapters/{model}.md
+    │   comparing wordings? → variant mode, 2–3 prompts, ONE spec_hash
     │
     ├─ Generate image (unless prompt-only)
     │
@@ -88,6 +95,7 @@ START: User request + optional image / brand / product / theme
 | User says | Entry point |
 |-----------|-------------|
 | "改用 Flux" | Adapter (Step 6b) |
+| "換一個寫法試試" | Optimizer variant mode (Step 7.5) — spec untouched |
 | "改用 B 那個方向" | Planner (Step 4) |
 | "一模一樣再生一次" | Generate |
 | "同一套視覺，換主題" | Analyzer (Step 1), with memory locks applied |

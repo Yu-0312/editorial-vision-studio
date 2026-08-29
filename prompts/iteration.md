@@ -22,6 +22,8 @@ Evaluator again
 
 Mutate the **spec**, never the emitted prompt string. A hand-patched prompt cannot be reproduced from the manifest and breaks model switching.
 
+This rule bans **post-generation hand patches**. It is not violated by [optimizer.md](optimizer.md), which runs pre-generation inside the compile path and is deterministic — same spec, same adapter, same `ruleset_version`, same string — with every op recorded in the manifest. After the image exists, nothing may touch the prompt: the fix is a spec field, and the recompile re-runs the Optimizer on the way back through.
+
 ## Failure → Responsible Layer
 
 The dimension names are the ten in [evaluator.md](evaluator.md) — no others. Every mutation is a **spec field change**; the named layer is the layer that owns that field, not a layer you re-run in isolation.
@@ -43,7 +45,7 @@ Two rows name the **Compiler**. Those are schema-conformance corrections — the
 
 **One mutation per iteration.** Two simultaneous fixes make the next score unattributable.
 
-After any mutation, the run re-enters at the **Compiler** and flows forward normally: Compiler → Adapter → Reviewer → Generate → Evaluator. "Responsible layer" names whose decision changed, not an entry point.
+After any mutation, the run re-enters at the **Compiler** and flows forward normally: Compiler → Adapter → Reviewer → Optimizer → Generate → Evaluator. "Responsible layer" names whose decision changed, not an entry point.
 
 ## Escalation Rule
 
@@ -99,4 +101,5 @@ iteration:
 
 - User taste disagreement ("I don't like blue") — that is a direction change, not a QC failure. Route to [art-direction.md](art-direction.md).
 - Model rendering artifacts unrelated to the spec (hands, garbled text) — regenerate the same spec with a different seed; do not mutate.
+- A failure the prompt-only score already caught (buried ground clause, vague quantity, duplicated instruction) — that is wording, and [optimizer.md](optimizer.md) owns it. Spending an iteration on it wastes one of three.
 - A dimension the brief never asked for. Do not fix `typography` on a gallery print with no title.

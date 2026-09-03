@@ -1,6 +1,6 @@
 # Ivory Postcard — Preset
 
-The repo's original hardcoded look, sealed as a preset: a photograph reconstructed as a minimal editorial illustration on ivory paper — three to five simplified symbolic forms, flat opaque paint, and a large quiet field.
+The repo's original hardcoded look, sealed as a preset: a photograph reconstructed as a reduced editorial illustration on ivory paper — three to five simplified symbolic forms, flat opaque paint, and a large quiet field.
 
 This is **not** a photo filter. The workflow reselects the subject, deletes detail, and rebuilds the composition.
 
@@ -69,7 +69,7 @@ Note that **deep recession** is the avoid, not projection itself. A viewpoint-le
 ## Compiler anchor
 
 ```
-Minimal editorial illustration on a warm ivory paper ground, flat and uniform,
+Editorial illustration on a warm ivory paper ground, flat and uniform,
 no grain or stain. Rebuild the scene using three to five kinds of simplified
 form, repeated as often as the scene needs; keep the arrangement the
 photograph had — objects that clustered still cluster, overlaps and relative

@@ -44,6 +44,8 @@ spatial:
   element_kinds: {chair: 3, table: 1, stool: 1, planter: 1}
 ```
 
+The Compiler copies this block verbatim into `direction.spatial_plan` ([../spec/editorial-spec.schema.md](../spec/editorial-spec.schema.md)), which is what every downstream layer reads. On a theme-only run the Analyzer does not run at all and the Planner authors `spatial_plan` instead — the field is required either way, because a prompt with no named projection is rejected whether or not a photograph existed.
+
 `element_kinds` is what a `form_types: 3-5` constraint counts — kinds, never instances. That constraint may reduce the vocabulary; it may not delete an instance the arrangement depends on. See [../assets/scene-construction.md](../assets/scene-construction.md).
 
 ## Editorial Score (0–100)
@@ -72,7 +74,9 @@ editorial_score: 81
 flags:              # vocabulary below; recoveries are derived from these, never listed here
   - low_saturation
   - low_contrast
-spatial: {}         # required whenever abstraction_level is relationship-first — see Spatial Report
+spatial: {}         # always emitted when a photo was analyzed; copied into direction.spatial_plan.
+                    # On a theme-only run the Analyzer does not run and the Planner authors
+                    # spatial_plan instead — see Spatial Report
 ```
 
 Flag vocabulary — the Analyzer emits only these, and [recovery.md](recovery.md) maps each to exactly one module:

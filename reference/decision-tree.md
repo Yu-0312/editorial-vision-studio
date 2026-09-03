@@ -19,8 +19,12 @@ START: User request + optional image / brand / product / theme
 │            → Analyzer still runs per photo
 │
 ├─ No image, theme/text only?
-│   └─ YES → Intent: Visual Concept / Zine / Campaign / Brand / Web
-│            → optional Variation Engine → Compiler (skip pixel Analyzer)
+│   └─ YES → run the SAME pipeline below, with exactly two changes:
+│            · Step 1 Analyzer SKIPPED → image_report: null,
+│              editorial_mode: standard, recoveries: []
+│            · Planner authors direction.spatial_plan from intent.subject
+│            Style Gate, Visual Language, Art Direction and Planner all still
+│            run. Any intent family is reachable — Gallery included.
 │
 └─ Has image
     │

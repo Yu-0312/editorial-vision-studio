@@ -15,7 +15,7 @@ Presets reuse the entire memory mechanism. Nothing new enforces them:
 
 | Preset | Ground | Render mode | Intended layouts | Use when |
 |--------|--------|-------------|------------------|----------|
-| [ivory-postcard](ivory-postcard.md) | `paper-light` | `painterly` | poster, gallery-print, social-asset, moodboard | Quiet minimal editorial illustration from a photo; the repo's original hardcoded look |
+| [ivory-postcard](ivory-postcard.md) | `paper-light` | `painterly` | poster, gallery-print, social-asset, moodboard | Quiet reduced editorial illustration from a photo; the repo's original hardcoded look |
 | [vintage-travel-poster](vintage-travel-poster.md) | `saturated` | `graphic` | poster, campaign-poster, social-asset, magazine-cover | Period travel/exhibition poster; flat colour fields, bold type, no photographic surface |
 | [papercraft-diorama-postcard](papercraft-diorama-postcard.md) | `full-bleed-photo` | `photographic` | social-asset | Photoreal papercraft diorama emerging from a postcard; social-first, 1:1 |
 

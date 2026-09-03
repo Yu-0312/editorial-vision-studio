@@ -16,7 +16,7 @@ Before these fields existed, the engine had a palette, a texture tier, and a sty
 |-------|-----------|-------------------|----------------------|
 | `paper-light` | warm ivory / cream / off-white paper field, flat and uniform | marks sit dark on light | FLAT, or SURFACE when style DNA rates Texture ★★★+ |
 | `neutral-gray` | mid-tone gray or concrete field | marks read both directions; needs a value anchor | FLAT or SURFACE |
-| `dark` | near-black, deep charcoal, or deep neutral field | marks sit light on dark; accents gain chroma | FLAT |
+| `dark` | near-black, deep charcoal, or deep neutral field | marks sit light on dark; accents gain chroma | FLAT, or SURFACE when style DNA rates Texture ★★★+ |
 | `saturated` | a single flat chromatic field covering the canvas — the ground *is* ink | palette must include the ground hue as a member | FLAT or SURFACE |
 | `full-bleed-photo` | the photograph is the canvas; no field behind it | palette is graded, not composed | **always FLAT** ([texture.md](texture.md)) |
 | `duotone` | two-ink field, one light one dark, no third value | exactly two hues plus their blend | FLAT |
@@ -26,6 +26,7 @@ Rules:
 - The ground is stated **first** in every compiled prompt ([../prompts/compiler.md](../prompts/compiler.md)). An unstated ground is the single most common way an image drifts back to paper white.
 - `saturated` and `duotone` require the ground hue to appear in `design_tokens.palette`. A ground that is not in the palette is a rejection.
 - On `dark` and `saturated`, invert the value logic of the style DNA rather than abandoning it — a Swiss grid on a dark ground is still a Swiss grid.
+- The last column is a **default, never a cap**. [texture.md](texture.md) is the single source of truth for texture permission and decides on `direction.layout` plus style DNA; where the two columns disagree, texture.md wins. A dark cotton-paper ground is legal on a CLEAN layout whose style rates Texture ★★★+ — what is never legal on a `dark` ground is PRINT wording, because grain over near-black reads as noise, not as paper.
 - Recovery modules never change the ground. Panter compensates chroma inside whatever ground is set ([../recovery/contrast.md](../recovery/contrast.md)).
 
 ## Render mode → prompt language

@@ -38,8 +38,9 @@ Run **after** Model Adapter, **before** [Prompt Optimizer](optimizer.md). Valida
 | Product editorial + distorted product identity | Reject | Add silhouette/proportion preservation clause |
 | `ground` or `render_mode` unset | Reject | Both are required with no default. Send it back to Art Direction rather than letting it fall through to a paper ground |
 | No projection named, or two viewpoints implied for one object | Reject | «Avoid perspective» is not a projection. Name one and hold it ([../assets/scene-construction.md](../assets/scene-construction.md)) |
+| `direction.spatial_plan` unset, on a photo run or a theme-only one | Reject | Send it back: the Analyzer fills it from a photo, the Planner authors it from `intent.subject`. The space clauses have nowhere to trace to without it |
 | No shared ground plane and no contact shadow, on a layout that is not `moodboard` or `interface-asset` | Reject | This is what makes reduced objects float. Floating by decision is fine; floating by omission is the defect |
-| `abstraction_level: relationship-first` + prompt does not restate the source arrangement | Reject | The level promises preserved relations; a prompt that drops them cannot deliver |
+| `abstraction_level: relationship-first` + prompt does not restate `spatial_plan.arrangement` | Reject | The level promises preserved relations; a prompt that drops them cannot deliver |
 | `render_mode: painterly` + no mark-making language (dabbed, brush-made, uneven edges) | Reject | Without it the model defaults to vector-clean, which is `graphic` |
 | `style_gate.outcome: commit` + Art Direction offered candidates | Reject | The user already chose, or opted out. A second menu is a defect ([style-gate.md](style-gate.md)) |
 | `style_gate.outcome: offer` + Art Direction committed silently | Reject | The user asked to see options and never got them |
@@ -75,7 +76,8 @@ Each style file defines dimension stars (Typography, Geometry, Negative Space, T
 - [ ] Supplied in-image copy is short enough to render and has an explicit placement
 - [ ] `ground` and `render_mode` are set, and the prompt says the same thing they do
 - [ ] One projection named; one shared ground plane; one light direction; contact shadows present
-- [ ] On `relationship-first`, the source's arrangement, overlaps, and relative scale appear in the prompt
+- [ ] `direction.spatial_plan` is set, and its projection, ground plane and light direction appear in the prompt
+- [ ] On `relationship-first`, `spatial_plan`'s arrangement, overlaps, and relative scale appear in the prompt
 - [ ] On a freeform run, every cue in `style_gate.description` appears in the prompt or in `avoids`
 - [ ] Every locked field from an active Visual Memory or preset survives into the prompt
 - [ ] Series derivatives carry the hero's palette, typeface, and texture tier unchanged

@@ -75,6 +75,19 @@ direction:
   style: string  # swiss, kinfolk, muji, ...
   editorial_mode: premium | standard | compensation | reconstruction
   abstraction_level: relationship-first | identity-cue | full-abstract   # HOW ABSTRACT
+                              # relationship-first — arrangement, intervals, density, hierarchy and
+                              #   occlusion survive; no object outlines do
+                              # identity-cue — the above, plus each subject's outer silhouette,
+                              #   never what sits on its surface
+                              # full-abstract — neither arrangement nor outline survives; only the
+                              #   mood and rhythm of the theme do. Nothing is traceable to a shape
+  spatial_plan:               # the scene facts the compiled prompt must state — required, no default
+    arrangement: string       # from image_report.spatial when a photo was analyzed;
+    overlaps: [string]        # authored by the Planner from intent.subject on a theme-only run
+    relative_scale: string
+    projection: string        # ONE viewpoint, named. "Avoid perspective" is not a projection
+    ground_plane: string
+    light_direction: string
   render_mode: photographic | photo-plus-graphic | graphic | painterly | mixed   # WHAT MEDIUM — required, no default
   composition:
     photo_ratio: 0.0-1.0      # 0 if no photo
@@ -108,7 +121,7 @@ recoveries: [string]          # module IDs: panter_mode, silhouette_boost, ...
 photo_policy:
   fidelity: required | optional | none     # required = never redraw source region
   reference_image: uploaded | none
-  source_region: upper | principal | full-bleed
+  source_region: upper | principal | full-bleed | null   # null whenever reference_image is none
 
 # --- Shared avoid list (model-agnostic) ---
 avoids:
@@ -137,7 +150,11 @@ target:
 - `style_gate.reason: preset_chosen` requires `style_gate.preset` and `preset` to be the same non-null id
 - `style_gate.reason: freeform` requires a non-null `style_gate.description`, and `art_direction.runner_up` must be null — a description commits to one reading
 - On `reason: freeform`, `design_tokens.ground` and `direction.render_mode` must each trace to a cue in the description or to the single permitted clarifying question ([../prompts/style-brief.md](../prompts/style-brief.md)). Neither may be inferred silently
-- If `direction.abstraction_level` is `relationship-first`, `image_report.spatial` must be non-null and the compiled prompt must restate `arrangement`, `ground_plane`, and `light_direction`. Relationships cannot be preserved if they were never recorded
+- `direction.spatial_plan` is **required on every run**, photo or theme-only. Its `projection`, `ground_plane`, and `light_direction` must appear in the compiled prompt. This is the field the space clauses trace to — without it they have no provenance, and [../prompts/optimizer.md](../prompts/optimizer.md) would strip the very clauses [../prompts/reviewer.md](../prompts/reviewer.md) rejects a prompt for lacking
+- On a photo run, `direction.spatial_plan` is copied from `image_report.spatial` verbatim — the Planner does not re-observe. On a theme-only run, `image_report` is null and the Planner authors `spatial_plan` from `intent.subject` ([../prompts/planner.md](../prompts/planner.md))
+- If `direction.abstraction_level` is `relationship-first`, `direction.spatial_plan.arrangement`, `overlaps`, and `relative_scale` must be non-null and the compiled prompt must restate them. Relationships cannot be preserved if they were never recorded
+- `photo_policy.source_region` is `null` whenever `photo_policy.reference_image` is `none`. A region of a photograph that does not exist is not a value
+- `direction.editorial_mode` is set from the Editorial Score when the Analyzer ran. On a theme-only run there is no source photograph and therefore no score: `editorial_mode` is `standard`, and the Recovery Engine has no flags to act on, so `recoveries` is `[]`. Do not invent a score to reach a different mode ([../prompts/analyzer.md](../prompts/analyzer.md))
 - `direction.composition.form_types` counts **kinds** of form, never instances. It may reduce the vocabulary; it may not delete an element the arrangement depends on ([../assets/scene-construction.md](../assets/scene-construction.md))
 - `art_direction.thesis` is required and must be traceable to a photo fact, brand cue, or stated goal — a direction with no argument is decoration
 - `direction.layout` must appear in `intent.allowed_outputs` and must not appear in `intent.blocked_outputs`

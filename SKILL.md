@@ -202,6 +202,8 @@ Key rules (full matrix in [prompts/planner.md](prompts/planner.md)):
 - Street + human story → Documentary Zine
 - Food/object + minimal → Product Editorial
 
+The Planner also fills `direction.spatial_plan` — projection, shared ground plane, light direction, arrangement. On a photo run it is a verbatim copy of `image_report.spatial`; on a **theme-only run the Planner authors it from `intent.subject`**. It is required either way: [prompts/reviewer.md](prompts/reviewer.md) rejects a prompt with no named projection whether or not a photograph existed, and without the field those clauses have no provenance for [prompts/optimizer.md](prompts/optimizer.md) to protect.
+
 If user specifies `style: kinfolk`, load [styles/kinfolk.md](styles/kinfolk.md) DNA.
 
 ## Step 5: Recovery Engine
@@ -360,6 +362,7 @@ This is the **Editorial Score** — an input measure of the source photo, produc
 | Editorial Score | Mode |
 |-----------------|------|
 | 90+ | Premium Editorial — refined extraction, minimal recovery |
+| *(no photo)* | Theme-only: no score exists. `editorial_mode: standard`, `recoveries: []` — never invent a score |
 | 70–89 | Standard Editorial |
 | 50–69 | Compensation Mode — apply Recovery stack |
 | <50 | Concept Reconstruction — abstract reinterpretation |
@@ -405,7 +408,7 @@ User: "同一套視覺，做東京街景" → load the Visual Memory, run Analyz
 
 **Always:**
 - Preserve the source's arrangement, overlaps, and relative scale — abstraction removes detail, not relationships
-- Name one projection, one ground plane, one light direction; give every grounded object a contact shadow
+- Name one projection, one ground plane, one light direction in `direction.spatial_plan`; give every grounded object a contact shadow
 - Preserve visual identity of source photo when one is provided
 - Make every abstract mark traceable to a photo fact, theme fact, brand cue, or stated goal
 - Keep prompts imageable and concrete

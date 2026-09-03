@@ -10,6 +10,17 @@ When `memory_id` or `preset` is set, fields locked by that memory are read-only.
 
 `design_tokens.ground` and `direction.render_mode` must both be set before the Planner hands off. They have no defaults; an unset value is a rejection, not ivory paper.
 
+## Spatial Plan
+
+`direction.spatial_plan` is required on every run. Where it comes from depends on whether a photograph was analyzed:
+
+| Run type | Source |
+|----------|--------|
+| Photo | Copy `image_report.spatial` verbatim. The Planner does not re-observe the image — that is the Analyzer's job and re-deciding it here is a layer violation |
+| Theme-only | The Planner authors it from `intent.subject`. Name one projection, one shared ground plane, one light direction, and the arrangement the subject implies |
+
+Theme-only is not an excuse to leave it empty. A brief that says "an old Kyoto tea room" already implies a viewpoint, a floor, and a window the light comes through; deciding those here is what stops the model inventing three of each. Say the projection you want — «avoid perspective» is not a projection ([../assets/scene-construction.md](../assets/scene-construction.md)).
+
 ## Subject → Layout Matrix
 
 | Subject + Condition | Layout | Default Style |
@@ -35,9 +46,13 @@ When `memory_id` or `preset` is set, fields locked by that memory are read-only.
 visual_language: Quiet Human
 layout: magazine-cover
 style: kinfolk
-typography: minimal serif, small scale
+typography: thin serif, caption scale   # never a banned adjective — see compiler.md
 color_strategy: warm neutral extracted + one sage accent
 abstraction_level: relationship-first  # or identity-cue / full-abstract
+spatial_plan:
+  projection: "flat elevation, held across every object"
+  ground_plane: "one shared floor, eye level just above the table top"
+  light_direction: "upper left, flat contact shadow under every grounded object"
 composition_strategy: upper photo 65%, lower abstract 25%, margin 10%
 recovery_plan: [panter_mode, color_anchor]
 editorial_mode: compensation  # premium | standard | compensation | reconstruction

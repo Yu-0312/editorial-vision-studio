@@ -14,7 +14,7 @@ Pull modules from:
 - Recovery clauses: [recovery/](../recovery/)
 - Conditional: [layouts/photo-abstract-diptych.md](../layouts/photo-abstract-diptych.md) when diptych; [assets/variation-engine.md](../assets/variation-engine.md) when zine
 
-**Compiler never analyzes the image.** It validates VisionSpec / EditorialSpec against schema rules.
+**Compiler never analyzes the image.** It validates VisionSpec / EditorialSpec against schema rules. On a photo run it copies `image_report.spatial` into `direction.spatial_plan` verbatim — copying is not analyzing; on a theme-only run that field arrives already authored by the Planner.
 
 **Compiler never re-decides.** When `memory_id` is set, locked palette, typography, style, and texture tier are compiled verbatim — the Compiler has no discretion over them ([../spec/visual-memory.schema.md](../spec/visual-memory.schema.md)).
 
@@ -47,7 +47,7 @@ User override: `model: flux` in request → sets `target.model` before Phase 2.
 Compile only information that can change final pixels. Convert the brief into this order:
 
 1. canvas and surface — state `design_tokens.ground` explicitly and first, resolved to prose via [assets/ground.md](../assets/ground.md); never emit the enum token. An unstated ground is the single most common way an image drifts back to paper white
-2. **space** — projection, shared ground plane, light direction and contact shadows, and the source's preserved arrangement ([assets/scene-construction.md](../assets/scene-construction.md)). Skipping this is what turns a reduced scene into floating clip art
+2. **space** — projection, shared ground plane, light direction and contact shadows, and the preserved arrangement, all read from `direction.spatial_plan` ([assets/scene-construction.md](../assets/scene-construction.md)). Skipping this is what turns a reduced scene into floating clip art
 3. attention geometry and negative-space budget
 4. one primary image anchor and its treatment
 5. typography or copy-safe behavior

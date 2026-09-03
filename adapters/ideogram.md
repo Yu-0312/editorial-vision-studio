@@ -28,6 +28,8 @@ Text must be legible and correctly spelled.
 
 Ideogram prioritizes text clauses — put `direction.title` in **first sentence**.
 
+The legibility sentence above is the **only** one. The Typography Emphasis Rule below prepends emphasis, never a second copy of it — two legibility instructions in one prompt dilute both, and `dedupe` firing on every run is an adapter defect, not a prompt defect ([../prompts/optimizer.md](../prompts/optimizer.md)).
+
 ## Negative Prompt
 
 ```
@@ -66,7 +68,7 @@ optimizer_contract:
 When `type_ratio > 0.15`, prepend:
 
 ```
-Typography-forward editorial design. Primary text: "{title}". Text must be sharp and readable.
+Typography-forward editorial design. Primary text: "{title}".
 ```
 
 ## Default Params

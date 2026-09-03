@@ -40,7 +40,7 @@ Crop only as much as the join needs. If a crop would cost the subject, change th
 
 ## What the Panel Is Built From
 
-The panel is compiled from `image_report.spatial` ([../prompts/analyzer.md](../prompts/analyzer.md)) — the same six fields every run already records:
+The panel is compiled from `direction.spatial_plan` — on a diptych that is always a verbatim copy of `image_report.spatial` ([../prompts/analyzer.md](../prompts/analyzer.md)), since the layout requires a source photograph. The same six fields every run already records:
 
 | Spatial field | Becomes |
 |---------------|---------|

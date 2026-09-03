@@ -40,19 +40,19 @@ Every op reads the target adapter's **`optimizer_contract`** block ([adapters/_t
 
 | # | Op | Fires when | Rewrite | Never |
 |---|----|------------|---------|-------|
-| 1 | `provenance_strip` | A clause traces to no spec field | Delete it | Delete a clause backed by a locked memory or preset field, or **any clause at or below the ladder's floor**. The spatial clauses have no spec field of their own on a theme-only run — `image_report.spatial` is null — yet [reviewer.md](reviewer.md) rejects a prompt without them. Requiring a clause in one layer and deleting it in the next is a loop, not a cleanup |
+| 1 | `provenance_strip` | A clause traces to no spec field | Delete it | Delete a clause backed by a locked memory or preset field, or **any clause at or below the ladder's floor**. The spatial clauses trace to `direction.spatial_plan`, which is set on every run including theme-only ones; [reviewer.md](reviewer.md) rejects a prompt without them. Requiring a clause in one layer and deleting it in the next is a loop, not a cleanup |
 | 2 | `ground_first` | The ground clause sits later than the adapter's `emphasis_order` allows | Move it to the front, or to the sentence immediately after the emphasis clause | Move it ahead of a `title-first` adapter's title — [ideogram.md](../adapters/ideogram.md) weights the first sentence for text, and reordering it costs a legible masthead |
 | 3 | `concretize` | A clause names a quality instead of a thing — "editorial feel", "sophisticated palette", "thoughtful composition" | Replace with the spec's own value | Invent a value the spec does not hold. Missing value → reject to Compiler |
 | 4 | `bind_numbers` | The spec holds a quantity but the prompt says a vague word — "a small accent", "lots of space", "a few colours" | Substitute the spec's number | Add a number the spec does not have |
 | 5 | `dedupe` | The same instruction appears twice | Keep the more specific statement, drop the other | Merge two statements that constrain *different* fields — that is compression, not duplication |
 | 6 | `route_negatives` | An avoid sits in the positive prompt and the adapter carries a `negative_prompt` | Move it | Drop the hard-avoids paragraph on adapters with no negative field |
-| 7 | `compress` | The request exceeds the adapter's stated budget (e.g. flux ≤3 sentences) | Drop clauses lowest-first on the provenance ladder | Drop anything at or below the floor line |
+| 7 | `compress` | The request exceeds the adapter's stated budget (e.g. flux ≤3 sentences) | Drop from the **top of the provenance ladder downward** — the top rung goes first | Drop anything at or below the floor line |
 
 Ops 3 and 4 are where most of the gain is. An image model renders nouns and numbers; it cannot render an adjective about taste. [compiler.md](compiler.md) already bans the fluff list — this op catches the fluff that is not on any list because it was phrased as a compliment to the design rather than a description of it.
 
 ### Provenance Ladder
 
-What `compress` drops, in order. Stop at the floor.
+What `compress` drops, and in what order. **Read it top to bottom: the first rung listed is the first to go.** Stop at the floor.
 
 ```
 atmosphere words

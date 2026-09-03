@@ -98,7 +98,7 @@ Each row names the dimension that should have caught it and the layer that owns 
 | Texture on a CLEAN layout | `texture` | Compiler — correct `texture_tier` per [assets/texture.md](../assets/texture.md) |
 | Ground came out paper-white when the spec said otherwise | `texture` | Compiler — restate `ground` as the first clause |
 | Objects float; no contact shadow; two viewpoints in one object | `composition` | Planner — set projection, ground plane, and light in `direction.composition` |
-| Source cluster came back as a row of isolated objects | `composition` | Planner — `relationship-first`, and restate the arrangement from `image_report.spatial` |
+| Source cluster came back as a row of isolated objects | `composition` | Planner — `relationship-first`, and restate the arrangement from `direction.spatial_plan` |
 | `painterly` returned as clean vector shapes | `texture` | Compiler — add the mark-making clause from [../assets/scene-construction.md](../assets/scene-construction.md) |
 | Layout overcrowded | `typography` | Planner — reduce type scale within style DNA caps |
 | Missing web copy-safe area | `platform_fit` | Planner — re-apply [layouts/website-hero.md](../layouts/website-hero.md) |

@@ -19,6 +19,8 @@ When `memory_id` or `preset` is set, fields locked by that memory are read-only.
 | Photo | Copy `image_report.spatial` verbatim. The Planner does not re-observe the image — that is the Analyzer's job and re-deciding it here is a layer violation |
 | Theme-only | The Planner authors it from `intent.subject`. Name one projection, one shared ground plane, one light direction, and the arrangement the subject implies |
 
+**Locked spatial fields win.** When an active memory or preset locks `spatial_plan` fields, apply them over the result field by field — a locked `projection: flat-elevation` overrides a photographed deep perspective, and that is the point of the lock. The lock is an authored decision, not a re-observation. Unlocked fields keep their source: the report on a photo run, Planner authoring on a theme-only one. Locked keys must match the spec's own names ([../spec/visual-memory.schema.md](../spec/visual-memory.schema.md)).
+
 Theme-only is not an excuse to leave it empty. A brief that says "an old Kyoto tea room" already implies a viewpoint, a floor, and a window the light comes through; deciding those here is what stops the model inventing three of each. Say the projection you want — «avoid perspective» is not a projection ([../assets/scene-construction.md](../assets/scene-construction.md)).
 
 ## Subject → Layout Matrix

@@ -39,7 +39,7 @@ A single grade cannot be acted on. Score **every dimension separately** — the 
 | Dimension | Weight | Scores |
 |-----------|--------|--------|
 | `subject` | 0.15 | Subject reads immediately; silhouette and scale hold |
-| `composition` | 0.15 | Planner ratios respected within ±10%; negative space preserved. **Spatial coherence**: one projection, one ground plane, one light direction, contact shadows present, and the source's arrangement, overlaps, and relative scale intact ([../assets/scene-construction.md](../assets/scene-construction.md)) |
+| `composition` | 0.15 | Planner ratios respected within ±10%; negative space preserved. **Spatial coherence**: one projection, one ground plane, one light direction, contact shadows present, and the scene's arrangement, overlaps, and relative scale intact — from the source photo when one was analyzed, else from the authored `spatial_plan` ([../assets/scene-construction.md](../assets/scene-construction.md)) |
 | `focal_point` | 0.10 | One unambiguous entry point; anchor visible at thumbnail scale |
 | `palette` | 0.10 | Palette count respected; contrast separation adequate; no drift hues |
 | `typography` | 0.10 | Present when specified, absent when not; within style DNA caps; legible |
@@ -97,7 +97,7 @@ Each row names the dimension that should have caught it and the layer that owns 
 | Missing Panter anchor | `focal_point` | Recovery — add `color_anchor` ([recovery/focus.md](../recovery/focus.md)) |
 | Texture on a CLEAN layout | `texture` | Compiler — correct `texture_tier` per [assets/texture.md](../assets/texture.md) |
 | Ground came out paper-white when the spec said otherwise | `texture` | Compiler — restate `ground` as the first clause |
-| Objects float; no contact shadow; two viewpoints in one object | `composition` | Planner — set projection, ground plane, and light in `direction.composition` |
+| Objects float; no contact shadow; two viewpoints in one object | `composition` | Planner — set projection, ground plane, and light direction in `direction.spatial_plan` |
 | Source cluster came back as a row of isolated objects | `composition` | Planner — `relationship-first`, and restate the arrangement from `direction.spatial_plan` |
 | `painterly` returned as clean vector shapes | `texture` | Compiler — add the mark-making clause from [../assets/scene-construction.md](../assets/scene-construction.md) |
 | Layout overcrowded | `typography` | Planner — reduce type scale within style DNA caps |

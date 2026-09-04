@@ -24,6 +24,9 @@ locked:
   abstraction_level: relationship-first | identity-cue | full-abstract
   composition: {...}                    # presets may lock composition, aspect_ratio, and layout;
                                         # memories established from a run may not
+  spatial_plan: {...}                   # optional, presets only, field by field; keys must match
+                                        # direction.spatial_plan exactly (projection, ground_plane,
+                                        # light_direction, arrangement, overlaps, relative_scale)
 
 blocked_layouts: [zine]                 # required whenever `layout` stays free
 

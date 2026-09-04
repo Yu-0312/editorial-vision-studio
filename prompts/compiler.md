@@ -14,7 +14,7 @@ Pull modules from:
 - Recovery clauses: [recovery/](../recovery/)
 - Conditional: [layouts/photo-abstract-diptych.md](../layouts/photo-abstract-diptych.md) when diptych; [assets/variation-engine.md](../assets/variation-engine.md) when zine
 
-**Compiler never analyzes the image.** It validates VisionSpec / EditorialSpec against schema rules. On a photo run it copies `image_report.spatial` into `direction.spatial_plan` verbatim — copying is not analyzing; on a theme-only run that field arrives already authored by the Planner.
+**Compiler never analyzes the image.** It validates VisionSpec / EditorialSpec against schema rules. On a photo run it copies `image_report.spatial` into `direction.spatial_plan` verbatim, then applies any spatial fields locked by an active memory or preset over the copy, field by field — both steps are mechanical, not analysis; on a theme-only run that field arrives already authored by the Planner.
 
 **Compiler never re-decides.** When `memory_id` is set, locked palette, typography, style, and texture tier are compiled verbatim — the Compiler has no discretion over them ([../spec/visual-memory.schema.md](../spec/visual-memory.schema.md)).
 

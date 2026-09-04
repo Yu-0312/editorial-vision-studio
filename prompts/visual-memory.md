@@ -29,6 +29,7 @@ Contract: [../spec/visual-memory.schema.md](../spec/visual-memory.schema.md)
 | `visual_language` | **locked** | Downstream of style; unlocking it unlocks everything |
 | `texture` tier | **locked** | Mixed PRINT and FLAT grounds never read as a set |
 | `atmosphere` | locked | Soft-lock: may shift one step, not invert |
+| `spatial_plan` fields | preset-only | A series memory locking projection or light makes every frame the same camera. A preset may, because reproducing one look is the job — and its keys must match `direction.spatial_plan` exactly |
 | `abstraction_level` | free | Per-subject; a portrait and a skyline abstract differently |
 | `composition` ratios | free | Adapts to each subject's aspect and negative space |
 | `layout` | free | Cover, spread, and social crop belong to the same system |
@@ -38,7 +39,7 @@ Contract: [../spec/visual-memory.schema.md](../spec/visual-memory.schema.md)
 
 Locking composition is a common mistake: it produces four images with the subject in the same corner, which reads as a template, not a system.
 
-**Presets are the exception.** A [preset](../presets/registry.md) (`source: preset`) may lock `composition`, `aspect_ratio`, and `layout`, because a preset is avowedly a template — reproducing one exact look is the whole job. Memories established from a run may not.
+**Presets are the exception.** A [preset](../presets/registry.md) (`source: preset`) may lock `composition`, `aspect_ratio`, `layout`, and — field by field, under the spec's own key names — `spatial_plan`, because a preset is avowedly a template — reproducing one exact look is the whole job. Memories established from a run may not.
 
 ## Establishing Memory
 

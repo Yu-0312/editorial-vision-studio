@@ -28,9 +28,11 @@ locked:
   typography: "handwritten postcard script, destination-specific; postmark and stamp as objects"
   texture_tier: FLAT                    # the canvas ground is a photograph; depicted paper is content, not canvas texture
   atmosphere: warm natural light, cinematic, quietly controlled
+  spatial_plan:                         # no source photo exists — the preset authors the spatial plan
+                                        # the Planner would otherwise invent; keys match the spec
+    projection: slightly elevated three-quarter view, one viewpoint
+    arrangement: back to front — real destination dissolving into bokeh, sharp postcard in the foreground, paper-cut world rising from its surface, traveller figure inside that world
   composition:
-    camera: slightly elevated three-quarter view
-    depth_order: [blurred real destination, sharp postcard, paper-cut landscape, traveller figure]
     focus: postcard tack-sharp, background creamy bokeh
 
 free: [title, subtitle, recoveries]

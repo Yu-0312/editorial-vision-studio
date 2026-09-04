@@ -8,7 +8,7 @@ Enum values are contract tokens, not prompt words. Never write `paper-light` or 
 
 Before these fields existed, the engine had a palette, a texture tier, and a style — but nothing that named the field the marks sit on. With no field to set, every run inherited whatever the repo said most often, which was warm ivory paper. A required field with no fallback cannot be skipped; that is the entire mechanism.
 
-`ground` and `render_mode` are independent of `abstraction_level`. Medium and distance-from-source are different questions: a `photographic` image can still be `full-abstract`.
+`ground` and `render_mode` are independent of `abstraction_level`. Medium and subject literalness are different questions: a `photographic` image can still be `full-abstract`.
 
 ## Ground → prompt language
 

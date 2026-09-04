@@ -26,15 +26,18 @@ locked:
   typography: "one small fine serif title at the lower margin, or none"
   texture_tier: FLAT
   atmosphere: quiet, still, contemplative
+  spatial_plan:                         # locked spatial fields — keys match direction.spatial_plan;
+                                        # they override the photo's own projection, ground, and light
+    projection: flat-elevation          # one viewpoint, held across every object
+    ground_plane: one shared surface    # everything stands on it
+    light_direction: single direction, flat contact shadow on every object
   composition:
     subject_scale: small
     subject_position: upper-centre
     whitespace_ratio: 0.55              # minimum, not a target
     form_types: 3-5                     # KINDS of form, repeated as the scene needs — not a cap on objects
-    projection: flat-elevation          # one viewpoint, held across every object
-    ground_plane: shared                # everything stands on one surface
-    light: single direction, flat contact shadow on every object
-    relations: preserved                # positions, relative scale, overlaps survive the reduction
+                                        # arrangement / overlaps / relative_scale stay unlocked — they
+                                        # come verbatim from image_report.spatial (see Photo Policy)
 
 blocked_layouts: [zine]            # PRINT tier would break the flat ivory ground
 

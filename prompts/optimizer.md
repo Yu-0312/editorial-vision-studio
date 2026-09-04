@@ -118,11 +118,11 @@ optimizer:
     - op: concretize
       before: "a sophisticated restrained palette"
       after: "four colours only: warm ivory, charcoal, muted red, bone"
-      spec_field: visual_system.palette
+      spec_field: design_tokens.palette
     - op: bind_numbers
-      before: "a small saturated accent"
-      after: "one cobalt block covering 2% of the canvas"
-      spec_field: recovery.color_anchor
+      before: "lots of quiet space around the subject"
+      after: "at least 55 percent empty field"
+      spec_field: direction.composition.whitespace_ratio
   ops_declined:
     - op: compress
       reason: within_budget

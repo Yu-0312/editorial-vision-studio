@@ -202,7 +202,7 @@ Key rules (full matrix in [prompts/planner.md](prompts/planner.md)):
 - Street + human story → Documentary Zine
 - Food/object + minimal → Product Editorial
 
-The Planner also fills `direction.spatial_plan` — projection, shared ground plane, light direction, arrangement. On a photo run it is a verbatim copy of `image_report.spatial`; on a **theme-only run the Planner authors it from `intent.subject`**. It is required either way: [prompts/reviewer.md](prompts/reviewer.md) rejects a prompt with no named projection whether or not a photograph existed, and without the field those clauses have no provenance for [prompts/optimizer.md](prompts/optimizer.md) to protect.
+The Planner also fills `direction.spatial_plan` — projection, shared ground plane, light direction, arrangement. On a photo run it is a verbatim copy of `image_report.spatial`; on a **theme-only run the Planner authors it from `intent.subject`**. Spatial fields locked by an active preset or memory are applied over the result field by field — a locked `projection: flat-elevation` is an authored decision that overrides what the photograph shows. It is required either way: [prompts/reviewer.md](prompts/reviewer.md) rejects a prompt with no named projection whether or not a photograph existed, and without the field those clauses have no provenance for [prompts/optimizer.md](prompts/optimizer.md) to protect.
 
 If user specifies `style: kinfolk`, load [styles/kinfolk.md](styles/kinfolk.md) DNA.
 
@@ -311,7 +311,7 @@ Enum values are contract tokens, never prompt words — every adapter resolves t
 
 An unset value is a **rejection, not a fallback**. This matters more than it looks: before these fields existed, an undecided ground fell through to warm ivory paper on every run, because that was the most-repeated value in the repo. A field with no default cannot be skipped.
 
-`render_mode` is not `abstraction_level`. Medium and distance-from-source are independent — a `photographic` image can still be `full-abstract`.
+`render_mode` is not `abstraction_level`. Medium and subject literalness are independent — a `photographic` image can still be `full-abstract`.
 
 ## Presets
 
@@ -325,7 +325,7 @@ A preset is a shipped [VisualMemory](spec/visual-memory.schema.md) with `source:
 
 The [Style Gate](prompts/style-gate.md) offers these as a numbered menu at the start of a run; `preset: ivory-postcard` is the shortcut that skips the menu, for automation and series work. Three different grounds is deliberate — it is what gives the candidate-diversity rule something to draw on. Registry and authoring guide: [presets/registry.md](presets/registry.md).
 
-Unlike a series memory, a preset **may lock `composition`, `aspect_ratio`, and `layout`**: a preset is avowedly a template, which is what it is for.
+Unlike a series memory, a preset **may lock `composition`, `aspect_ratio`, `layout`, and — field by field, under the spec's own key names — `spatial_plan`**: a preset is avowedly a template, which is what it is for. Locked spatial fields override the photographed values; unlocked fields still come from the photo or the Planner.
 
 ## Visual Memory & Series
 

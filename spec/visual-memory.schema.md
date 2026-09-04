@@ -21,6 +21,9 @@ locked:
   typography: "grotesk title, sans metadata"
   texture_tier: FLAT | SURFACE | PRINT
   atmosphere: quiet contemporary            # soft-lock
+  # spatial_plan — presets only, field by field (projection, ground_plane,
+  #   light_direction, arrangement, overlaps, relative_scale); keys must match
+  #   direction.spatial_plan exactly. See validation rules below
 
 blocked_layouts: [zine]                     # required whenever `layout` is free
 
@@ -50,7 +53,10 @@ forked_from: null                           # memory_id when this is a fork
 - `locked.texture_tier: PRINT` implies every run in the series uses `layout: zine`. Reject any other layout while that lock holds — see [../assets/texture.md](../assets/texture.md).
 - A field may not appear in both `locked` and `free`.
 - `composition` may never be locked when `source: generated` or `user_provided`. Locking it produces a template, not a system — four images with the subject in the same corner.
-- `source: preset` **may** lock `composition`, `aspect_ratio`, and `layout`. A preset is avowedly a template; that is what it is for. See [../presets/registry.md](../presets/registry.md).
+- `source: preset` **may** lock `composition`, `aspect_ratio`, `layout`, and `spatial_plan` (field by field). A preset is avowedly a template; that is what it is for. See [../presets/registry.md](../presets/registry.md).
+- `locked.spatial_plan` keys must be exactly `direction.spatial_plan`'s keys — `projection`, `ground_plane`, `light_direction`, `arrangement`, `overlaps`, `relative_scale`. A spatial constraint written under `composition` under a different name (`camera`, `light`, `relations`) is a schema violation: the Reviewer's locked-field check cannot see it, and it silently duplicates a field the spec already owns.
+- Spatial-lock precedence: on a photo run, `direction.spatial_plan` starts as the verbatim copy of `image_report.spatial`, then each locked spatial field **overrides the copy** — a locked `projection: flat-elevation` beats the photographed perspective, and that is the point. Unlocked spatial fields keep the photographed values. On a theme-only run, unlocked spatial fields are authored by the Planner as usual; a preset that locks `projection` but not `light_direction` still gets a Planner-authored light.
+- `spatial_plan` sits outside the locked/free bookkeeping below: it is required on every run regardless, so a memory may lock none, some, or all of its fields while the rest follows the normal source rules.
 - Every field in the canonical `free` list must appear in either `locked` or `free`. A field in neither can be set by nobody — `layout` and `abstraction_level` are the two that go missing most often, and both are required in every spec.
 - A memory that leaves `layout` free must list `blocked_layouts`, because texture permission is decided by `direction.layout` ([../assets/texture.md](../assets/texture.md)) and an unrestricted memory could select `zine` and pull PRINT into a FLAT system.
 - `locked.ground` and `locked.render_mode` are mandatory in every memory. They are the two axes that have no safe default.
